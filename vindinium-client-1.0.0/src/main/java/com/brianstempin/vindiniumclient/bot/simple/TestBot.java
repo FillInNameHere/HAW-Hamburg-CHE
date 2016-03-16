@@ -138,11 +138,19 @@ public class TestBot implements SimpleBot {
         Vertex move = getPath(closestPub).get(0);
 
         /*Gedanken:
+            - Mapscans:
+                -> Wie viele Schenken gibt es?
+                -> Wie viele Minen gibt es?
+                -> wie groß ist die Map?
             - Wenn besitzer der meisten Minen, vielleicht in der Nähe eine Schenke aufhalten?
-            - Sinvoller Grund zum Kämpfen -> Nähe / HP des Gegners berücksichtigen
+            - Wann ist ein doppelheal auf 100HP sinnvoll?
+            - Wenn keine Genger in der Nähe(relativ) ist, heile ich mich denn auch mit weniger als 40HP? oder vielleicht erst mit <= 20?
+            - Sinvoller Grund zum Kämpfen -> Gegner in der  mit sehr wenig HP? Schenken radius mit einbeziehen?
+            - Auf dem Weg zur Schenke sollte er möglichst nicht auf andere Spieler treffen!
+            - TeamBot? If hero.getName == HAW-Hamburg CHE ... dann nicht angreifen oder Mine klauen?
         */
 
-        //Heilung
+        // Zur nächsten Schenke!
         if (gameState.getHero().getGold() >= 2 && gameState.getHero().getLife() <= 40) {
             //Heilung
             move = getPath(closestPub).get(0);
@@ -153,7 +161,7 @@ public class TestBot implements SimpleBot {
             runAwayMode = false;
         }
 
-        /* //Kämpfen
+        /* // Auf in dem Kampf!
         if (runAwayMode == false && "Grund zum Töten"){
             move = getPath(closestPlayer).get(0);
             logger.info("Ich bring ihn um!");
