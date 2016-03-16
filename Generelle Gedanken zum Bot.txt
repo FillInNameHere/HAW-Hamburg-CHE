@@ -1,0 +1,6 @@
+Nur Sieg belohnen (meistes Gold)?
+Nur Niederlage bestrafen (wenigstes Gold)?
+Nur Spieler Kill Bot (Jagd auf den mit den meisten Minen)?
+Sinnvoller Bot (siehe Gedanken von Testbot)
+
+Große und kleine Map unterscheiden?
