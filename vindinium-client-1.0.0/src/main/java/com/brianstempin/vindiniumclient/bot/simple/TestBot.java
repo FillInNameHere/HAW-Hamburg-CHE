@@ -15,6 +15,9 @@ public class TestBot implements SimpleBot {
         logger = Logger.getLogger("testbot");
     }
 
+    //Ab zu nächsten Schenke, heilen!
+    public boolean runAwayMode = false;
+
     private static List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
         List<Vertex> vertexes = new LinkedList<Vertex>();
         Vertex me = null;
@@ -38,13 +41,13 @@ public class TestBot implements SimpleBot {
 
             Vertex v = vertexes.get(i);
 
-            // Überprüfe:  Sind wir auf diesem Feld?
+            // Überprüfe: Sind wir auf diesem Feld?
             if (v.getPosition().getX() == hero.getPos().getX() && v.getPosition().getY() == hero.getPos().getY()){
                 me = v;
             }
 
+            // Überprüfe: Felder worauf etwas steht werden nicht einbezogen.
             if (v.getTileType().equals("##") || v.getTileType().equals("[]") || v.getTileType().startsWith("$")) {
-                // Felder worauf etwas steht werden nicht einbezogen.
                 continue;
             }
 
@@ -80,7 +83,6 @@ public class TestBot implements SimpleBot {
                 }
             }
         }
-
         return vertexes;
     }
 
@@ -98,18 +100,11 @@ public class TestBot implements SimpleBot {
         return path;
     }
 
-    int HeroID = 0;
-    int Turn = 0;
-
     @Override
     public BotMove move(GameState gameState) {
-        logger.info("Rundeneröffnung");
 
-        //ID von unserem Helden herausfinden
-        HeroID = gameState.getHero().getId();
-
-        //Ab zu nächsten Schenke, heilen!
-        boolean runAwayMode = false;
+        //logger.info("Rundeneröffnung");
+        logger.info("Turn: " + gameState.getGame().getTurn() + " -> Rundeneröffnung");
 
         //Pfade suchen nächste(r) (Gegner, Schenke, Mine)
         List<Vertex> vertexes = doDijkstra(gameState.getGame().getBoard(), gameState.getHero());
@@ -119,9 +114,14 @@ public class TestBot implements SimpleBot {
         Vertex closestMine = null;
 
         for (Vertex v : vertexes) {
-            //Bestimmung des nächsten Gegners
-            if (v.getTileType().startsWith("@") && v.getMinDistance() != 0 && v.getMinDistance() != Double.POSITIVE_INFINITY && (closestPlayer == null || closestPlayer.getMinDistance() > v.getMinDistance())){
-                closestPlayer = v;
+            //Bestimmung der nächsten Mine
+            if (v.getTileType().startsWith("$") && v.getMinDistance() != 0 && v.getMinDistance() != Double.POSITIVE_INFINITY && (closestMine == null || closestMine.getMinDistance() > v.getMinDistance())) {
+                //closestMine = v;
+                if(v.getTileType().startsWith("$" + gameState.getHero().getId())){
+                    continue;
+                } else {
+                    closestMine = v;
+                }
             }
 
             //Bestimmung der nächsten Schenke
@@ -129,29 +129,31 @@ public class TestBot implements SimpleBot {
                 closestPub = v;
             }
 
-            //Bestimmung der nächsten Mine
-            //Ausschluss seiner eigenen
-            if (v.getTileType().startsWith("$") && v.getMinDistance() != Double.POSITIVE_INFINITY && (closestMine == null || closestPub.getMinDistance() > v.getMinDistance())) {
-                closestMine = v;
+            //Bestimmung des nächsten Gegners
+            if (v.getTileType().startsWith("@") && v.getMinDistance() != Double.POSITIVE_INFINITY && (closestPlayer == null || closestPlayer.getMinDistance() > v.getMinDistance())){
+                closestPlayer = v;
             }
         }
 
         Vertex move = getPath(closestPub).get(0);
 
+        /*Gedanken:
+            - Wenn besitzer der meisten Minen, vielleicht in der Nähe eine Schenke aufhalten?
+            - Sinvoller Grund zum Kämpfen -> Nähe / HP des Gegners berücksichtigen
+        */
+
         //Heilung
-        if (gameState.getHero().getGold() >= 2 && gameState.getHero().getLife() <= 20) {
+        if (gameState.getHero().getGold() >= 2 && gameState.getHero().getLife() <= 40) {
             //Heilung
             move = getPath(closestPub).get(0);
             runAwayMode = true;
-            logger.info("Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!");
+            //logger.info("Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!");
+            logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!");
         } else {
             runAwayMode = false;
         }
 
         /* //Kämpfen
-        // - Sinvoller Grund zum Kämpfen
-        // - Nähe des Gegner berücksichtigen
-        // - HP des Gegners berücksichtigen
         if (runAwayMode == false && "Grund zum Töten"){
             move = getPath(closestPlayer).get(0);
             logger.info("Ich bring ihn um!");
@@ -160,10 +162,10 @@ public class TestBot implements SimpleBot {
         // Zur nächsten Mine!
         if (runAwayMode == false) {
             move = getPath(closestMine).get(0);
-            logger.info("Ich gehe zur nächsten Mine!");
+            //logger.info("Ich gehe zur nächsten Mine!");
+            logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich gehe zur nächsten Mine!");
         }
 
-        Turn++;
         return BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
     }
 
