@@ -116,7 +116,6 @@ public class TestBot implements SimpleBot {
         for (Vertex v : vertexes) {
             //Bestimmung der nächsten Mine
             if (v.getTileType().startsWith("$") && v.getMinDistance() != 0 && v.getMinDistance() != Double.POSITIVE_INFINITY && (closestMine == null || closestMine.getMinDistance() > v.getMinDistance())) {
-                //closestMine = v;
                 if(v.getTileType().startsWith("$" + gameState.getHero().getId())){
                     continue;
                 } else {
@@ -136,26 +135,12 @@ public class TestBot implements SimpleBot {
         }
 
         Vertex move = getPath(closestPub).get(0);
-
-        /*Gedanken:
-            - Mapscans:
-                -> Wie viele Schenken gibt es?
-                -> Wie viele Minen gibt es?
-                -> wie groß ist die Map?
-            - Wenn besitzer der meisten Minen, vielleicht in der Nähe eine Schenke aufhalten?
-            - Wann ist ein doppelheal auf 100HP sinnvoll?
-            - Wenn keine Genger in der Nähe(relativ) ist, heile ich mich denn auch mit weniger als 40HP? oder vielleicht erst mit <= 20?
-            - Sinvoller Grund zum Kämpfen -> Gegner in der  mit sehr wenig HP? Schenken radius mit einbeziehen?
-            - Auf dem Weg zur Schenke sollte er möglichst nicht auf andere Spieler treffen!
-            - TeamBot? If hero.getName == HAW-Hamburg CHE ... dann nicht angreifen oder Mine klauen?
-        */
-
+        
         // Zur nächsten Schenke!
         if (gameState.getHero().getGold() >= 2 && gameState.getHero().getLife() <= 40) {
             //Heilung
             move = getPath(closestPub).get(0);
             runAwayMode = true;
-            //logger.info("Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!");
             logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!");
         } else {
             runAwayMode = false;
@@ -164,13 +149,12 @@ public class TestBot implements SimpleBot {
         /* // Auf in dem Kampf!
         if (runAwayMode == false && "Grund zum Töten"){
             move = getPath(closestPlayer).get(0);
-            logger.info("Ich bring ihn um!");
+            logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich bring ihn um!");
         }*/
 
         // Zur nächsten Mine!
         if (runAwayMode == false) {
             move = getPath(closestMine).get(0);
-            //logger.info("Ich gehe zur nächsten Mine!");
             logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich gehe zur nächsten Mine!");
         }
 

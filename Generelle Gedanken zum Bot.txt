@@ -4,3 +4,14 @@ Nur Spieler Kill Bot (Jagd auf den mit den meisten Minen)?
 Sinnvoller Bot (siehe Gedanken von Testbot)
 
 Große und kleine Map unterscheiden?
+
+- Mapscans:
+	-> Wie viele Schenken gibt es?
+	-> Wie viele Minen gibt es?
+	-> wie groß ist die Map?
+- Wenn besitzer der meisten Minen, vielleicht in der Nähe eine Schenke aufhalten?
+- Wann ist ein doppelheal auf 100HP sinnvoll?
+- Wenn keine Genger in der Nähe(relativ) ist, heile ich mich denn auch mit weniger als 40HP? oder vielleicht erst mit <= 20?
+- Sinvoller Grund zum Kämpfen -> Gegner in der  mit sehr wenig HP? Schenken radius mit einbeziehen?
+- Auf dem Weg zur Schenke sollte er möglichst nicht auf andere Spieler treffen!
+- TeamBot? If hero.getName == HAW-Hamburg CHE ... dann nicht angreifen oder Mine klauen?
