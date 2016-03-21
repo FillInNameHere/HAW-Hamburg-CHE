@@ -15,8 +15,9 @@ public class TestBot implements SimpleBot {
         logger = Logger.getLogger("testbot");
     }
 
-    //Ab zu nächsten Schenke, heilen!
-    public boolean runAwayMode = false;
+    public boolean mineMode = false;
+    public boolean beerMode = false;
+    public boolean fightMode = false;
 
     private static List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
         List<Vertex> vertexes = new LinkedList<Vertex>();
@@ -130,32 +131,41 @@ public class TestBot implements SimpleBot {
 
             //Bestimmung des nächsten Gegners
             if (v.getTileType().startsWith("@") && v.getMinDistance() != Double.POSITIVE_INFINITY && (closestPlayer == null || closestPlayer.getMinDistance() > v.getMinDistance())){
-                closestPlayer = v;
+                if(v.getTileType().startsWith("@" + gameState.getHero().getId())){
+                    continue;
+                } else {
+                    closestPlayer = v;
+                }
             }
         }
 
         Vertex move = getPath(closestPub).get(0);
-        
+
         // Zur nächsten Schenke!
-        if (gameState.getHero().getGold() >= 2 && gameState.getHero().getLife() <= 40) {
-            //Heilung
+        if (fightMode == false && mineMode == false && gameState.getHero().getGold() >= 2 && gameState.getHero().getLife() <= 40) {
             move = getPath(closestPub).get(0);
-            runAwayMode = true;
+            beerMode = true;
             logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!");
         } else {
-            runAwayMode = false;
+            beerMode = false;
         }
 
-        /* // Auf in dem Kampf!
-        if (runAwayMode == false && "Grund zum Töten"){
+        // Auf in dem Kampf!
+        if (beerMode == false && mineMode == false && getPath(closestPlayer).get(0).getMinDistance() <= 2.0 && gameState.getHero().getMineCount() < 1 && gameState.getHero().getLife() >= 60){
             move = getPath(closestPlayer).get(0);
+            fightMode = true;
             logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich bring ihn um!");
-        }*/
+        } else {
+            fightMode = false;
+        }
 
         // Zur nächsten Mine!
-        if (runAwayMode == false) {
+        if (beerMode == false && fightMode == false && gameState.getHero().getLife() >= 41) {
             move = getPath(closestMine).get(0);
+            mineMode = true;
             logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich gehe zur nächsten Mine!");
+        } else {
+            mineMode = false;
         }
 
         return BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());

@@ -15,3 +15,6 @@ Große und kleine Map unterscheiden?
 - Sinvoller Grund zum Kämpfen -> Gegner in der  mit sehr wenig HP? Schenken radius mit einbeziehen?
 - Auf dem Weg zur Schenke sollte er möglichst nicht auf andere Spieler treffen!
 - TeamBot? If hero.getName == HAW-Hamburg CHE ... dann nicht angreifen oder Mine klauen?
+
+- Selbstmord: wenn keine Minen && 0-20 Life && ggf. Spieler oder Mine sehr nah dran.
+- Selbstmord: Wenn Life < 20 lieber an einer Mine sterben, als von einem Gegner getötet zu werden.
