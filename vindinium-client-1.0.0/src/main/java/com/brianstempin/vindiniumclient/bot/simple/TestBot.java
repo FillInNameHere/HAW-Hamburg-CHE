@@ -18,6 +18,7 @@ public class TestBot implements SimpleBot {
     public boolean mineMode = false;
     public boolean beerMode = false;
     public boolean fightMode = false;
+    public int lastelement = 0;
 
     private static List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
         List<Vertex> vertexes = new LinkedList<Vertex>();
@@ -150,8 +151,10 @@ public class TestBot implements SimpleBot {
             beerMode = false;
         }
 
+        lastelement = getPath(closestPlayer).size() - 1;
+
         // Auf in dem Kampf!
-        if (beerMode == false && mineMode == false && getPath(closestPlayer).get(0).getMinDistance() <= 2.0 && gameState.getHero().getMineCount() < 1 && gameState.getHero().getLife() >= 60){
+        if (beerMode == false && mineMode == false && getPath(closestPlayer).get(lastelement).getMinDistance() <= 3 && gameState.getHero().getMineCount() < 1 && gameState.getHero().getLife() >= 60){
             move = getPath(closestPlayer).get(0);
             fightMode = true;
             logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich bring ihn um!");
