@@ -1,0 +1,54 @@
+Mär 22, 2016 9:49:45 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 0 -> Ich gehe zur nächsten Mine!
+Mär 22, 2016 9:49:45 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 0; Life: 100; Gold: 0; MineCount: 0;
+Mär 22, 2016 9:49:46 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 4 -> Ich gehe zur nächsten Mine!
+Mär 22, 2016 9:49:46 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 4; Life: 99; Gold: 0; MineCount: 0;
+Mär 22, 2016 9:49:46 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 8 -> Ich gehe zur nächsten Mine!
+Mär 22, 2016 9:49:46 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 8; Life: 98; Gold: 0; MineCount: 0;
+Mär 22, 2016 9:49:46 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 12 -> Ich gehe zur nächsten Mine!
+Mär 22, 2016 9:49:46 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 12; Life: 77; Gold: 1; MineCount: 1;
+Mär 22, 2016 9:49:47 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 16 -> Ich gehe zur nächsten Mine!
+Mär 22, 2016 9:49:47 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 16; Life: 76; Gold: 2; MineCount: 1;
+Mär 22, 2016 9:49:47 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 20 -> Ich gehe zur nächsten Mine!
+Mär 22, 2016 9:49:47 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 20; Life: 75; Gold: 3; MineCount: 1;
+Mär 22, 2016 9:49:47 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 24 -> Ich gehe zur nächsten Mine!
+Mär 22, 2016 9:49:47 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 24; Life: 74; Gold: 4; MineCount: 1;
+Mär 22, 2016 9:49:48 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 28 -> Ich gehe zur nächsten Mine!
+Mär 22, 2016 9:49:48 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 28; Life: 53; Gold: 6; MineCount: 2;
+Mär 22, 2016 9:49:48 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 32 -> Ich gehe zur nächsten Mine!
+Mär 22, 2016 9:49:48 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 32; Life: 52; Gold: 8; MineCount: 2;
+Mär 22, 2016 9:49:48 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 36; Life: 31; Gold: 11; MineCount: 3;
+Mär 22, 2016 9:49:49 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 40 -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!
+Mär 22, 2016 9:49:49 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 40; Life: 30; Gold: 14; MineCount: 3;
+Mär 22, 2016 9:49:49 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 44 -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!
+Mär 22, 2016 9:49:49 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 44; Life: 29; Gold: 17; MineCount: 3;
+Mär 22, 2016 9:49:49 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 48 -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!
+Mär 22, 2016 9:49:49 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 48; Life: 28; Gold: 20; MineCount: 3;
+Mär 22, 2016 9:49:50 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 52 -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!
+Mär 22, 2016 9:49:50 AM com.brianstempin.vindiniumclient.bot.simple.TestBot move
+INFORMATION: Turn: 52; Life: 27; Gold: 23; MineCount: 3;

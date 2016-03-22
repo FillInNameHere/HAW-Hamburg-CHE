@@ -18,7 +18,8 @@ public class TestBot implements SimpleBot {
     public boolean mineMode = false;
     public boolean beerMode = false;
     public boolean fightMode = false;
-    public int lastelement = 0;
+    public int closestPlayerId = 0;
+    public int lastElement = 0;
 
     private static List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
         List<Vertex> vertexes = new LinkedList<Vertex>();
@@ -105,8 +106,7 @@ public class TestBot implements SimpleBot {
     @Override
     public BotMove move(GameState gameState) {
 
-        //logger.info("Rundeneröffnung");
-        logger.info("Turn: " + gameState.getGame().getTurn() + " -> Rundeneröffnung");
+        //logger.info("Turn: " + gameState.getGame().getTurn() + " -> Rundeneröffnung");
 
         //Pfade suchen nächste(r) (Gegner, Schenke, Mine)
         List<Vertex> vertexes = doDijkstra(gameState.getGame().getBoard(), gameState.getHero());
@@ -122,6 +122,21 @@ public class TestBot implements SimpleBot {
                     continue;
                 } else {
                     closestMine = v;
+                    if (v.getTileType().equals("$1")) {
+                        closestPlayerId = 1;
+                    }
+
+                    if (v.getTileType().equals("$2")) {
+                        closestPlayerId = 2;
+                    }
+
+                    if (v.getTileType().equals("$3")) {
+                        closestPlayerId = 3;
+                    }
+
+                    if (v.getTileType().equals("$4")) {
+                        closestPlayerId = 4;
+                    }
                 }
             }
 
@@ -140,10 +155,11 @@ public class TestBot implements SimpleBot {
             }
         }
 
-        Vertex move = getPath(closestPub).get(0);
+        Vertex move = getPath(closestMine).get(0);
+        lastElement = getPath(closestPlayer).size() - 1;
 
         // Zur nächsten Schenke!
-        if (fightMode == false && mineMode == false && gameState.getHero().getGold() >= 2 && gameState.getHero().getLife() <= 40) {
+        if ((fightMode == false) && (mineMode == false) && (gameState.getHero().getGold() >= 2) && (gameState.getHero().getLife() <= 40)) {
             move = getPath(closestPub).get(0);
             beerMode = true;
             logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!");
@@ -151,25 +167,27 @@ public class TestBot implements SimpleBot {
             beerMode = false;
         }
 
-        lastelement = getPath(closestPlayer).size() - 1;
-
         // Auf in dem Kampf!
-        if (beerMode == false && mineMode == false && getPath(closestPlayer).get(lastelement).getMinDistance() <= 3 && gameState.getHero().getMineCount() < 1 && gameState.getHero().getLife() >= 60){
+        if ((beerMode == false) && (mineMode == false) && !(gameState.getGame().getHeroes().get(closestPlayerId).getName().equals("HAW-Hamburg CHE")) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() < gameState.getHero().getLife()) && (getPath(closestPlayer).get(lastElement).getMinDistance() <= 3)  && (gameState.getHero().getMineCount() <= 1)){
             move = getPath(closestPlayer).get(0);
             fightMode = true;
-            logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich bring ihn um!");
+            logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich bring " + gameState.getGame().getHeroes().get(closestPlayerId).getName() + " um!");
         } else {
             fightMode = false;
         }
 
+        //Todo - Teamplay: Keine Team-Minen klauen/einnehmen!!!
+
         // Zur nächsten Mine!
-        if (beerMode == false && fightMode == false && gameState.getHero().getLife() >= 41) {
+        if ((beerMode == false) && (fightMode == false) && (gameState.getHero().getMineCount() >= 0)  && (gameState.getHero().getLife() >= 41)) {
             move = getPath(closestMine).get(0);
             mineMode = true;
             logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich gehe zur nächsten Mine!");
         } else {
             mineMode = false;
         }
+
+        logger.info("Turn: " + gameState.getGame().getTurn() + "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + ";");
 
         return BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
     }
