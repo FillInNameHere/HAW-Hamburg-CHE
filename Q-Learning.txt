@@ -1,0 +1,29 @@
+Input:
+- States
+- Rewards
+
+
+Output:
+- Datenbank -> speichert sinnvolle Spielzüge zu bestimmten Situationen
+
+
+Rewards (5 Kategorien): 
+
+Kategorie 1 (-1000)
+  - loose
+
+Kategorie 2 (-25)
+  - Taverne, HP >= 40
+  - Sterben
+  - Gegner Töten der "HAW-Hamburg CHE" heißt (Erweiterung Teambot)!!!
+
+Kategorie 3 (-1)
+  - Schritt machen
+
+Kategorie 4 (+25)
+  - (nicht eigene) Mine einnehmen
+  - Taverne, HP <= 40
+  - Gegner Töten, Minecount > 3
+
+Kategorie 5 (+1000)
+  - win
