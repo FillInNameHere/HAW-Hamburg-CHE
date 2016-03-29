@@ -110,8 +110,6 @@ public class TestBot implements SimpleBot {
     @Override
     public BotMove move(GameState gameState) {
 
-        //logger.info("Turn: " + gameState.getGame().getTurn() + " -> Rundeneröffnung");
-
         if (gameState.getGame().getHeroes().get(0).getName().equals("HAW-Hamburg CHE")){
             hero1IsTeamplayBot = true;
         }
@@ -160,7 +158,7 @@ public class TestBot implements SimpleBot {
         lastElement = getPath(closestPlayer).size() - 1;
 
         // Zur nächsten Schenke!
-        if ((gameState.getHero().getGold() >= 2) && (gameState.getHero().getLife() <= 40)) {
+        if ((gameState.getHero().getGold() >= 2) && (gameState.getHero().getLife() <= 35)) {
             move = getPath(closestPub).get(0);
             beerMode = true;
             fightMode = false;
@@ -171,7 +169,7 @@ public class TestBot implements SimpleBot {
         }
 
         // Zur nächsten Mine!
-        if ((beerMode == false) && (fightMode == false) && (gameState.getHero().getLife() >= 41)) {
+        if ((beerMode == false) && (fightMode == false) && (gameState.getHero().getLife() >= 36)) {
             move = getPath(closestMine).get(0);
             mineMode = true;
             logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich gehe zur nächsten Mine!");
@@ -180,7 +178,7 @@ public class TestBot implements SimpleBot {
         }
 
         // Auf in dem Kampf!
-        if ((beerMode == false) && (mineMode == false) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() < gameState.getHero().getLife()) && (getPath(closestPlayer).get(lastElement).getMinDistance() <= 3) && (gameState.getHero().getMineCount() <= 1) && (gameState.getHero().getLife() >= 41)){
+        if ((beerMode == false) && (mineMode == false) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() < gameState.getHero().getLife()) && (getPath(closestPlayer).get(lastElement).getMinDistance() <= 3) && (gameState.getHero().getMineCount() <= 2) && (gameState.getHero().getLife() >= 36)){
             move = getPath(closestPlayer).get(0);
             fightMode = true;
             logger.info("Turn: " + gameState.getGame().getTurn() + " -> Ich bring " + gameState.getGame().getHeroes().get(closestPlayerId).getName() + " um!");
