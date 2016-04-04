@@ -20,3 +20,5 @@ Große und kleine Map unterscheiden?
 
 - TeamBot:
 	- Wie wird der Reward gesetzt wenn einer der Bots 1. un der andere 2. wird???
+	- Anpassung des Tötens, statt wenn weniger als 2 Minen -> Berücksichtigung der Gesamtminen anzahlen (Je mehr Minen auf dem Feld, desto größer wird auch der Wert bei dem ich Töte.)
+	- Anpassung des Tötens, Berücksichtigen der Rundenanzahlen, je später das Spiel, desto eher wird getötet, sofern man nicht selber viele Minen hat.
