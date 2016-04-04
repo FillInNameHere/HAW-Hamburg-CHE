@@ -57,8 +57,6 @@ public class TestBot implements SimpleBot {
                 me = v;
             }
 
-
-
             // Überprüfe: Felder worauf etwas steht werden nicht einbezogen.
             if (v.getTileType().equals("##") || v.getTileType().equals("[]") || v.getTileType().startsWith("$")) {
 
@@ -130,27 +128,30 @@ public class TestBot implements SimpleBot {
         if (gameState.getGame().getTurn() >= 1196) {
             mapSize = gameState.getGame().getBoard().getSize() * gameState.getGame().getBoard().getSize();
 
+            //TavernCount und MineCount stimmen noch nicht, sie sind zu groß!!! ANALYSE
             //Teilen durch die Runden, da zur Zeit bei jedem Durchlauf gescannt wird.
-            globalMineCount = globalMineCount % 300;
-            tavernCount = tavernCount % 300;
-
+            globalMineCount = globalMineCount % gameState.getGame().getTurn();
+            tavernCount = tavernCount % gameState.getGame().getTurn();
+            
             logger.info("Mapinformations: MapSize: " + mapSize + "; GlobalMineCount: " + globalMineCount + "; TavernCount: " + tavernCount + ";");
         }
 
-        if (gameState.getGame().getHeroes().get(0).getName().equals("HAW-Hamburg CHE")){
-            hero1IsTeamplayBot = true;
-        }
+        if (gameState.getGame().getTurn() <= 20) {
+            if (gameState.getGame().getHeroes().get(0).getName().equals("HAW-Hamburg CHE")) {
+                hero1IsTeamplayBot = true;
+            }
 
-        if (gameState.getGame().getHeroes().get(1).getName().equals("HAW-Hamburg CHE")){
-            hero2IsTeamplayBot = true;
-        }
+            if (gameState.getGame().getHeroes().get(1).getName().equals("HAW-Hamburg CHE")) {
+                hero2IsTeamplayBot = true;
+            }
 
-        if (gameState.getGame().getHeroes().get(2).getName().equals("HAW-Hamburg CHE")){
-            hero3IsTeamplayBot = true;
-        }
+            if (gameState.getGame().getHeroes().get(2).getName().equals("HAW-Hamburg CHE")) {
+                hero3IsTeamplayBot = true;
+            }
 
-        if (gameState.getGame().getHeroes().get(3).getName().equals("HAW-Hamburg CHE")){
-            hero4IsTeamplayBot = true;
+            if (gameState.getGame().getHeroes().get(3).getName().equals("HAW-Hamburg CHE")) {
+                hero4IsTeamplayBot = true;
+            }
         }
 
         //Pfade suchen nächste(r) (Gegner, Schenke, Mine)
