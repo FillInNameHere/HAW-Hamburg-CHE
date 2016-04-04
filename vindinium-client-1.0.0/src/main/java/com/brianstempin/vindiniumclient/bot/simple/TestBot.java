@@ -125,20 +125,22 @@ public class TestBot implements SimpleBot {
     @Override
     public BotMove move(GameState gameState) {
 
-        if (gameState.getGame().getHeroes().get(0).getName().equals("HAW-Hamburg CHE")) {
-            hero1IsTeamplayBot = true;
-        }
+        if (gameState.getGame().getTurn() <= 20) {
+            if (gameState.getGame().getHeroes().get(0).getName().equals("HAW-Hamburg CHE")) {
+                hero1IsTeamplayBot = true;
+            }
 
-        if (gameState.getGame().getHeroes().get(1).getName().equals("HAW-Hamburg CHE")) {
-            hero2IsTeamplayBot = true;
-        }
+            if (gameState.getGame().getHeroes().get(1).getName().equals("HAW-Hamburg CHE")) {
+                hero2IsTeamplayBot = true;
+            }
 
-        if (gameState.getGame().getHeroes().get(2).getName().equals("HAW-Hamburg CHE")) {
-            hero3IsTeamplayBot = true;
-        }
+            if (gameState.getGame().getHeroes().get(2).getName().equals("HAW-Hamburg CHE")) {
+                hero3IsTeamplayBot = true;
+            }
 
-        if (gameState.getGame().getHeroes().get(3).getName().equals("HAW-Hamburg CHE")) {
-            hero4IsTeamplayBot = true;
+            if (gameState.getGame().getHeroes().get(3).getName().equals("HAW-Hamburg CHE")) {
+                hero4IsTeamplayBot = true;
+            }
         }
 
         //Pfade suchen nächste(r) (Gegner, Schenke, Mine)
@@ -164,6 +166,23 @@ public class TestBot implements SimpleBot {
             //Bestimmung des nächsten Gegners
             if (v.getTileType().startsWith("@") && v.getMinDistance() != Double.POSITIVE_INFINITY && (closestPlayer == null || closestPlayer.getMinDistance() > v.getMinDistance())){
                 if(!(v.getTileType().startsWith("@" + gameState.getHero().getId())) && !(v.getTileType().equals("@1") && hero1IsTeamplayBot) && !(v.getTileType().equals("@2") && hero2IsTeamplayBot) && !(v.getTileType().equals("@3") && hero3IsTeamplayBot) && !(v.getTileType().equals("@4") && hero4IsTeamplayBot)){
+
+                    if (v.getTileType().equals("@1")){
+                        closestPlayerId = 0;
+                    }
+
+                    if (v.getTileType().equals("@2")){
+                        closestPlayerId = 1;
+                    }
+
+                    if (v.getTileType().equals("@3")){
+                        closestPlayerId = 2;
+                    }
+
+                    if (v.getTileType().equals("@4")){
+                        closestPlayerId = 3;
+                    }
+
                     closestPlayer = v;
                 }
             }
@@ -210,7 +229,7 @@ public class TestBot implements SimpleBot {
             globalMineCount = globalMineCount / 300;
             tavernCount = tavernCount / 300;
 
-            logger.info("HeroID: " + gameState.getHero().getId() +  "-> Spiel wurde beendet! => Mapinformations: MapSize: " + mapSize + "; GlobalMineCount: " + globalMineCount + "; TavernCount: " + tavernCount + ";");
+            logger.info("HeroID: " + gameState.getHero().getId() +  " -> Spiel wurde beendet! => Mapinfos: MapSize: " + mapSize + "; GlobalMineCount: " + globalMineCount + "; TavernCount: " + tavernCount + ";");
         }
 
         return BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
