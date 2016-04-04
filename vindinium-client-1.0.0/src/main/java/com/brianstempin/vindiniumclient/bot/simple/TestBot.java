@@ -178,7 +178,7 @@ public class TestBot implements SimpleBot {
             tavernMode = true;
             fightMode = false;
             mineMode = false;
-            logger.info("Turn: " + gameState.getGame().getTurn() + "; HeroID: " + gameState.getHero().getId() +  "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!");
+            logger.info("Turn: " + gameState.getGame().getTurn() + "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!");
         } else {
             tavernMode = false;
         }
@@ -187,7 +187,7 @@ public class TestBot implements SimpleBot {
         if ((tavernMode == false) && (fightMode == false) && (gameState.getHero().getLife() >= 38)) {
             move = getPath(closestMine).get(0);
             mineMode = true;
-            logger.info("Turn: " + gameState.getGame().getTurn() + "; HeroID: " + gameState.getHero().getId() +  "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich gehe zur nächsten Mine!");
+            logger.info("Turn: " + gameState.getGame().getTurn() + "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich gehe zur nächsten Mine!");
         } else {
             mineMode = false;
         }
@@ -197,7 +197,7 @@ public class TestBot implements SimpleBot {
             move = getPath(closestPlayer).get(0);
             fightMode = true;
             mineMode = false;
-            logger.info("Turn: " + gameState.getGame().getTurn() + "; HeroID: " + gameState.getHero().getId() +  "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich bring " + gameState.getGame().getHeroes().get(closestPlayerId).getName() + " um!");
+            logger.info("Turn: " + gameState.getGame().getTurn() + "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich bring " + gameState.getGame().getHeroes().get(closestPlayerId).getName() + " um!");
         } else {
             fightMode = false;
         }
@@ -210,7 +210,7 @@ public class TestBot implements SimpleBot {
             globalMineCount = globalMineCount / 300;
             tavernCount = tavernCount / 300;
 
-            logger.info("Spiel wurde beendet! Mapinformations: MapSize: " + mapSize + "; GlobalMineCount: " + globalMineCount + "; TavernCount: " + tavernCount + ";");
+            logger.info("HeroID: " + gameState.getHero().getId() +  "-> Spiel wurde beendet! => Mapinformations: MapSize: " + mapSize + "; GlobalMineCount: " + globalMineCount + "; TavernCount: " + tavernCount + ";");
         }
 
         return BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
