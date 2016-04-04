@@ -212,7 +212,7 @@ public class TestBot implements SimpleBot {
         }
 
         // Auf in dem Kampf!
-        if ((tavernMode == false)  && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() < gameState.getHero().getLife()) && (getPath(closestPlayer).get(lastElement).getMinDistance() <= 3) && (gameState.getHero().getMineCount() <= 2) && (gameState.getHero().getLife() >= 38)){
+        if ((tavernMode == false) && (gameState.getGame().getHeroes().get(closestPlayerId).getMineCount() >= 2)  && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() < gameState.getHero().getLife()) && (getPath(closestPlayer).get(lastElement).getMinDistance() <= 3) && (gameState.getHero().getMineCount() <= 2) && (gameState.getHero().getLife() >= 38)){
             move = getPath(closestPlayer).get(0);
             fightMode = true;
             mineMode = false;
