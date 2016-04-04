@@ -17,3 +17,6 @@ Große und kleine Map unterscheiden?
 	-> Ausweichen, sofern HeroHP < GegnerHP?
 	-> Befindet sich der Gegner auf dem Weg zu nächsten Ziel (Mine, Schenke)?
 	-> Befindet sich der Gegner in einem Radius von 2-3 Feldern?
+
+- TeamBot:
+	- Wie wird der Reward gesetzt wenn einer der Bots 1. un der andere 2. wird???
