@@ -21,15 +21,11 @@ public class CHEBot implements SimpleBot {
     // Eigenes Gold (abstrahiert)
     public boolean ownGoldBiggerTwo = false;
 
-    // Eigene Platzierung
-    public int ownInGameRanking = 0;
-
     // SpielModus (0 = Schenke; 1 = Mine; 2 = Kampf; 3 = Stehen;)
     public int modus = 0;
 
     // Letzter Spielmodus (0 = Schenke; 1 = Mine; 2 = Kampf; 3 = Stehen;)
     public int lastModus = 0;
-
 
     // Zeitbereich (0 = Turn 0-299; 1 = Turn 300-599; 2 = Turn 600-899; 3 = Turn 900-1199;)
     public int timeRange = 0;
@@ -40,12 +36,18 @@ public class CHEBot implements SimpleBot {
     public int tavernCountHelper = 0;
     public int globalMineCount = 0;
     public int globalMineCountHelper = 0;
+    public int closestPlayerId = 0;
 
     // TeamPlay
     public boolean hero1IsTeamplayBot = false;
     public boolean hero2IsTeamplayBot = false;
     public boolean hero3IsTeamplayBot = false;
     public boolean hero4IsTeamplayBot = false;
+
+    // Ranking
+    public int ownInGameRanking = 0;
+    public ArrayList sortGoldArray = new ArrayList();
+    public Set distinctSortGoldArray = new HashSet();
 
     private List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
         List<Vertex> vertexes = new LinkedList<Vertex>();
@@ -188,6 +190,23 @@ public class CHEBot implements SimpleBot {
             //Bestimmung des nächsten Gegners
             if (v.getTileType().startsWith("@") && v.getMinDistance() != Double.POSITIVE_INFINITY && (closestPlayer == null || closestPlayer.getMinDistance() > v.getMinDistance())){
                 if(!(v.getTileType().startsWith("@" + gameState.getHero().getId())) && !(v.getTileType().equals("@1") && hero1IsTeamplayBot) && !(v.getTileType().equals("@2") && hero2IsTeamplayBot) && !(v.getTileType().equals("@3") && hero3IsTeamplayBot) && !(v.getTileType().equals("@4") && hero4IsTeamplayBot)){
+
+                    if (v.getTileType().equals("@1")){
+                        closestPlayerId = 0;
+                    }
+
+                    if (v.getTileType().equals("@2")){
+                        closestPlayerId = 1;
+                    }
+
+                    if (v.getTileType().equals("@3")){
+                        closestPlayerId = 2;
+                    }
+
+                    if (v.getTileType().equals("@4")){
+                        closestPlayerId = 3;
+                    }
+
                     closestPlayer = v;
                 }
             }
@@ -213,9 +232,29 @@ public class CHEBot implements SimpleBot {
             timeRange = 3;
         }
 
-        // Eigene Platzierung
+        // Ranking
+        sortGoldArray.clear();
+        distinctSortGoldArray.clear();
 
+        for(int i = 0; i < 4; i++) {
+            sortGoldArray.add(gameState.getGame().getHeroes().get(i).getGold());
+        }
 
+        distinctSortGoldArray.addAll(sortGoldArray);
+
+        sortGoldArray.clear();
+
+        sortGoldArray.addAll(distinctSortGoldArray);
+
+        Collections.sort(sortGoldArray);
+
+        Collections.reverse(sortGoldArray);
+
+        for(int i = 0; i < sortGoldArray.size(); i++) {
+            if (sortGoldArray.get(i).equals(gameState.getHero().getGold())){
+                ownInGameRanking = i + 1;
+            }
+        }
 
         // HeroID: gameState.getHero().getId()
         // Turn: gameState.getGame().getTurn()
