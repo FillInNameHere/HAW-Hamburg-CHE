@@ -4,6 +4,7 @@ import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
 import com.brianstempin.vindiniumclient.dto.GameState;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -33,6 +34,11 @@ public class TestBot implements SimpleBot {
     public boolean hero2IsTeamplayBot = false;
     public boolean hero3IsTeamplayBot = false;
     public boolean hero4IsTeamplayBot = false;
+
+    // Ranking
+    public int ownInGameRanking = 0;
+    public ArrayList sortGoldArray = new ArrayList();
+    public Set distinctSortGoldArray = new HashSet();
 
     public int lastElement = 0;
 
@@ -153,7 +159,7 @@ public class TestBot implements SimpleBot {
             mapSize = gameState.getGame().getBoard().getSize() * gameState.getGame().getBoard().getSize();
             globalMineCount = globalMineCountHelper;
             tavernCount = tavernCountHelper;
-            logger.info("HeroID: " + gameState.getHero().getId() +  " -> Spiel wurde gestartet! => Mapinfos: MapSize: " + mapSize + "; GlobalMineCount: " + globalMineCount + "; TavernCount: " + tavernCount + ";");
+            logger.info("HeroID: " + gameState.getHero().getId() + "; Rank: " + ownInGameRanking + " -> Spiel wurde gestartet! => Mapinfos: MapSize: " + mapSize + "; GlobalMineCount: " + globalMineCount + "; TavernCount: " + tavernCount + ";");
         }
 
         //Pfade suchen nächste(r) (Gegner, Schenke, Mine)
@@ -210,7 +216,7 @@ public class TestBot implements SimpleBot {
             tavernMode = true;
             fightMode = false;
             mineMode = false;
-            logger.info("HID: " + gameState.getHero().getId() + "; Turn: " + gameState.getGame().getTurn() + "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!");
+            logger.info("HeroID: " + gameState.getHero().getId() + "; Rank: " + ownInGameRanking + "; Turn: " + gameState.getGame().getTurn() + "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich muss mich heilen, bin auf dem Weg zur nächsten Schenke!");
         } else {
             tavernMode = false;
         }
@@ -219,7 +225,7 @@ public class TestBot implements SimpleBot {
         if ((tavernMode == false) && (fightMode == false) && (gameState.getHero().getLife() >= 38)) {
             move = getPath(closestMine).get(0);
             mineMode = true;
-            logger.info("HID: " + gameState.getHero().getId() + "; Turn: " + gameState.getGame().getTurn() + "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich gehe zur nächsten Mine!");
+            logger.info("HeroID: " + gameState.getHero().getId() + "; Rank: " + ownInGameRanking + "; Turn: " + gameState.getGame().getTurn() + "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich gehe zur nächsten Mine!");
         } else {
             mineMode = false;
         }
@@ -229,14 +235,38 @@ public class TestBot implements SimpleBot {
             move = getPath(closestPlayer).get(0);
             fightMode = true;
             mineMode = false;
-            logger.info("HID: " + gameState.getHero().getId() + "; Turn: " + gameState.getGame().getTurn() + "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich bring " + gameState.getGame().getHeroes().get(closestPlayerId).getName() + "(" + closestPlayerId + ") um! Er hat " + gameState.getGame().getHeroes().get(closestPlayerId).getMineCount() + " Minen.");
+            logger.info("HeroID: " + gameState.getHero().getId() + "; Rank: " + ownInGameRanking + "; Turn: " + gameState.getGame().getTurn() + "; Life: " + gameState.getHero().getLife() + "; Gold: " + gameState.getHero().getGold() + "; MineCount: " + gameState.getHero().getMineCount() + "; -> Ich bring " + gameState.getGame().getHeroes().get(closestPlayerId).getName() + "(" + closestPlayerId + ") um! Er hat " + gameState.getGame().getHeroes().get(closestPlayerId).getMineCount() + " Minen.");
         } else {
             fightMode = false;
         }
 
+        // Ranking
+        sortGoldArray.clear();
+        distinctSortGoldArray.clear();
+
+        for(int i = 0; i < 4; i++) {
+            sortGoldArray.add(gameState.getGame().getHeroes().get(i).getGold());
+        }
+
+        distinctSortGoldArray.addAll(sortGoldArray);
+
+        sortGoldArray.clear();
+
+        sortGoldArray.addAll(distinctSortGoldArray);
+
+        Collections.sort(sortGoldArray);
+
+        Collections.reverse(sortGoldArray);
+
+        for(int i = 0; i < sortGoldArray.size(); i++) {
+            if (sortGoldArray.get(i).equals(gameState.getHero().getGold())){
+                ownInGameRanking = i + 1;
+            }
+        }
+
         //Spiel wurde beendet!
         if (gameState.getGame().getTurn() >= 1196) {
-            logger.info("HeroID: " + gameState.getHero().getId() +  " -> Spiel wurde beendet! => Mapinfos: MapSize: " + mapSize + "; GlobalMineCount: " + globalMineCount + "; TavernCount: " + tavernCount + ";");
+            logger.info("HeroID: " + gameState.getHero().getId() + "; Rank: " + ownInGameRanking + " -> Spiel wurde beendet! => Mapinfos: MapSize: " + mapSize + "; GlobalMineCount: " + globalMineCount + "; TavernCount: " + tavernCount + ";");
         }
 
         return BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
