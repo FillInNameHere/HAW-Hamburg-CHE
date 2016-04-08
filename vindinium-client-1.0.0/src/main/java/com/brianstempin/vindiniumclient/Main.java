@@ -5,6 +5,8 @@ import com.brianstempin.vindiniumclient.bot.advanced.AdvancedBotRunner;
 import com.brianstempin.vindiniumclient.bot.simple.SimpleBot;
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.simple.SimpleBotRunner;
+import com.brianstempin.vindiniumclient.datastructure.models.GameLog;
+import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.dto.ApiKey;
 import com.brianstempin.vindiniumclient.dto.GameState;
 import com.brianstempin.vindiniumclient.dto.Move;
