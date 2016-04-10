@@ -26,4 +26,8 @@ public class BotUtils {
             return BotMove.STAY;
         }
     }
+
+    public enum BotAction {
+        IDLE, MINE, ANGREIFEN, FORTFAHREN, TAVERNE
+    }
 }
