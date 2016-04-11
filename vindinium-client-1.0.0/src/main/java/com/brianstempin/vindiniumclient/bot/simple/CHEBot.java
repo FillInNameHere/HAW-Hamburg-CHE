@@ -45,17 +45,12 @@ public class CHEBot implements SimpleBot {
     public int closestPlayerLife = 9;
 
     // SpielModus (0: Schenke; 1: Mine; 2: Kampf; 3: Stehen;)
-    public int modus = 1;;
+    public int modus = 1;
 
     // Zeitbereich (abstahiert) (0: Turn 0-299; 1: Turn 300-599; 2: Turn 600-899; 3: Turn 900-1199;)
     public int timeRange = 0;
 
     // Map-Informationen
-    public int mapSize = 0;
-    public int tavernCount = 0;
-    public int tavernCountHelper = 0;
-    public int globalMineCount = 0;
-    public int globalMineCountHelper = 0;
     public int closestPlayerId = 0;
 
     // TeamPlay
@@ -100,17 +95,6 @@ public class CHEBot implements SimpleBot {
 
             // Überprüfe: Felder worauf etwas steht werden nicht einbezogen.
             if (v.getTileType().equals("##") || v.getTileType().equals("[]") || v.getTileType().startsWith("$")) {
-
-                //Mapscan: TavernenAnzahl
-                if (v.getTileType().equals("[]")){
-                    tavernCountHelper++;
-                }
-
-                //Mapscan: MinenAnzahl
-                if (v.getTileType().startsWith("$")){
-                    globalMineCountHelper++;
-                }
-
                 continue;
             }
 
@@ -179,11 +163,6 @@ public class CHEBot implements SimpleBot {
             if (gameState.getGame().getHeroes().get(3).getName().equals("HAW-Hamburg CHE")) {
                 hero4IsTeamplayBot = true;
             }
-
-            //MapInfos besorgen
-            mapSize = gameState.getGame().getBoard().getSize() * gameState.getGame().getBoard().getSize();
-            globalMineCount = globalMineCountHelper;
-            tavernCount = tavernCountHelper;
         }
 
         //Pfade suchen nächste(r) (Gegner, Schenke, Mine)
