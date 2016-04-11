@@ -236,67 +236,17 @@ public class CHEBot implements SimpleBot {
         }
 
         // Eigenes Leben (abstrahiert)
-        if(gameState.getHero().getLife() <= 10){
+        if (gameState.getHero().getLife() == 0) {
             ownLife = 0;
-        }
-        if((gameState.getHero().getLife() > 10) && (gameState.getHero().getLife() >= 20)){
-            ownLife = 1;
-        }
-        if((gameState.getHero().getLife() > 20) && (gameState.getHero().getLife() >= 30)){
-            ownLife = 2;
-        }
-        if((gameState.getHero().getLife() > 30) && (gameState.getHero().getLife() >= 40)){
-            ownLife = 3;
-        }
-        if((gameState.getHero().getLife() > 40) && (gameState.getHero().getLife() >= 50)){
-            ownLife = 4;
-        }
-        if((gameState.getHero().getLife() > 50) && (gameState.getHero().getLife() >= 60)){
-            ownLife = 5;
-        }
-        if((gameState.getHero().getLife() > 60) && (gameState.getHero().getLife() >= 70)){
-            ownLife = 6;
-        }
-        if((gameState.getHero().getLife() > 70) && (gameState.getHero().getLife() >= 80)){
-            ownLife = 7;
-        }
-        if((gameState.getHero().getLife() > 80) && (gameState.getHero().getLife() >= 90)){
-            ownLife = 8;
-        }
-        if((gameState.getHero().getLife() > 90) && (gameState.getHero().getLife() >= 100)){
-            ownLife = 9;
+        } else {
+            ownLife = ((gameState.getHero().getLife() - 1) / 10);
         }
 
         // Nähester Gegner Leben (abstrahiert)
-        if(gameState.getGame().getHeroes().get(closestPlayerId).getLife() <= 10){
+        if (gameState.getGame().getHeroes().get(closestPlayerId).getLife() == 0) {
             closestPlayerLife = 0;
-        }
-        if((gameState.getGame().getHeroes().get(closestPlayerId).getLife() > 10) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() >= 20)){
-            closestPlayerLife = 1;
-        }
-        if((gameState.getGame().getHeroes().get(closestPlayerId).getLife() > 20) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() >= 30)){
-            closestPlayerLife = 2;
-        }
-        if((gameState.getGame().getHeroes().get(closestPlayerId).getLife() > 30) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() >= 40)){
-            closestPlayerLife = 3;
-        }
-        if((gameState.getGame().getHeroes().get(closestPlayerId).getLife() > 40) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() >= 50)){
-            closestPlayerLife = 4;
-        }
-        if((gameState.getGame().getHeroes().get(closestPlayerId).getLife() > 50) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() >= 60)){
-            closestPlayerLife = 5;
-        }
-        if((gameState.getGame().getHeroes().get(closestPlayerId).getLife() > 60) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() >= 70)){
-            closestPlayerLife = 6;
-        }
-        if((gameState.getGame().getHeroes().get(closestPlayerId).getLife() > 70) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() >= 80)){
-            closestPlayerLife = 7;
-        }
-        if((gameState.getGame().getHeroes().get(closestPlayerId).getLife() > 80) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() >= 90)){
-            closestPlayerLife = 8;
-        }
-        if((gameState.getGame().getHeroes().get(closestPlayerId).getLife() > 90) && (gameState.getGame().getHeroes().get(closestPlayerId).getLife() >= 100)) {
-            closestPlayerLife = 9;
+        } else {
+            closestPlayerLife = ((gameState.getGame().getHeroes().get(closestPlayerId).getLife() - 1) / 10);
         }
 
         // Nähester Gegner Minenanzahl (abstrahiert)
