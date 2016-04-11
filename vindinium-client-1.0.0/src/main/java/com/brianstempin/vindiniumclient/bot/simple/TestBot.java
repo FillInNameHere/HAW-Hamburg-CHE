@@ -4,7 +4,6 @@ import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
 import com.brianstempin.vindiniumclient.dto.GameState;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.logging.Logger;
 
