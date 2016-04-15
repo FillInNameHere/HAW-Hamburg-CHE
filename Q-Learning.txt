@@ -25,11 +25,13 @@ Kategorie 3 (-20)
   - (Kampf)modus && ownMineCount == 3 
   - (Kampf)modus == 2 && closestPlayerDistanceBiggerFour == 1
   - (Kampf)modus == 2 && closestPlayerMineCount == 1
+  - (Kampf)modus == 2 && closestPlayerLife > ownLife
 
 
 Kategorie 4 (-1)
   - (Taverne)modus == 0 && ownLife >= 2 && ownLife <= 3
   - (Kampf)modus == 2 && ownMineCount == 2
+  - (Kampf)modus == 2 && closestPlayerLife == ownLife 
 
   //Durch im Modus sein -> Schritt machen)
   - (Taverne)modus == 0 
@@ -37,16 +39,17 @@ Kategorie 4 (-1)
   - (Kampf)modus == 2
 
 
-Kategorie 5 (+10)
+Kategorie 5 (+8)
   - (Taverne)modus == 0 + ownLife <= 1
   - (Kampf)modus == 2 && ownMineCount <= 1 
   - (Kampf)modus == 2 && closestPlayerDistanceBiggerFour == 0
   - (Kampf)modus == 2 && closestPlayerMineCount >= 2
+  - (Kampf)modus == 2 && closestPlayerLife < ownLife 
 
 
 Kategorie 6 (+25)
   - (Mine)modus == 1 && ownLife >=3
 
 
-Kategorie 7 (+100)
+Kategorie 7 (+75)
   - ownInGameRanking == 1
