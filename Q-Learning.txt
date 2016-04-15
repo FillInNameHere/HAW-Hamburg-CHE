@@ -8,7 +8,7 @@ Output:
 
 Rewards (7 Kategorien): 
 
-Kategorie 1 -75)
+Kategorie 1 (-75)
   - (Taverne)modus == 0 && ownGoldBiggerTwo == 0
   - (Kampf)modus == 2 && closestPlayerMineCount == 0
 
@@ -22,7 +22,7 @@ Kategorie 3 (-20)
   - (Mine)modus == 1 && ownLife <=2
   - ownInGameRanking == 2
   - (Taverne)modus == 0 && ownLife >= 4
-  - (Kampf)modus && ownMineCount == 3 
+  - (Kampf)modus == 2 && ownMineCount == 3 
   - (Kampf)modus == 2 && closestPlayerDistanceBiggerFour == 1
   - (Kampf)modus == 2 && closestPlayerMineCount == 1
   - (Kampf)modus == 2 && closestPlayerLife > ownLife
