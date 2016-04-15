@@ -64,8 +64,6 @@ public class CHEBot implements SimpleBot {
     public ArrayList sortGoldArray = new ArrayList();
     public Set distinctSortGoldArray = new HashSet();
 
-    public int lastElement = 0;
-
     private List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
         List<Vertex> vertexes = new LinkedList<Vertex>();
 
@@ -207,14 +205,14 @@ public class CHEBot implements SimpleBot {
 
         currState = state;
 
-        // Nähester Gegner Entfernung (abstrahiert) > 4
-        if (getPath(closestPlayer).get(lastElement).getMinDistance() > 4){
+        // Nähester Gegner Entfernung (abstrahiert) (> 4)
+        if ((getPath(closestPlayer).size() - 1) > 4){
             closestPlayerDistanceBiggerFour = 1;
         } else {
             closestPlayerDistanceBiggerFour = 0;
         }
 
-        // Eigenes Gold (abstrahiert) >= 2
+        // Eigenes Gold (abstrahiert) (>= 2)
         if (gameState.getHero().getGold() >= 2){
             ownGoldBiggerTwo = 1;
         } else {
@@ -293,7 +291,6 @@ public class CHEBot implements SimpleBot {
 
         // Notfallmodus
         Vertex move = getPath(closestMine).get(0);
-        lastElement = getPath(closestPlayer).size() - 1;
 
         // Schenke
         if (modus == 0) {
@@ -318,6 +315,7 @@ public class CHEBot implements SimpleBot {
         // Sieg
         if (gameState.getGame().getTurn() >= 1196 && ownInGameRanking == 1) {
             win = 1;
+            logger.info("Game: finished; LastState: " + state);
         }
 
         stateStr = "" + ownInGameRanking + "" + ownLife + "" + ownMineCount + "" + closestPlayerDistanceBiggerFour + "" + closestPlayerMineCount + "" + closestPlayerLife + "" + timeRange + "" + ownGoldBiggerTwo + "" + win + "";
