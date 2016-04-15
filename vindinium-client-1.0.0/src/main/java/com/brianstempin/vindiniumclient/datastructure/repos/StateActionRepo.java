@@ -14,11 +14,11 @@ public class StateActionRepo {
     public StateActionRepo() {
     }
 
-    public StateAction saveStateAction(StateAction state) {
+    public StateAction saveStateAction(StateAction action) {
         try {
             StateAction savedStateAction  = new StateAction();
             em.getTransaction().begin();
-            savedStateAction = em.merge(state);
+            savedStateAction = em.merge(action);
             em.getTransaction().commit();
             return savedStateAction;
         }

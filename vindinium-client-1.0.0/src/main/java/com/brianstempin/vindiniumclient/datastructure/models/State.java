@@ -11,22 +11,29 @@ import java.util.List;
 @Table(name = "State")
 public class State {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int stateId;
-    private String stateComment;
-    @OneToMany(cascade = CascadeType.ALL)
+    @Column(nullable = false, unique = true)
+    private long stateId;
+    private String comment;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "state")
     private List<StateAction> actions;
-    private Date discovery;
 
     public State() {
     }
 
-    public String getStateComment() {
-        return stateComment;
+    public long getStateId() {
+        return stateId;
     }
 
-    public void setStateComment(String stateComment) {
-        this.stateComment = stateComment;
+    public void setStateId(long stateId) {
+        this.stateId = stateId;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public List<StateAction> getActions() {
@@ -35,13 +42,5 @@ public class State {
 
     public void setActions(List<StateAction> actions) {
         this.actions = actions;
-    }
-
-    public Date getDiscovery() {
-        return discovery;
-    }
-
-    public void setDiscovery(Date discovery) {
-        this.discovery = discovery;
     }
 }

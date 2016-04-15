@@ -11,19 +11,23 @@ import javax.persistence.*;
 @Table(name = "StateAction")
 public class StateAction {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int stateActionID;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state")
     private State state;
-    private String description;
-    private BotMove action;
     private double qValue;
-    private int used;
-    private int explored;
     private int bestAction;
 
     public StateAction() {
+    }
+
+    public int getStateActionID() {
+        return stateActionID;
+    }
+
+    public void setStateActionID(int stateActionID) {
+        this.stateActionID = stateActionID;
     }
 
     public State getState() {
@@ -34,44 +38,12 @@ public class StateAction {
         this.state = state;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BotMove getAction() {
-        return action;
-    }
-
-    public void setAction(BotMove action) {
-        this.action = action;
-    }
-
     public double getqValue() {
         return qValue;
     }
 
     public void setqValue(double qValue) {
         this.qValue = qValue;
-    }
-
-    public int getUsed() {
-        return used;
-    }
-
-    public void setUsed(int used) {
-        this.used = used;
-    }
-
-    public int getExplored() {
-        return explored;
-    }
-
-    public void setExplored(int explored) {
-        this.explored = explored;
     }
 
     public int getBestAction() {
