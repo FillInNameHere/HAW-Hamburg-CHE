@@ -2,28 +2,51 @@ Input:
 - States
 - Rewards
 
-
 Output:
 - Datenbank -> speichert sinnvolle Spielzüge zu bestimmten Situationen
 
 
-Rewards (5 Kategorien): 
+Rewards (7 Kategorien): 
 
-Kategorie 1 (-1000)
-  - loose
+Kategorie 1 -75)
+  - (Taverne)modus == 0 && ownGoldBiggerTwo == 0
+  - (Kampf)modus == 2 && closestPlayerMineCount == 0
 
-Kategorie 2 (-25)
-  - Taverne, HP >= 40
-  - Sterben
-  - Gegner Töten der "HAW-Hamburg CHE" heißt (Erweiterung Teambot)!!!
 
-Kategorie 3 (-1)
-  - Schritt machen
+Kategorie 2 (-50)
+  - ownInGameRanking == 3 
+  - ownInGameRanking == 4
 
-Kategorie 4 (+25)
-  - (nicht eigene) Mine einnehmen
-  - Taverne, HP <= 40
-  - Gegner Töten, Minecount > 3
 
-Kategorie 5 (+1000)
-  - win
+Kategorie 3 (-20)
+  - (Mine)modus == 1 && ownLife <=2
+  - ownInGameRanking == 2
+  - (Taverne)modus == 0 && ownLife >= 4
+  - (Kampf)modus && ownMineCount == 3 
+  - (Kampf)modus == 2 && closestPlayerDistanceBiggerFour == 1
+  - (Kampf)modus == 2 && closestPlayerMineCount == 1
+
+
+Kategorie 4 (-1)
+  - (Taverne)modus == 0 && ownLife >= 2 && ownLife <= 3
+  - (Kampf)modus == 2 && ownMineCount == 2
+
+  //Durch im Modus sein -> Schritt machen)
+  - (Taverne)modus == 0 
+  - (Mine)modus == 1 
+  - (Kampf)modus == 2
+
+
+Kategorie 5 (+10)
+  - (Taverne)modus == 0 + ownLife <= 1
+  - (Kampf)modus == 2 && ownMineCount <= 1 
+  - (Kampf)modus == 2 && closestPlayerDistanceBiggerFour == 0
+  - (Kampf)modus == 2 && closestPlayerMineCount >= 2
+
+
+Kategorie 6 (+25)
+  - (Mine)modus == 1 && ownLife >=3
+
+
+Kategorie 7 (+100)
+  - ownInGameRanking == 1
