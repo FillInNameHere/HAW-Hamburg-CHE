@@ -6,9 +6,11 @@ package com.brianstempin.vindiniumclient.algorithms;
 public class Reward {
 
     public static int reward(int modus, long state){
-        //return reward
+        // return reward
         int reward = 0;
 
+        // timeRangeFaktor
+        double timeRangeFaktor = 0.125;
 
         // Reward Kategorien (Single Point Of Control)
         int rewardKat1 = -75;
@@ -48,7 +50,7 @@ public class Reward {
         Integer ownGoldBiggerTwo = (int) ownGoldBiggerTwoChar;
 
 
-        //Kategorie 1 (-75)
+        // Kategorie 1 (-75)
         if (modus == 0 && ownGoldBiggerTwo == 0) {
             reward += rewardKat1;
         }
@@ -58,7 +60,7 @@ public class Reward {
         }
 
 
-        //Kategorie 2 (-50)
+        // Kategorie 2 (-50)
         if (ownIngameRanking == 3) {
             reward += rewardKat2;
         }
@@ -68,7 +70,7 @@ public class Reward {
         }
 
 
-        //Kategorie 3 (-20)
+        // Kategorie 3 (-20)
         if (modus == 1 && ownLife <= 2) {
             reward += rewardKat3;
         }
@@ -98,7 +100,7 @@ public class Reward {
         }
 
 
-        //Kategorie 4 (-1)
+        // Kategorie 4 (-1)
         if (modus == 0 && ownLife >= 2 && ownLife <= 3) {
             reward += rewardKat4;
         }
@@ -124,7 +126,7 @@ public class Reward {
         }
 
 
-        //Kategorie 5 (+8)
+        // Kategorie 5 (+8)
         if (modus == 0 && ownLife <= 1) {
             reward += rewardKat5;
         }
@@ -146,16 +148,19 @@ public class Reward {
         }
 
 
-        //Kategorie 6 (+25)
+        // Kategorie 6 (+25)
         if (modus == 1 && ownLife >= 3) {
             reward += rewardKat6;
         }
 
 
-        //Kategorie 7 (+75)
+        // Kategorie 7 (+75)
         if (ownIngameRanking == 1) {
             reward += rewardKat7;
         }
+
+        // timeRangeFaktor
+        reward += reward * (1 + (timeRange * timeRangeFaktor));
 
         return reward;
     }
