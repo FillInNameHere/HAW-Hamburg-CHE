@@ -37,9 +37,6 @@ public class CHEBot implements SimpleBot {
     // Eigene Minenanzahl (abstrahiert) (0: 0, 1: 1-3, 2: 4-7, 3: 8-inf)
     public int ownMineCount = 0;
 
-    // Sieg (abstrahiert)
-    public int win = 0;
-
     // Nähester Gegner Entfernung (abstrahiert)
     public int closestPlayerDistanceBiggerFour = 0;
 
