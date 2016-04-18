@@ -28,6 +28,6 @@ public class BotUtils {
     }
 
     public enum BotAction {
-        IDLE, MINE, ANGREIFEN, FORTFAHREN, TAVERNE
+        SCHENKE, MINE, KAMPF, STEHEN, FORTFAHREN
     }
 }

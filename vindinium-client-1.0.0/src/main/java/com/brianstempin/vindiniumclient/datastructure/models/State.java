@@ -1,7 +1,6 @@
 package com.brianstempin.vindiniumclient.datastructure.models;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +15,7 @@ public class State {
     private String comment;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "state")
     private List<StateAction> actions;
+    private int bestAction;
 
     public State() {
     }
@@ -43,4 +43,8 @@ public class State {
     public void setActions(List<StateAction> actions) {
         this.actions = actions;
     }
+
+    public void setBestAction(int actionId) { this.bestAction = actionId; }
+
+    public int getBestAction() { return bestAction; }
 }

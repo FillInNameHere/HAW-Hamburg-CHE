@@ -1,7 +1,12 @@
 package com.brianstempin.vindiniumclient.bot.simple;
 
+import com.brianstempin.vindiniumclient.algorithms.ILearningAlgorithm;
+import com.brianstempin.vindiniumclient.algorithms.QLearning;
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
+import com.brianstempin.vindiniumclient.datastructure.models.State;
+import com.brianstempin.vindiniumclient.datastructure.repos.StateActionRepo;
+import com.brianstempin.vindiniumclient.datastructure.repos.StateRepo;
 import com.brianstempin.vindiniumclient.dto.GameState;
 
 import java.util.*;
@@ -16,9 +21,9 @@ public class CHEBot implements SimpleBot {
     }
 
     // Zustand
-    long currState = 190109000;
-    String stateStr = "190109000";
-    long state = 190109000;
+    long currState = 19010900;
+    String stateStr = "19010900";
+    long state = 19010900;
 
     // Eigene Position
     Vertex ownPosition = null;
@@ -63,6 +68,15 @@ public class CHEBot implements SimpleBot {
     public int ownInGameRanking = 1;
     public ArrayList sortGoldArray = new ArrayList();
     public Set distinctSortGoldArray = new HashSet();
+
+    private ILearningAlgorithm learningAlgorithm = new QLearning(new StateRepo(), new StateActionRepo());
+
+    private void doLearningAlgorithm(){
+        State currentState = new State();
+        currentState.setStateId(state);
+        BotUtils.BotAction action = learningAlgorithm.step(currentState);
+        if(action.ordinal() < 4){ modus = action.ordinal();}
+    }
 
     private List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
         List<Vertex> vertexes = new LinkedList<Vertex>();
@@ -147,6 +161,9 @@ public class CHEBot implements SimpleBot {
 
     @Override
     public BotMove move(GameState gameState) {
+
+        //Führe Lern-Algorithmus aus
+        doLearningAlgorithm();
 
         if ((gameState.getGame().getTurn() >= 4) && (gameState.getGame().getTurn() <= 7)) {
             if (gameState.getGame().getHeroes().get(0).getName().equals("HAW-Hamburg CHE")) {

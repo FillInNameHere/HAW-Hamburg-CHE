@@ -35,14 +35,12 @@ public class DatastructureTest {
         StateAction a1 = new StateAction();
         // Important!
         a1.setState(state);
-        a1.setBestAction(1);
         a1.setqValue(9.3);
         actions.add(a1);
 
         StateAction a2 = new StateAction();
         // Important!
         a2.setState(state);
-        a2.setBestAction(2);
         a2.setqValue(2.5);
         actions.add(a2);
 

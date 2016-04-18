@@ -1,6 +1,7 @@
 package com.brianstempin.vindiniumclient.datastructure.models;
 
 import com.brianstempin.vindiniumclient.bot.BotMove;
+import com.brianstempin.vindiniumclient.bot.BotUtils;
 
 import javax.persistence.*;
 
@@ -17,7 +18,7 @@ public class StateAction {
     @JoinColumn(name = "state")
     private State state;
     private double qValue;
-    private int bestAction;
+    private BotUtils.BotAction action;
 
     public StateAction() {
     }
@@ -46,11 +47,8 @@ public class StateAction {
         this.qValue = qValue;
     }
 
-    public int getBestAction() {
-        return bestAction;
-    }
 
-    public void setBestAction(int bestAction) {
-        this.bestAction = bestAction;
-    }
+    public BotUtils.BotAction getAction() { return action; }
+
+    public void setAction(BotUtils.BotAction action) { this.action = action; }
 }

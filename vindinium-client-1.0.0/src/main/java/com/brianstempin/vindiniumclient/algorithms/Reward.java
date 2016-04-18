@@ -5,7 +5,7 @@ package com.brianstempin.vindiniumclient.algorithms;
  */
 public class Reward {
 
-    public int reward(int modus, long state){
+    public static int reward(int modus, long state){
         //return reward
         int reward = 0;
 
