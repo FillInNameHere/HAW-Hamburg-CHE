@@ -68,11 +68,13 @@ public class CHEBot implements SimpleBot {
 
     private ILearningAlgorithm learningAlgorithm = new QLearning(new StateRepo(), new StateActionRepo());
 
-    private void doLearningAlgorithm(){
+    private void doLearningAlgorithm() {
         State currentState = new State();
         currentState.setStateId(state);
         BotUtils.BotAction action = learningAlgorithm.step(currentState);
-        if(action.ordinal() < 4){ modus = action.ordinal();}
+        if (action.ordinal() < 4) {
+            modus = action.ordinal();
+        }
     }
 
     private List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
@@ -98,7 +100,7 @@ public class CHEBot implements SimpleBot {
             Vertex v = vertexes.get(i);
 
             // Überprüfe: Sind wir auf diesem Feld?
-            if (v.getPosition().getX() == hero.getPos().getX() && v.getPosition().getY() == hero.getPos().getY()){
+            if (v.getPosition().getX() == hero.getPos().getX() && v.getPosition().getY() == hero.getPos().getY()) {
                 ownPosition = v;
             }
 
@@ -158,7 +160,6 @@ public class CHEBot implements SimpleBot {
 
     @Override
     public BotMove move(GameState gameState) {
-
         //Führe Lern-Algorithmus aus
         doLearningAlgorithm();
 
@@ -187,7 +188,7 @@ public class CHEBot implements SimpleBot {
         for (Vertex v : vertexes) {
             //Bestimmung der nächsten Mine
             if (v.getTileType().startsWith("$") && v.getMinDistance() != 0 && v.getMinDistance() != Double.POSITIVE_INFINITY && (closestMine == null || closestMine.getMinDistance() > v.getMinDistance())) {
-                if(!(v.getTileType().startsWith("$" + gameState.getHero().getId())) && !(v.getTileType().equals("$1") && hero1IsTeamplayBot) && !(v.getTileType().equals("$2") && hero2IsTeamplayBot) && !(v.getTileType().equals("$3") && hero3IsTeamplayBot) && !(v.getTileType().equals("$4") && hero4IsTeamplayBot)){
+                if (!(v.getTileType().startsWith("$" + gameState.getHero().getId())) && !(v.getTileType().equals("$1") && hero1IsTeamplayBot) && !(v.getTileType().equals("$2") && hero2IsTeamplayBot) && !(v.getTileType().equals("$3") && hero3IsTeamplayBot) && !(v.getTileType().equals("$4") && hero4IsTeamplayBot)) {
                     closestMine = v;
                 }
             }
@@ -198,18 +199,18 @@ public class CHEBot implements SimpleBot {
             }
 
             //Bestimmung des nächsten Gegners
-            if (v.getTileType().startsWith("@") && v.getMinDistance() != Double.POSITIVE_INFINITY && (closestPlayer == null || closestPlayer.getMinDistance() > v.getMinDistance())){
-                if(!(v.getTileType().startsWith("@" + gameState.getHero().getId())) && !(v.getTileType().equals("@1") && hero1IsTeamplayBot) && !(v.getTileType().equals("@2") && hero2IsTeamplayBot) && !(v.getTileType().equals("@3") && hero3IsTeamplayBot) && !(v.getTileType().equals("@4") && hero4IsTeamplayBot)){
-                    if (v.getTileType().equals("@1")){
+            if (v.getTileType().startsWith("@") && v.getMinDistance() != Double.POSITIVE_INFINITY && (closestPlayer == null || closestPlayer.getMinDistance() > v.getMinDistance())) {
+                if (!(v.getTileType().startsWith("@" + gameState.getHero().getId())) && !(v.getTileType().equals("@1") && hero1IsTeamplayBot) && !(v.getTileType().equals("@2") && hero2IsTeamplayBot) && !(v.getTileType().equals("@3") && hero3IsTeamplayBot) && !(v.getTileType().equals("@4") && hero4IsTeamplayBot)) {
+                    if (v.getTileType().equals("@1")) {
                         closestPlayerId = 0;
                     }
-                    if (v.getTileType().equals("@2")){
+                    if (v.getTileType().equals("@2")) {
                         closestPlayerId = 1;
                     }
-                    if (v.getTileType().equals("@3")){
+                    if (v.getTileType().equals("@3")) {
                         closestPlayerId = 2;
                     }
-                    if (v.getTileType().equals("@4")){
+                    if (v.getTileType().equals("@4")) {
                         closestPlayerId = 3;
                     }
                     closestPlayer = v;
@@ -220,30 +221,30 @@ public class CHEBot implements SimpleBot {
         currState = state;
 
         // Nähester Gegner Entfernung (abstrahiert) (> 4)
-        if ((getPath(closestPlayer).size() - 1) > 4){
+        if ((getPath(closestPlayer).size() - 1) > 4) {
             closestPlayerDistanceBiggerFour = 1;
         } else {
             closestPlayerDistanceBiggerFour = 0;
         }
 
         // Eigenes Gold (abstrahiert) (>= 2)
-        if (gameState.getHero().getGold() >= 2){
+        if (gameState.getHero().getGold() >= 2) {
             ownGoldBiggerTwo = 1;
         } else {
             ownGoldBiggerTwo = 0;
         }
 
         // Eigene Minenanzahl (abstrahiert)
-        if (gameState.getHero().getMineCount() == 0){
+        if (gameState.getHero().getMineCount() == 0) {
             ownMineCount = 0;
         }
-        if ((gameState.getHero().getMineCount()) > 0 && (gameState.getHero().getMineCount() <= 3)){
+        if ((gameState.getHero().getMineCount()) > 0 && (gameState.getHero().getMineCount() <= 3)) {
             ownMineCount = 1;
         }
-        if ((gameState.getHero().getMineCount()) > 3 && (gameState.getHero().getMineCount() <= 7)){
+        if ((gameState.getHero().getMineCount()) > 3 && (gameState.getHero().getMineCount() <= 7)) {
             ownMineCount = 2;
         }
-        if (gameState.getHero().getMineCount() >= 8){
+        if (gameState.getHero().getMineCount() >= 8) {
             ownMineCount = 3;
         }
 
@@ -262,34 +263,34 @@ public class CHEBot implements SimpleBot {
         }
 
         // Nähester Gegner Minenanzahl (abstrahiert)
-        if (gameState.getGame().getHeroes().get(closestPlayerId).getMineCount() == 0){
+        if (gameState.getGame().getHeroes().get(closestPlayerId).getMineCount() == 0) {
             closestPlayerMineCount = 0;
         }
-        if ((gameState.getGame().getHeroes().get(closestPlayerId).getMineCount()) > 0 && (gameState.getGame().getHeroes().get(closestPlayerId).getMineCount() <= 3)){
+        if ((gameState.getGame().getHeroes().get(closestPlayerId).getMineCount()) > 0 && (gameState.getGame().getHeroes().get(closestPlayerId).getMineCount() <= 3)) {
             closestPlayerMineCount = 1;
         }
-        if ((gameState.getGame().getHeroes().get(closestPlayerId).getMineCount()) > 3 && (gameState.getGame().getHeroes().get(closestPlayerId).getMineCount() <= 7)){
+        if ((gameState.getGame().getHeroes().get(closestPlayerId).getMineCount()) > 3 && (gameState.getGame().getHeroes().get(closestPlayerId).getMineCount() <= 7)) {
             closestPlayerMineCount = 2;
         }
-        if (gameState.getGame().getHeroes().get(closestPlayerId).getMineCount() >= 8){
+        if (gameState.getGame().getHeroes().get(closestPlayerId).getMineCount() >= 8) {
             closestPlayerMineCount = 3;
         }
 
         // Spieldauer (abstrahiert)
-        if ((gameState.getGame().getTurn() >= 300) && (gameState.getGame().getTurn() <= 599)){
+        if ((gameState.getGame().getTurn() >= 300) && (gameState.getGame().getTurn() <= 599)) {
             timeRange = 1;
         }
-        if ((gameState.getGame().getTurn() >= 600) && (gameState.getGame().getTurn() <= 899)){
+        if ((gameState.getGame().getTurn() >= 600) && (gameState.getGame().getTurn() <= 899)) {
             timeRange = 2;
         }
-        if ((gameState.getGame().getTurn() >= 900) && (gameState.getGame().getTurn() <= 1199)){
+        if ((gameState.getGame().getTurn() >= 900) && (gameState.getGame().getTurn() <= 1199)) {
             timeRange = 3;
         }
 
         // Eigene Platzierung
         sortGoldArray.clear();
         distinctSortGoldArray.clear();
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             sortGoldArray.add(gameState.getGame().getHeroes().get(i).getGold());
         }
         distinctSortGoldArray.addAll(sortGoldArray);
@@ -297,8 +298,8 @@ public class CHEBot implements SimpleBot {
         sortGoldArray.addAll(distinctSortGoldArray);
         Collections.sort(sortGoldArray);
         Collections.reverse(sortGoldArray);
-        for(int i = 0; i < sortGoldArray.size(); i++) {
-            if (sortGoldArray.get(i).equals(gameState.getHero().getGold())){
+        for (int i = 0; i < sortGoldArray.size(); i++) {
+            if (sortGoldArray.get(i).equals(gameState.getHero().getGold())) {
                 ownInGameRanking = i + 1;
             }
         }
@@ -323,14 +324,15 @@ public class CHEBot implements SimpleBot {
 
         // Stehen
         if (modus == 3) {
-            move = getPath(ownPosition).get(0);
+            return BotMove.STAY;
         }
+
 
         stateStr = "" + ownInGameRanking + "" + ownLife + "" + ownMineCount + "" + closestPlayerDistanceBiggerFour + "" + closestPlayerMineCount + "" + closestPlayerLife + "" + timeRange + "" + ownGoldBiggerTwo + "";
         state = Long.parseLong(stateStr);
 
         //logger.info("State: " + state + " (ownInGameRanking,ownLife,ownMineCount,closestPlayerDistanceBiggerFour,closestPlayerMineCount,closestPlayerLife,timeRange,ownGoldBiggerTwo)");
-
+        logger.info("" + gameState.getGame().getTurn());
         return BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
     }
 

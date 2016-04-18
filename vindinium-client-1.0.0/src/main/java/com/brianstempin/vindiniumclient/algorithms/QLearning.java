@@ -8,6 +8,7 @@ import com.brianstempin.vindiniumclient.datastructure.repos.StateActionRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateRepo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,7 +43,6 @@ public class QLearning implements ILearningAlgorithm {
 
     @Override
     public BotAction step(State currentState) {
-
         if (this.currentState == null || currentState.getStateId() != this.currentState.getStateId()) {
             StateAction stateAction;
             State state = stateRepo.findState(currentState.getStateId());
