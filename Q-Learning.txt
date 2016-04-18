@@ -8,6 +8,10 @@ Output:
 
 Rewards (7 Kategorien): 
 
+// Je später das Spiel, desto krasser werden die höher werden die Bewertungen
+timeRangeFaktor
+reward += reward * (1 + (timeRange * timeRangeFaktor));
+
 Kategorie 1 (-75)
   - (Taverne)modus == 0 && ownGoldBiggerTwo == 0
   - (Kampf)modus == 2 && closestPlayerMineCount == 0
