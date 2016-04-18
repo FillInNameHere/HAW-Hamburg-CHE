@@ -59,6 +59,10 @@ public class Reward {
             reward += rewardKat1;
         }
 
+        if (modus == 0 && ownLife == 9) {
+            reward += rewardKat1;
+        }
+
 
         // Kategorie 2 (-50)
         if (ownIngameRanking == 3) {
@@ -66,6 +70,10 @@ public class Reward {
         }
 
         if (ownIngameRanking == 4) {
+            reward += rewardKat2;
+        }
+
+        if (modus == 0 && ownLife >= 6 && ownLife <= 8) {
             reward += rewardKat2;
         }
 
@@ -79,7 +87,7 @@ public class Reward {
             reward += rewardKat3;
         }
 
-        if (modus == 0 && ownLife >= 4) {
+        if (modus == 0 && ownLife >= 4 && ownLife <= 5) {
             reward += rewardKat3;
         }
 
@@ -127,10 +135,6 @@ public class Reward {
 
 
         // Kategorie 5 (+8)
-        if (modus == 0 && ownLife <= 1) {
-            reward += rewardKat5;
-        }
-
         if (modus == 2 && ownMineCount <= 1) {
             reward += rewardKat5;
         }
@@ -150,6 +154,10 @@ public class Reward {
 
         // Kategorie 6 (+25)
         if (modus == 1 && ownLife >= 3) {
+            reward += rewardKat6;
+        }
+
+        if (modus == 0 && ownLife <= 1) {
             reward += rewardKat6;
         }
 
