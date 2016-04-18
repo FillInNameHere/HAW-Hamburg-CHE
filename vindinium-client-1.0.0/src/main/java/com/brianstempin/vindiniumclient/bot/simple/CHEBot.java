@@ -77,6 +77,7 @@ public class CHEBot implements SimpleBot {
 
     private List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
         List<Vertex> vertexes = new LinkedList<Vertex>();
+        Vertex me = null;
 
         // Graph ohne Kanten erstellen
         for (int row = 0; row < board.getSize(); row++) {
@@ -99,8 +100,11 @@ public class CHEBot implements SimpleBot {
 
             // Überprüfe: Sind wir auf diesem Feld?
             if (v.getPosition().getX() == hero.getPos().getX() && v.getPosition().getY() == hero.getPos().getY()){
-                ownPosition = v;
+                me = v;
             }
+
+            ownPosition = v;
+            ownPosition.setPosition(me.getPosition());
 
             // Überprüfe: Felder worauf etwas steht werden nicht einbezogen.
             if (v.getTileType().equals("##") || v.getTileType().equals("[]") || v.getTileType().startsWith("$")) {
@@ -123,8 +127,8 @@ public class CHEBot implements SimpleBot {
         }
 
         PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>();
-        vertexQueue.add(ownPosition);
-        ownPosition.setMinDistance(0);
+        vertexQueue.add(me);
+        me.setMinDistance(0);
 
         while (!vertexQueue.isEmpty()) {
             Vertex v = vertexQueue.poll();
