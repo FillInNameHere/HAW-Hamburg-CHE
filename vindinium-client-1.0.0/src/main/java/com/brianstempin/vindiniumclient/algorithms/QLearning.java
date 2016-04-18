@@ -22,7 +22,7 @@ public class QLearning implements ILearningAlgorithm {
     private StateRepo stateRepo;
     private StateActionRepo stateActionRepo;
     private double learningRate = 0.8;
-    private double explorationFactor = 0.2;
+    private double explorationFactor = 0.8;
     private boolean eval = false;
 
     private double discount = 1;
@@ -44,9 +44,7 @@ public class QLearning implements ILearningAlgorithm {
     public BotAction step(State currentState) {
 
         if (this.currentState == null || currentState.getStateId() != this.currentState.getStateId()) {
-            this.currentState = currentState;
             StateAction stateAction;
-
             State state = stateRepo.findState(currentState.getStateId());
 
             if (!(state == null)) {
@@ -54,7 +52,7 @@ public class QLearning implements ILearningAlgorithm {
                 stateAction = this.currentState.getActions().get(this.currentState.getBestAction());
             } else {
                 this.currentState = initState(currentState);
-                stateAction = lastStateActions.get(this.currentState.getBestAction());
+                stateAction = this.currentState.getActions().get(this.currentState.getBestAction());
             }
 
             if (Math.random() < explorationFactor) {
@@ -79,16 +77,14 @@ public class QLearning implements ILearningAlgorithm {
         for (int i = 0, valuesLength = values.length-1; i < valuesLength; i++) {
             BotAction b = values[i];
             StateAction sa = new StateAction();
-            sa.setqValue(Double.MAX_VALUE);
+            sa.setqValue(0.0);
             sa.setState(state);
             sa.setAction(b);
             actions.add(sa);
-            stateActionRepo.saveStateAction(sa);
         }
         state.setActions(actions);
         state.setBestAction((int) (Math.random() * 4));
-        stateRepo.saveState(state);
-        return state;
+        return stateRepo.saveState(state);
     }
 
     private void evaluateLastStep() {
@@ -97,8 +93,6 @@ public class QLearning implements ILearningAlgorithm {
         double bestQValNow = currentState.getActions().get(currentState.getBestAction()).getqValue();
         double newQVal = oldQVal + learningRate * (reward + discount * bestQValNow - oldQVal);
         lastAction.setqValue(newQVal);
-        System.out.println(lastAction.getStateActionID());
-        stateActionRepo.saveStateAction(lastAction);
 
         StateAction bestAction = lastStateActions.get(lastState.getBestAction());
         for (int i = 0, actionsSize = lastStateActions.size(); i < actionsSize; i++) {

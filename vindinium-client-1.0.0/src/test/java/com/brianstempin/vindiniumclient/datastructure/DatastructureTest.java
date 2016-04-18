@@ -18,6 +18,7 @@ public class DatastructureTest {
     private StateRepo stateRepo;
     private StateActionRepo stateActionRepo;
 
+
     @Before
     public void setup() {
         stateRepo = new StateRepo();
@@ -48,7 +49,14 @@ public class DatastructureTest {
         state.setActions(actions);
 
         this.stateRepo.saveState(state);
-        this.stateActionRepo.saveStateAction(a1);
-        this.stateActionRepo.saveStateAction(a2);
+        State state2 = this.stateRepo.findState(123456L);
+        state2.getActions().get(0).setqValue(9.99);
+        this.stateRepo.saveState(state2);
+        State state3 = this.stateRepo.findState(123456L);
+
+
+        //this.stateActionRepo.saveStateAction(a1);
+        //this.stateActionRepo.saveStateAction(a2);
+        System.out.println(state3.getComment());
     }
 }

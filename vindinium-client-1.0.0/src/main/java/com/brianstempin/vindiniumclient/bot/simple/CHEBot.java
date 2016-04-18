@@ -329,7 +329,7 @@ public class CHEBot implements SimpleBot {
         stateStr = "" + ownInGameRanking + "" + ownLife + "" + ownMineCount + "" + closestPlayerDistanceBiggerFour + "" + closestPlayerMineCount + "" + closestPlayerLife + "" + timeRange + "" + ownGoldBiggerTwo + "";
         state = Long.parseLong(stateStr);
 
-        logger.info("State: " + state + " (ownInGameRanking,ownLife,ownMineCount,closestPlayerDistanceBiggerFour,closestPlayerMineCount,closestPlayerLife,timeRange,ownGoldBiggerTwo)");
+        //logger.info("State: " + state + " (ownInGameRanking,ownLife,ownMineCount,closestPlayerDistanceBiggerFour,closestPlayerMineCount,closestPlayerLife,timeRange,ownGoldBiggerTwo)");
 
         return BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
     }

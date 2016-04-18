@@ -13,7 +13,7 @@ public class State {
     @Column(nullable = false, unique = true)
     private long stateId;
     private String comment;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "state")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "state", cascade = CascadeType.ALL)
     private List<StateAction> actions;
     private int bestAction;
 
