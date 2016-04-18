@@ -160,7 +160,7 @@ public class Reward {
         }
 
         // timeRangeFaktor
-        reward += reward * (1 + (timeRange * timeRangeFaktor));
+        reward = (int) (reward * (1 + (timeRange * timeRangeFaktor)));
 
         return reward;
     }

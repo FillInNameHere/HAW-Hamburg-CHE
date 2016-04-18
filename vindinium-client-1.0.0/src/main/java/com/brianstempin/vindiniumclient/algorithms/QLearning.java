@@ -97,6 +97,7 @@ public class QLearning implements ILearningAlgorithm {
         double bestQValNow = currentState.getActions().get(currentState.getBestAction()).getqValue();
         double newQVal = oldQVal + learningRate * (reward + discount * bestQValNow - oldQVal);
         lastAction.setqValue(newQVal);
+        System.out.println(lastAction.getStateActionID());
         stateActionRepo.saveStateAction(lastAction);
 
         StateAction bestAction = lastStateActions.get(lastState.getBestAction());
