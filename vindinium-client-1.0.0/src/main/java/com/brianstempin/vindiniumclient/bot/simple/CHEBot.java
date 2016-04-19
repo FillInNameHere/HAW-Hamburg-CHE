@@ -43,13 +43,13 @@ public class CHEBot implements SimpleBot {
     // Eigene Minenanzahl (abstrahiert) (0: 0, 0: 1-3, 0: 4-7, 0: 8-inf)
     public int closestPlayerMineCount = 0;
 
-    // Nähester Gegner Entfernung (abstrahiert) (0: 0-10, 1: 11-20, 2: 21-30, 3: 31-40, 4: 41-50, 5: 51-60, 6: 61-70, 7: 71-80, 8: 81-90, 9: 91-100)
+    // Nähester Gegner Leben (abstrahiert) (0: 0-10, 1: 11-20, 2: 21-30, 3: 31-40, 4: 41-50, 5: 51-60, 6: 61-70, 7: 71-80, 8: 81-90, 9: 91-100)
     public int closestPlayerLife = 9;
 
-    // SpielModus (0: Schenke; 1: Mine; 2: Kampf; 3: Stehen;)
+    // SpielModus (0: Schenke, 1: Mine, 2: Kampf, 3: Stehen)
     public int modus = 1;
 
-    // Zeitbereich (abstahiert) (0: Turn 0-299; 1: Turn 300-599; 2: Turn 600-899; 3: Turn 900-1199;)
+    // Zeitbereich (abstahiert) (0: 0-299, 1: 300-599, 2: 600-899, 3: 900-1199)
     public int timeRange = 0;
 
     // Map-Informationen
@@ -61,7 +61,7 @@ public class CHEBot implements SimpleBot {
     public boolean hero3IsTeamplayBot = false;
     public boolean hero4IsTeamplayBot = false;
 
-    // Ranking
+    // Ranking (abstrahiert) (1: 1, 2: 2, 3: 3, 4: 4)
     public int ownInGameRanking = 1;
     public ArrayList sortGoldArray = new ArrayList();
     public Set distinctSortGoldArray = new HashSet();
