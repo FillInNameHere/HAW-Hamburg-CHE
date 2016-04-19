@@ -11,6 +11,8 @@ public class RandomBot implements SimpleBot {
     public BotMove move(GameState gameState) {
         int randomNumber = (int)(Math.random() * 4);
 
+        return BotMove.STAY;
+/*
         switch(randomNumber) {
             case 1:
                 return BotMove.NORTH;
@@ -22,7 +24,7 @@ public class RandomBot implements SimpleBot {
                 return BotMove.WEST;
             default:
                 return BotMove.STAY;
-        }
+        }*/
     }
 
     @Override

@@ -306,25 +306,28 @@ public class CHEBot implements SimpleBot {
 
         // Notfallmodus
         Vertex move = getPath(closestMine).get(0);
-
+        BotMove botMove = null;
         // Schenke
         if (modus == 0) {
             move = getPath(closestPub).get(0);
+            botMove = BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
         }
 
         // Mine
         if (modus == 1) {
             move = getPath(closestMine).get(0);
+            botMove = BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
         }
 
         // Kampf
         if (modus == 2) {
             move = getPath(closestPlayer).get(0);
+            botMove = BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
         }
 
         // Stehen
         if (modus == 3) {
-            return BotMove.STAY;
+            botMove = BotMove.STAY;
         }
 
 
@@ -333,7 +336,7 @@ public class CHEBot implements SimpleBot {
 
         //logger.info("State: " + state + " (ownInGameRanking,ownLife,ownMineCount,closestPlayerDistanceBiggerFour,closestPlayerMineCount,closestPlayerLife,timeRange,ownGoldBiggerTwo)");
         logger.info("" + gameState.getGame().getTurn());
-        return BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
+        return botMove;
     }
 
     @Override

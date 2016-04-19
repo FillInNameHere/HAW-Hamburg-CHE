@@ -22,8 +22,8 @@ public class QLearning implements ILearningAlgorithm {
     private List<StateAction> lastStateActions;
     private StateRepo stateRepo;
     private StateActionRepo stateActionRepo;
-    private double learningRate = 0.8;
-    private double explorationFactor = 0.8;
+    private double learningRate = 0.1;
+    private double explorationFactor = 0.15;
     private boolean eval = false;
 
     private double discount = 1;

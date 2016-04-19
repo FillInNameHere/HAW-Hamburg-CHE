@@ -52,6 +52,7 @@ public class SimpleBotRunner implements Callable<GameState> {
             response = request.execute();
             gameState = response.parseAs(GameState.class);
             logger.info("Game URL: {}", gameState.getViewUrl());
+            System.out.println("Game URL: "+gameState.getViewUrl());
 
             // Game loop
             while (!gameState.getGame().isFinished() && !gameState.getHero().isCrashed()) {
