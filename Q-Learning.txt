@@ -8,9 +8,9 @@ Output:
 
 Rewards (7 Kategorien): 
 
-// Je später das Spiel, desto krasser werden die höher werden die Bewertungen
-timeRangeFaktor
-reward += reward * (1 + (timeRange * timeRangeFaktor));
+// Je später das Spiel, desto intensiver wird die Höhe der Belohnungen / Bestrafungen, 
+als Grundlage dient hier der timeRangeFaktor in kombination mit der timeRange.
+reward = reward * (1 + (timeRange * timeRangeFaktor));
 
 Kategorie 1 (-75)
   - (Taverne)modus == 0 && ownGoldBiggerTwo == 0
