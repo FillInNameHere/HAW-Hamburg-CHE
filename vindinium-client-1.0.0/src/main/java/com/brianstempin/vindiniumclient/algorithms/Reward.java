@@ -16,7 +16,7 @@ public class Reward {
         int rewardKat1 = -75;
         int rewardKat2 = -50;
         int rewardKat3 = -20;
-        int rewardKat4 = -1;
+        int rewardKat4 = -2;
         int rewardKat5 = 8;
         int rewardKat6 = 25;
         int rewardKat7 = 75;
@@ -108,7 +108,7 @@ public class Reward {
         }
 
 
-        // Kategorie 4 (-1)
+        // Kategorie 4 (-2)
         if (modus == 0 && ownLife >= 2 && ownLife <= 3) {
             reward += rewardKat4;
         }
@@ -121,15 +121,7 @@ public class Reward {
             reward += rewardKat4;
         }
 
-        if (modus == 0) {
-            reward += rewardKat4;
-        }
-
-        if (modus == 1) {
-            reward += rewardKat4;
-        }
-
-        if (modus == 2) {
+        if (modus == 3) {
             reward += rewardKat4;
         }
 
