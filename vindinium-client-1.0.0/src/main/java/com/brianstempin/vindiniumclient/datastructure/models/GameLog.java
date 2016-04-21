@@ -20,7 +20,7 @@ public class GameLog {
     private int mine;
     private int totalMineCount;
     private int deathByEnemy;
-    private int deatbByMine;
+    private int deathByMine;
     private int kills;
     private int blockedWay;
     private Date startingTime;
@@ -36,10 +36,10 @@ public class GameLog {
     private Hero hero4;
 
     private int reward;
-    private int bigestReward;
-    private int bigestRewardRound;
-    private int smalestReward;
-    private int smalestRewardRound;
+    private int biggestReward;
+    private int biggestRewardRound;
+    private int smallestReward;
+    private int smallestRewardRound;
     private int maxSteps;
     private int minSteps;
     private int steps;
@@ -52,7 +52,7 @@ public class GameLog {
         this.rounds = 0;
         this.tavern = 0;
         this.mine = 0;
-        this.deatbByMine = 0;
+        this.deathByMine = 0;
         this.deathByEnemy = 0;
         this.kills = 0;
         this.blockedWay = 0;
@@ -126,11 +126,11 @@ public class GameLog {
     }
 
     public int getDeatbByMine() {
-        return deatbByMine;
+        return deathByMine;
     }
 
     public void setDeatbByMine(int deatbByMine) {
-        this.deatbByMine = deatbByMine;
+        this.deathByMine = deatbByMine;
     }
 
     public int getKills() {
@@ -205,36 +205,36 @@ public class GameLog {
         this.reward = reward;
     }
 
-    public int getBigestReward() {
-        return bigestReward;
+    public int getBiggestReward() {
+        return biggestReward;
     }
 
     public void setBigestReward(int bigestReward) {
-        this.bigestReward = bigestReward;
+        this.biggestReward = bigestReward;
     }
 
     public int getBigestRewardRound() {
-        return bigestRewardRound;
+        return biggestRewardRound;
     }
 
     public void setBigestRewardRound(int bigestRewardRound) {
-        this.bigestRewardRound = bigestRewardRound;
+        this.biggestRewardRound = bigestRewardRound;
     }
 
     public int getSmalestReward() {
-        return smalestReward;
+        return smallestReward;
     }
 
     public void setSmalestReward(int smalestReward) {
-        this.smalestReward = smalestReward;
+        this.smallestReward = smalestReward;
     }
 
-    public int getSmalestRewardRound() {
-        return smalestRewardRound;
+    public int getSmallestRewardRound() {
+        return smallestRewardRound;
     }
 
-    public void setSmalestRewardRound(int smalestRewardRound) {
-        this.smalestRewardRound = smalestRewardRound;
+    public void setSmallestRewardRound(int smallestRewardRound) {
+        this.smallestRewardRound = smallestRewardRound;
     }
 
     public int getMaxSteps() {

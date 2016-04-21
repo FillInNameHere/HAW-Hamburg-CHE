@@ -4,7 +4,9 @@ import com.brianstempin.vindiniumclient.algorithms.ILearningAlgorithm;
 import com.brianstempin.vindiniumclient.algorithms.QLearning;
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
+import com.brianstempin.vindiniumclient.datastructure.models.GameLog;
 import com.brianstempin.vindiniumclient.datastructure.models.State;
+import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateActionRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateRepo;
 import com.brianstempin.vindiniumclient.dto.GameState;
@@ -15,9 +17,15 @@ import java.util.logging.Logger;
 public class CHEBot implements SimpleBot {
 
     private Logger logger;
+    private GameLog gameLog;
+    private ILearningAlgorithm learningAlgorithm;
+    private GameLogRepo gameLogRepo;
 
     public CHEBot() {
         logger = Logger.getLogger("CHEBot");
+        gameLog = new GameLog();
+        learningAlgorithm = new QLearning(new StateRepo(), new StateActionRepo());
+        gameLogRepo = new GameLogRepo();
     }
 
     // Zustand
@@ -65,8 +73,6 @@ public class CHEBot implements SimpleBot {
     public int ownInGameRanking = 1;
     public ArrayList sortGoldArray = new ArrayList();
     public Set distinctSortGoldArray = new HashSet();
-
-    private ILearningAlgorithm learningAlgorithm = new QLearning(new StateRepo(), new StateActionRepo());
 
     private void doLearningAlgorithm() {
         State currentState = new State();
