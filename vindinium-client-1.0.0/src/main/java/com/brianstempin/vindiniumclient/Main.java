@@ -29,7 +29,7 @@ public class Main {
     private static final Logger gameStateLogger = LogManager.getLogger("gameStateLogger");
 
     public static void main(String args[]) throws Exception {
-
+        //Because push
         final String key = args[0];
         final String arena = args[1];
         final String botType = args[2];
