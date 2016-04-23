@@ -22,7 +22,6 @@ public class GameLog {
     private int deathByEnemy;
     private int deathByMine;
     private int kills;
-    private int blockedWay;
     private Date startingTime;
     private boolean crashed;
 
@@ -55,7 +54,6 @@ public class GameLog {
         this.deathByMine = 0;
         this.deathByEnemy = 0;
         this.kills = 0;
-        this.blockedWay = 0;
         this.startingTime = new Date();
         this.reward = 0;
         this.steps = 0;
@@ -139,14 +137,6 @@ public class GameLog {
 
     public void setKills(int kills) {
         this.kills = kills;
-    }
-
-    public int getBlockedWay() {
-        return blockedWay;
-    }
-
-    public void setBlockedWay(int blockedWay) {
-        this.blockedWay = blockedWay;
     }
 
     public Date getStartingTime() {
