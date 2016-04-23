@@ -27,7 +27,6 @@ public class GameLog {
     private boolean crashed;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "gameStepId")
     private List<GameStep> gameSteps;
 
     @OneToOne(cascade = CascadeType.ALL)

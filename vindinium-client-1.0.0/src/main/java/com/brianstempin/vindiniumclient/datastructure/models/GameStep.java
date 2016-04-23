@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class GameStep {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name = "gameLogId")
     private long gameStepId;
     @OneToOne
     private State state;
