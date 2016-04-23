@@ -5,6 +5,7 @@ import com.brianstempin.vindiniumclient.algorithms.QLearning;
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
 import com.brianstempin.vindiniumclient.datastructure.models.GameLog;
+import com.brianstempin.vindiniumclient.datastructure.models.GameStep;
 import com.brianstempin.vindiniumclient.datastructure.models.State;
 import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateActionRepo;
@@ -21,11 +22,12 @@ public class CHEBot implements SimpleBot {
     private ILearningAlgorithm learningAlgorithm;
     private GameLogRepo gameLogRepo;
 
+
     public CHEBot() {
         logger = Logger.getLogger("CHEBot");
         gameLog = new GameLog();
-        learningAlgorithm = new QLearning(new StateRepo(), new StateActionRepo());
         gameLogRepo = new GameLogRepo();
+        learningAlgorithm = new QLearning(new StateRepo());
     }
 
     // Zustand
@@ -77,10 +79,14 @@ public class CHEBot implements SimpleBot {
     private void doLearningAlgorithm() {
         State currentState = new State();
         currentState.setStateId(state);
-        BotUtils.BotAction action = learningAlgorithm.step(currentState);
+        GameStep gameStep = learningAlgorithm.step(currentState);
+        BotUtils.BotAction action = gameStep.getChosenAction();
         if (action.ordinal() < 4) {
             modus = action.ordinal();
         }
+        gameLog.addGameStep(gameStep);
+        gameLog = gameLogRepo.saveGameLog(gameLog);
+        System.out.println(gameLog.getGameSteps().size());
     }
 
     private List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {

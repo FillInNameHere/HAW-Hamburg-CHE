@@ -2,8 +2,10 @@ package com.brianstempin.vindiniumclient.algorithms;
 
 import com.brianstempin.vindiniumclient.bot.BotUtils;
 import com.brianstempin.vindiniumclient.bot.BotUtils.BotAction;
+import com.brianstempin.vindiniumclient.datastructure.models.GameStep;
 import com.brianstempin.vindiniumclient.datastructure.models.State;
 import com.brianstempin.vindiniumclient.datastructure.models.StateAction;
+import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateActionRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateRepo;
 
@@ -21,7 +23,7 @@ public class QLearning implements ILearningAlgorithm {
     private StateAction lastAction;
     private List<StateAction> lastStateActions;
     private StateRepo stateRepo;
-    private StateActionRepo stateActionRepo;
+    private GameLogRepo gameLogRepo;
     private double learningRate = 0.1;
     private double explorationFactor = 0.15;
     private boolean eval = false;
@@ -31,9 +33,8 @@ public class QLearning implements ILearningAlgorithm {
     private QLearning() {
     }
 
-    public QLearning(StateRepo stateRepo, StateActionRepo stateActionRepo) {
+    public QLearning(StateRepo stateRepo) {
         this.stateRepo = stateRepo;
-        this.stateActionRepo = stateActionRepo;
     }
 
     @Override
@@ -42,7 +43,8 @@ public class QLearning implements ILearningAlgorithm {
     }
 
     @Override
-    public BotAction step(State currentState) {
+    public GameStep step(State currentState) {
+        GameStep gameStep = new GameStep();
         if (this.currentState == null || currentState.getStateId() != this.currentState.getStateId()) {
             StateAction stateAction;
             State state = stateRepo.findState(currentState.getStateId());
@@ -55,18 +57,25 @@ public class QLearning implements ILearningAlgorithm {
                 stateAction = this.currentState.getActions().get(this.currentState.getBestAction());
             }
 
+            gameStep.setBestActionThen(stateAction.getAction());
+
             if (Math.random() < explorationFactor) {
                 stateAction = this.currentState.getActions().get((int) (Math.random() * 4));
             }
 
+            gameStep.setChosenAction(stateAction.getAction());
+            gameStep.setState(this.currentState);
             this.lastState = this.currentState;
             this.lastStateActions = this.lastState.getActions();
             this.lastAction = stateAction;
             if(eval) evaluateLastStep();
             eval = true;
-            return stateAction.getAction();
+            return gameStep;
         } else {
-            return BotAction.FORTFAHREN;
+            gameStep.setChosenAction(BotAction.FORTFAHREN);
+            gameStep.setState(this.lastState);
+            gameStep.setBestActionThen(BotAction.FORTFAHREN);
+            return gameStep;
         }
     }
 

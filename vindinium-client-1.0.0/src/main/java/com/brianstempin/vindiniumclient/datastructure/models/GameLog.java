@@ -1,7 +1,9 @@
 package com.brianstempin.vindiniumclient.datastructure.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Christian on 08.04.2016.
@@ -11,19 +13,22 @@ import java.util.Date;
 public class GameLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long gameLogId;
     private String gameURL;
     private int whoAmI;
     private boolean win;
     private int rounds;
     private int tavern;
-    private int mine;
     private int totalMineCount;
     private int deathByEnemy;
     private int deathByMine;
     private int kills;
     private Date startingTime;
     private boolean crashed;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "gameStepId")
+    private List<GameStep> gameSteps;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Hero hero1;
@@ -50,13 +55,13 @@ public class GameLog {
         this.whoAmI = 5;
         this.rounds = 0;
         this.tavern = 0;
-        this.mine = 0;
         this.deathByMine = 0;
         this.deathByEnemy = 0;
         this.kills = 0;
         this.startingTime = new Date();
         this.reward = 0;
         this.steps = 0;
+        this.gameSteps = new ArrayList<>();
     }
 
     public String getGameURL() {
@@ -97,14 +102,6 @@ public class GameLog {
 
     public void setTavern(int tavern) {
         this.tavern = tavern;
-    }
-
-    public int getMine() {
-        return mine;
-    }
-
-    public void setMine(int mine) {
-        this.mine = mine;
     }
 
     public int getTotalMineCount() {
@@ -249,5 +246,17 @@ public class GameLog {
 
     public void setSteps(int steps) {
         this.steps = steps;
+    }
+
+    public List<GameStep> getGameSteps() {
+        return gameSteps;
+    }
+
+    public void setGameSteps(List<GameStep> gameSteps) {
+        this.gameSteps = gameSteps;
+    }
+
+    public void addGameStep(GameStep gameStep){
+        this.gameSteps.add(gameStep);
     }
 }

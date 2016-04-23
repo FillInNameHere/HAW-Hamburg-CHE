@@ -1,5 +1,6 @@
 package com.brianstempin.vindiniumclient.algorithms;
 
+import com.brianstempin.vindiniumclient.datastructure.models.GameStep;
 import com.brianstempin.vindiniumclient.datastructure.models.State;
 
 import static com.brianstempin.vindiniumclient.bot.BotUtils.BotAction;
@@ -10,5 +11,5 @@ import static com.brianstempin.vindiniumclient.bot.BotUtils.BotAction;
 public interface ILearningAlgorithm {
     void initialize(State currentState);
 
-    BotAction step(State currentState);
+    GameStep step(State currentState);
 }
