@@ -1,6 +1,5 @@
 package com.brianstempin.vindiniumclient.datastructure.models;
 
-import com.brianstempin.vindiniumclient.bot.BotUtils;
 import com.brianstempin.vindiniumclient.bot.BotUtils.BotAction;
 
 import javax.persistence.*;
@@ -20,7 +19,8 @@ public class GameStep {
     private BotAction chosenAction;
     private BotAction bestActionThen;
 
-    public GameStep(){
+
+    public GameStep() {
     }
 
     public State getState() {

@@ -86,7 +86,6 @@ public class CHEBot implements SimpleBot {
         }
         gameLog.addGameStep(gameStep);
         gameLog = gameLogRepo.saveGameLog(gameLog);
-        System.out.println(gameLog.getGameSteps().size());
     }
 
     private List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
@@ -317,7 +316,7 @@ public class CHEBot implements SimpleBot {
         }
 
         // Notfallmodus
-        Vertex move = getPath(closestMine).get(0);
+        Vertex move;
         BotMove botMove = null;
         // Schenke
         if (modus == 0) {
@@ -348,6 +347,7 @@ public class CHEBot implements SimpleBot {
 
         //logger.info("State: " + state + " (ownInGameRanking,ownLife,ownMineCount,closestPlayerDistanceBiggerFour,closestPlayerMineCount,closestPlayerLife,timeRange,ownGoldBiggerTwo)");
         logger.info("" + gameState.getGame().getTurn());
+        gameLog.setRounds(gameState.getGame().getTurn());
         return botMove;
     }
 

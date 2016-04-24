@@ -48,7 +48,7 @@ public class GameLog {
     private int steps;
 
     public GameLog() {
-        this.gameURL ="";
+        this.gameURL = "";
         this.win = false;
         this.crashed = false;
         this.whoAmI = 5;
@@ -119,11 +119,11 @@ public class GameLog {
         this.deathByEnemy = deathByEnemy;
     }
 
-    public int getDeatbByMine() {
+    public int getDeathByMine() {
         return deathByMine;
     }
 
-    public void setDeatbByMine(int deatbByMine) {
+    public void setDeathByMine(int deatbByMine) {
         this.deathByMine = deatbByMine;
     }
 
@@ -195,24 +195,12 @@ public class GameLog {
         return biggestReward;
     }
 
-    public void setBigestReward(int bigestReward) {
-        this.biggestReward = bigestReward;
-    }
-
-    public int getBigestRewardRound() {
+    public int getBiggestRewardRound() {
         return biggestRewardRound;
     }
 
-    public void setBigestRewardRound(int bigestRewardRound) {
-        this.biggestRewardRound = bigestRewardRound;
-    }
-
-    public int getSmalestReward() {
+    public int getSmallestReward() {
         return smallestReward;
-    }
-
-    public void setSmalestReward(int smalestReward) {
-        this.smallestReward = smalestReward;
     }
 
     public int getSmallestRewardRound() {
@@ -255,7 +243,7 @@ public class GameLog {
         this.gameSteps = gameSteps;
     }
 
-    public void addGameStep(GameStep gameStep){
+    public void addGameStep(GameStep gameStep) {
         this.gameSteps.add(gameStep);
     }
 }
