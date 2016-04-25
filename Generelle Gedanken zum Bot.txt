@@ -22,3 +22,14 @@ Große und kleine Map unterscheiden?
 	- Wie wird der Reward gesetzt wenn einer der Bots 1. un der andere 2. wird???
 	- Anpassung des Tötens, statt wenn weniger als 2 Minen -> Berücksichtigung der Gesamtminen anzahlen (Je mehr Minen auf dem Feld, desto größer wird auch der Wert bei dem ich Töte.)
 	- Anpassung des Tötens, Berücksichtigen der Rundenanzahlen, je später das Spiel, desto eher wird getötet, sofern man nicht selber viele Minen hat.
+
+HINTERKOPF:
+
+1.) Sofern er falsch versteht, dass die Belohnung für den ersten Platz unabhängig von dem Modus, ihm die sinvolle Handlung vorgibt.
+
+=> 1st Platz muss dann weniger Reward geben im Verhältnis zu dem Modus.
+
+Es besteht die Sorge, dass er kurz vor einehmen einer Mine, bzw. Tötung eines Spielers oder Heilung, den Modus wechselt und nicht zum Abschluss kommt.
+
+
+2.) Lieber nahe Mine von Gegner klauen als vom Goblin? Da dieser dann Punkte einbüßt.
