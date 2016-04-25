@@ -6,6 +6,7 @@ import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
 import com.brianstempin.vindiniumclient.datastructure.models.GameLog;
 import com.brianstempin.vindiniumclient.datastructure.models.GameStep;
+import com.brianstempin.vindiniumclient.datastructure.models.Hero;
 import com.brianstempin.vindiniumclient.datastructure.models.State;
 import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateActionRepo;
@@ -94,7 +95,6 @@ public class CHEBot implements SimpleBot {
         }
 
         gameLog.addGameStep(gameStep);
-        gameLog = gameLogRepo.saveGameLog(gameLog);
     }
 
     private List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
@@ -184,7 +184,7 @@ public class CHEBot implements SimpleBot {
         doLearningAlgorithm();
         gameLog.setGameURL(gameState.getViewUrl());
         gameLog.setWhoAmI(gameState.getHero().getId());
-
+                
         if ((gameState.getGame().getTurn() >= 4) && (gameState.getGame().getTurn() <= 7)) {
             if (gameState.getGame().getHeroes().get(0).getName().equals("HAW-Hamburg CHE")) {
                 hero1IsTeamplayBot = true;
@@ -353,13 +353,17 @@ public class CHEBot implements SimpleBot {
 
         //logger.info("State: " + state + " (ownInGameRanking,ownLife,ownMineCount,closestPlayerDistanceBiggerFour,closestPlayerMineCount,closestPlayerLife,timeRange,ownGoldBiggerTwo)");
         logger.info("" + gameState.getGame().getTurn());
-        if(gameState.getGame().isFinished()){
+        if (gameState.getGame().getTurn() >= 1196) {
             System.out.println("Game has ended!");
             if(ownInGameRanking == 1){
-                gameLog.isWin();
+                System.out.println("Me win!");
+                gameLog.setWin(true);
+            } else {
+                System.out.println("Me no win!");
             }
         }
         gameLog.setRounds(gameState.getGame().getTurn());
+        gameLog = gameLogRepo.saveGameLog(gameLog);
         return botMove;
     }
 
