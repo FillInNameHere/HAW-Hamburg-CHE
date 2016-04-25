@@ -33,3 +33,7 @@ Es besteht die Sorge, dass er kurz vor einehmen einer Mine, bzw. Tˆtung eines Sp
 
 
 2.) Lieber nahe Mine von Gegner klauen als vom Goblin? Da dieser dann Punkte einb¸ﬂt.
+
+3.) Implementierung einer Art Statistik.
+-> Winrate im Sinne von erster oder zweiter.
+Auﬂerdem, bezogen auf alle Spiele, wie oft erster, zweiter, driter, vierter? (Prozentual)
