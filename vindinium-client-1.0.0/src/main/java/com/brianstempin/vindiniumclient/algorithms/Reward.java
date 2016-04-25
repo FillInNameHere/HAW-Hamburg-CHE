@@ -13,12 +13,12 @@ public class Reward {
         double timeRangeFaktor = 0.125;
 
         // Reward Kategorien (Single Point Of Control)
-        int rewardKat1 = -75;
-        int rewardKat2 = -50;
+        int rewardKat1 = -200;
+        int rewardKat2 = -75;
         int rewardKat3 = -20;
         int rewardKat4 = -2;
         int rewardKat5 = 8;
-        int rewardKat6 = 25;
+        int rewardKat6 = 30;
         int rewardKat7 = 75;
 
 
@@ -50,7 +50,7 @@ public class Reward {
         Integer ownGoldBiggerTwo = (int) ownGoldBiggerTwoChar;
 
 
-        // Kategorie 1 (-75)
+        // Kategorie 1 (-200)
         if (modus == 0 && ownGoldBiggerTwo == 0) {
             reward += rewardKat1;
         }
@@ -64,7 +64,7 @@ public class Reward {
         }
 
 
-        // Kategorie 2 (-50)
+        // Kategorie 2 (-75)
         if (ownIngameRanking == 3) {
             reward += rewardKat2;
         }
@@ -74,6 +74,10 @@ public class Reward {
         }
 
         if (modus == 0 && ownLife >= 6 && ownLife <= 8) {
+            reward += rewardKat2;
+        }
+
+        if (modus == 2 && closestPlayerDistanceBiggerFour == 1) {
             reward += rewardKat2;
         }
 
@@ -92,10 +96,6 @@ public class Reward {
         }
 
         if (modus == 2 && ownMineCount == 3) {
-            reward += rewardKat3;
-        }
-
-        if (modus == 2 && closestPlayerDistanceBiggerFour == 1) {
             reward += rewardKat3;
         }
 
@@ -144,7 +144,7 @@ public class Reward {
         }
 
 
-        // Kategorie 6 (+25)
+        // Kategorie 6 (+30)
         if (modus == 1 && ownLife >= 3) {
             reward += rewardKat6;
         }
