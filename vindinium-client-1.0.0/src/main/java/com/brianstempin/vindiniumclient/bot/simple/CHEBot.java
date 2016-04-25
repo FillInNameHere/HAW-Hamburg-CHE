@@ -56,7 +56,7 @@ public class CHEBot implements SimpleBot {
     // Nähester Gegner Leben (abstrahiert) (0: 0-10, 1: 11-20, 2: 21-30, 3: 31-40, 4: 41-50, 5: 51-60, 6: 61-70, 7: 71-80, 8: 81-90, 9: 91-100)
     public int closestPlayerLife = 9;
 
-    // SpielModus (0: Schenke, 1: Mine, 2: Kampf, 3: Stehen)
+    // SpielModus (0: Schenke, 1: Mine, 2: Kampf)
     public int modus = 1;
 
     // Zeitbereich (abstahiert) (0: 0-299, 1: 300-599, 2: 600-899, 3: 900-1199)
@@ -81,7 +81,7 @@ public class CHEBot implements SimpleBot {
         currentState.setStateId(state);
         GameStep gameStep = learningAlgorithm.step(currentState);
         BotUtils.BotAction action = gameStep.getChosenAction();
-        if (action.ordinal() < 4) {
+        if (action.ordinal() < 3) {
             modus = action.ordinal();
         }
 
@@ -345,11 +345,6 @@ public class CHEBot implements SimpleBot {
         if (modus == 2) {
             move = getPath(closestPlayer).get(0);
             botMove = BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
-        }
-
-        // Stehen
-        if (modus == 3) {
-            botMove = BotMove.STAY;
         }
 
 

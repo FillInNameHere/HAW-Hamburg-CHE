@@ -61,7 +61,7 @@ public class QLearning implements ILearningAlgorithm {
             gameStep.setBestActionThen(stateAction.getAction());
 
             if (Math.random() < explorationFactor) {
-                stateAction = this.currentState.getActions().get((int) (Math.random() * 4));
+                stateAction = this.currentState.getActions().get((int) (Math.random() * 3));
             }
 
             gameStep.setChosenAction(stateAction.getAction());
@@ -93,7 +93,7 @@ public class QLearning implements ILearningAlgorithm {
             actions.add(sa);
         }
         state.setActions(actions);
-        state.setBestAction((int) (Math.random() * 4));
+        state.setBestAction((int) (Math.random() * 3));
         return stateRepo.saveState(state);
     }
 

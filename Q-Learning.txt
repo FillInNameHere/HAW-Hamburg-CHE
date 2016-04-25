@@ -36,7 +36,6 @@ Kategorie 4 (-2)
   - (Taverne)modus == 0 && ownLife >= 2 && ownLife <= 3
   - (Kampf)modus == 2 && ownMineCount == 2
   - (Kampf)modus == 2 && closestPlayerLife == ownLife 
-  - (Stehen)modus == 3
 
 
 Kategorie 5 (+8)

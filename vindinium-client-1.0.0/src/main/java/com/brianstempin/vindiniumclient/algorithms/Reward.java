@@ -121,10 +121,6 @@ public class Reward {
             reward += rewardKat4;
         }
 
-        if (modus == 3) {
-            reward += rewardKat4;
-        }
-
 
         // Kategorie 5 (+8)
         if (modus == 2 && ownMineCount <= 1) {

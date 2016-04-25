@@ -28,6 +28,6 @@ public class BotUtils {
     }
 
     public enum BotAction {
-        SCHENKE, MINE, KAMPF, STEHEN, FORTFAHREN
+        SCHENKE, MINE, KAMPF, FORTFAHREN
     }
 }
