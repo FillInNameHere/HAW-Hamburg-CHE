@@ -84,6 +84,15 @@ public class CHEBot implements SimpleBot {
         if (action.ordinal() < 4) {
             modus = action.ordinal();
         }
+
+        gameLog.setReward(gameLog.getReward()+gameStep.getReward());
+
+        if(gameStep.getReward() > gameLog.getBiggestReward()){
+            gameLog.setBiggestReward(gameStep.getReward());
+        } else if(gameStep.getReward() < gameLog.getSmallestReward()){
+            gameLog.setSmallestReward(gameStep.getReward());
+        }
+
         gameLog.addGameStep(gameStep);
         gameLog = gameLogRepo.saveGameLog(gameLog);
     }
@@ -173,6 +182,8 @@ public class CHEBot implements SimpleBot {
     public BotMove move(GameState gameState) {
         //Führe Lern-Algorithmus aus
         doLearningAlgorithm();
+        gameLog.setGameURL(gameState.getViewUrl());
+        gameLog.setWhoAmI(gameState.getHero().getId());
 
         if ((gameState.getGame().getTurn() >= 4) && (gameState.getGame().getTurn() <= 7)) {
             if (gameState.getGame().getHeroes().get(0).getName().equals("HAW-Hamburg CHE")) {
@@ -347,6 +358,12 @@ public class CHEBot implements SimpleBot {
 
         //logger.info("State: " + state + " (ownInGameRanking,ownLife,ownMineCount,closestPlayerDistanceBiggerFour,closestPlayerMineCount,closestPlayerLife,timeRange,ownGoldBiggerTwo)");
         logger.info("" + gameState.getGame().getTurn());
+        if(gameState.getGame().isFinished()){
+            System.out.println("Game has ended!");
+            if(ownInGameRanking == 1){
+                gameLog.isWin();
+            }
+        }
         gameLog.setRounds(gameState.getGame().getTurn());
         return botMove;
     }

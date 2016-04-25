@@ -18,6 +18,9 @@ public class GameStep {
     private State state;
     private BotAction chosenAction;
     private BotAction bestActionThen;
+    private double oldQval;
+    private double newQval;
+    private int reward;
 
 
     public GameStep() {
@@ -45,5 +48,29 @@ public class GameStep {
 
     public void setBestActionThen(BotAction bestActionThen) {
         this.bestActionThen = bestActionThen;
+    }
+
+    public double getNewQval() {
+        return newQval;
+    }
+
+    public void setNewQval(double newQval) {
+        this.newQval = newQval;
+    }
+
+    public double getOldQval() {
+        return oldQval;
+    }
+
+    public void setOldQval(double oldQval) {
+        this.oldQval = oldQval;
+    }
+
+    public int getReward() {
+        return reward;
+    }
+
+    public void setReward(int reward) {
+        this.reward = reward;
     }
 }

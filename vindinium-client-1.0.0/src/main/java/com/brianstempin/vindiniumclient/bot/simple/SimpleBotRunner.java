@@ -71,10 +71,12 @@ public class SimpleBotRunner implements Callable<GameState> {
         } catch (Exception e) {
             logger.error("Error during game play", e);
             System.out.println("Error during game play: " + e);
+            System.exit(0);
         }
 
         logger.info("Game over");
         System.out.println("Game over");
+        System.exit(0);
         return gameState;
     }
 }

@@ -27,6 +27,7 @@ public class QLearning implements ILearningAlgorithm {
     private double learningRate = 0.1;
     private double explorationFactor = 0.15;
     private boolean eval = false;
+    private GameStep gameStep;
 
     private double discount = 1;
 
@@ -44,7 +45,7 @@ public class QLearning implements ILearningAlgorithm {
 
     @Override
     public GameStep step(State currentState) {
-        GameStep gameStep = new GameStep();
+        this.gameStep = new GameStep();
         if (this.currentState == null || currentState.getStateId() != this.currentState.getStateId()) {
             StateAction stateAction;
             State state = stateRepo.findState(currentState.getStateId());
@@ -102,6 +103,9 @@ public class QLearning implements ILearningAlgorithm {
         double bestQValNow = currentState.getActions().get(currentState.getBestAction()).getqValue();
         double newQVal = oldQVal + learningRate * (reward + discount * bestQValNow - oldQVal);
         lastAction.setqValue(newQVal);
+        gameStep.setOldQval(oldQVal);
+        gameStep.setNewQval(newQVal);
+        gameStep.setReward(reward);
 
         StateAction bestAction = lastStateActions.get(lastState.getBestAction());
         for (int i = 0, actionsSize = lastStateActions.size(); i < actionsSize; i++) {

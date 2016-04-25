@@ -40,12 +40,7 @@ public class GameLog {
 
     private int reward;
     private int biggestReward;
-    private int biggestRewardRound;
     private int smallestReward;
-    private int smallestRewardRound;
-    private int maxSteps;
-    private int minSteps;
-    private int steps;
 
     public GameLog() {
         this.gameURL = "";
@@ -59,7 +54,6 @@ public class GameLog {
         this.kills = 0;
         this.startingTime = new Date();
         this.reward = 0;
-        this.steps = 0;
         this.gameSteps = new ArrayList<>();
     }
 
@@ -195,44 +189,8 @@ public class GameLog {
         return biggestReward;
     }
 
-    public int getBiggestRewardRound() {
-        return biggestRewardRound;
-    }
-
     public int getSmallestReward() {
         return smallestReward;
-    }
-
-    public int getSmallestRewardRound() {
-        return smallestRewardRound;
-    }
-
-    public void setSmallestRewardRound(int smallestRewardRound) {
-        this.smallestRewardRound = smallestRewardRound;
-    }
-
-    public int getMaxSteps() {
-        return maxSteps;
-    }
-
-    public void setMaxSteps(int maxSteps) {
-        this.maxSteps = maxSteps;
-    }
-
-    public int getMinSteps() {
-        return minSteps;
-    }
-
-    public void setMinSteps(int minSteps) {
-        this.minSteps = minSteps;
-    }
-
-    public int getSteps() {
-        return steps;
-    }
-
-    public void setSteps(int steps) {
-        this.steps = steps;
     }
 
     public List<GameStep> getGameSteps() {
@@ -245,5 +203,13 @@ public class GameLog {
 
     public void addGameStep(GameStep gameStep) {
         this.gameSteps.add(gameStep);
+    }
+
+    public void setBiggestReward(int biggestReward) {
+        this.biggestReward = biggestReward;
+    }
+
+    public void setSmallestReward(int smallestReward) {
+        this.smallestReward = smallestReward;
     }
 }
