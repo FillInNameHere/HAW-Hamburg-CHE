@@ -329,24 +329,34 @@ public class CHEBot implements SimpleBot {
         // Notfallmodus
         Vertex move;
         BotMove botMove = null;
+
         // Schenke
         if (modus == 0) {
             move = getPath(closestPub).get(0);
             botMove = BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
         }
 
-        // Mine
-        if (modus == 1) {
-            move = getPath(closestMine).get(0);
-            botMove = BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
-        }
-
         // Kampf
         if (modus == 2) {
-            move = getPath(closestPlayer).get(0);
-            botMove = BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
+            // Sonderfall alle vier Spieler sind TeamPlayBots
+            if (getPath(closestPlayer).get(0) == null) {
+                modus = 1;
+            } else {
+                move = getPath(closestPlayer).get(0);
+                botMove = BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
+            }
         }
 
+        // Mine
+        if (modus == 1) {
+            // Sonderfall Hero besitzt ale Minen
+            if (getPath(closestMine).get(0) == null){
+                botMove = BotMove.STAY;
+            } else {
+                move = getPath(closestMine).get(0);
+                botMove = BotUtils.directionTowards(gameState.getHero().getPos(), move.getPosition());
+            }
+        }
 
         stateStr = "" + ownInGameRanking + "" + ownLife + "" + ownMineCount + "" + closestPlayerDistanceBiggerFour + "" + closestPlayerMineCount + "" + closestPlayerLife + "" + timeRange + "" + ownGoldBiggerTwo + "";
         state = Long.parseLong(stateStr);
