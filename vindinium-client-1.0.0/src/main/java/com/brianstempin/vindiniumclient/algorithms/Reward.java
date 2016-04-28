@@ -18,7 +18,7 @@ public class Reward {
         int rewardKat3 = -20;
         int rewardKat4 = -2;
         int rewardKat5 = 8;
-        int rewardKat6 = 30;
+        int rewardKat6 = 50;
         int rewardKat7 = 75;
 
 
@@ -65,11 +65,11 @@ public class Reward {
 
 
         // Kategorie 2 (-75)
-        if (ownIngameRanking == 3) {
+        if (ownIngameRanking >= 3 && ownIngameRanking <= 4) {
             reward += rewardKat2;
         }
 
-        if (ownIngameRanking == 4) {
+        if (modus == 1 && ownLife <= 2) {
             reward += rewardKat2;
         }
 
@@ -83,15 +83,11 @@ public class Reward {
 
 
         // Kategorie 3 (-20)
-        if (modus == 1 && ownLife <= 2) {
-            reward += rewardKat3;
-        }
-
         if (ownIngameRanking == 2) {
             reward += rewardKat3;
         }
 
-        if (modus == 0 && ownLife >= 4 && ownLife <= 5) {
+        if (modus == 0 && ownLife == 5) {
             reward += rewardKat3;
         }
 
@@ -109,7 +105,7 @@ public class Reward {
 
 
         // Kategorie 4 (-2)
-        if (modus == 0 && ownLife >= 2 && ownLife <= 3) {
+        if (modus == 0 && ownLife == 4) {
             reward += rewardKat4;
         }
 
@@ -139,8 +135,12 @@ public class Reward {
             reward += rewardKat5;
         }
 
+        if (modus == 0 && ownLife >= 2 && ownLife <= 3) {
+            reward += rewardKat5;
+        }
 
-        // Kategorie 6 (+30)
+
+        // Kategorie 6 (+50)
         if (modus == 1 && ownLife >= 3) {
             reward += rewardKat6;
         }
