@@ -3,3 +3,16 @@ Das Datum zum jeweiligen Spiel mit angeben. (Database DATE() )
 Statistik (win/loose)
 
 Droptable
+
+NextGame Ranked (ggf. in andere Liste eintragen)
+
+Get... nach 25Einträgen neue Seite wie z.b. bei google Suchergebnissen => Get last 100 verschwindet.
+
+Bei Get all je nach dem ob gewonnen, verloren oder draw die Zeilen Färben (grün,gelb,rot)
+
+Webgui aufhübschen (Design)
+
+vllt. Livestream von dem aktuell laufenden Spiel einbinden.
+
+Verlinkung auf Githubaccount und wiki
+
