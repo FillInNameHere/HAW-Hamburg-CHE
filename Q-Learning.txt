@@ -15,42 +15,43 @@ reward = reward * (1 + (timeRange * timeRangeFaktor));
 
 Kategorie 1 (-200)
   - (Taverne)modus == 0 && ownGoldBiggerTwo == 0
-  - (Kampf)modus == 2 && closestPlayerMineCount == 0
   - (Taverne)modus == 0 && ownLife == 9
-
-
-Kategorie 2 (-75)
-  - ownInGameRanking >= 3 && ownInGameRanking <=4 
-  - (Mine)modus == 1 && ownLife <=2
-  - (Taverne)modus == 0 && ownLife >= 6 && ownLife <= 8
+  - (Mine)modus == 1 && ownLife <= 1
+  - (Kampf)modus == 2 && closestPlayerMineCount == 0
   - (Kampf)modus == 2 && closestPlayerDistanceBiggerFour == 1
 
 
-Kategorie 3 (-20)
-  - ownInGameRanking == 2
-  - (Taverne)modus == 0 && ownLife == 5
+Kategorie 2 (-75)
+  - (Taverne)modus == 0 && ownLife >= 7 && ownLife <= 8
+  - (Mine)modus == 1 && ownLife ==2
+  - ownInGameRanking >= 3 && ownInGameRanking <=4 
+
+
+Kategorie 3 (-25)
+  - (Taverne)modus == 0 && ownLife == 6
   - (Kampf)modus == 2 && ownMineCount == 3 
   - (Kampf)modus == 2 && closestPlayerMineCount == 1
   - (Kampf)modus == 2 && closestPlayerLife > ownLife
+  - ownInGameRanking == 2
 
 
 Kategorie 4 (-2)
-  - (Taverne)modus == 0 && ownLife == 4  
+  - (Taverne)modus == 0 && ownLife == 5 
   - (Kampf)modus == 2 && ownMineCount == 2
   - (Kampf)modus == 2 && closestPlayerLife == ownLife 
 
 
-Kategorie 5 (+8)
+Kategorie 5 (+13)
+  - (Taverne)modus == 0 && ownLife >= 3 && ownLife <= 4
   - (Kampf)modus == 2 && ownMineCount <= 1 
   - (Kampf)modus == 2 && closestPlayerDistanceBiggerFour == 0
   - (Kampf)modus == 2 && closestPlayerMineCount >= 2
   - (Kampf)modus == 2 && closestPlayerLife < ownLife 
-  - (Taverne)modus == 0 && ownLife >= 2 && ownLife <= 3
 
 
 Kategorie 6 (+50)
+  - (Taverne)modus == 0 && ownLife <= 2
   - (Mine)modus == 1 && ownLife >=3
-  - (Taverne)modus == 0 && ownLife <= 1
 
 
 Kategorie 7 (+75)
