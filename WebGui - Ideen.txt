@@ -1,0 +1,5 @@
+Das Datum zum jeweiligen Spiel mit angeben. (Database DATE() )
+
+Statistik (win/loose)
+
+Droptable
