@@ -24,6 +24,7 @@ Kategorie 1 (-200)
 Kategorie 2 (-75)
   - (Taverne)modus == 0 && ownLife >= 7 && ownLife <= 8
   - (Mine)modus == 1 && ownLife ==2
+  - (Kampf)modus == 2 && ownLife <= 1
   - ownInGameRanking >= 3 && ownInGameRanking <=4 
 
 

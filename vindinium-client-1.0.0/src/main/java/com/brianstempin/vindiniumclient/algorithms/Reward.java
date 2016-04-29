@@ -83,6 +83,10 @@ public class Reward {
             reward += rewardKat2;
         }
 
+        if (modus == 2 && ownLife <= 1) {
+            reward += rewardKat2;
+        }
+
         if (ownIngameRanking >= 3 && ownIngameRanking <= 4) {
             reward += rewardKat2;
         }
