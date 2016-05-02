@@ -26,9 +26,6 @@ public class GameLog {
     private Date startingTime;
     private boolean crashed;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<GameStep> gameSteps;
-
     @OneToOne(cascade = CascadeType.ALL)
     private Hero hero1;
     @OneToOne(cascade = CascadeType.ALL)
@@ -54,7 +51,6 @@ public class GameLog {
         this.kills = 0;
         this.startingTime = new Date();
         this.reward = 0;
-        this.gameSteps = new ArrayList<>();
     }
 
     public String getGameURL() {
@@ -191,18 +187,6 @@ public class GameLog {
 
     public int getSmallestReward() {
         return smallestReward;
-    }
-
-    public List<GameStep> getGameSteps() {
-        return gameSteps;
-    }
-
-    public void setGameSteps(List<GameStep> gameSteps) {
-        this.gameSteps = gameSteps;
-    }
-
-    public void addGameStep(GameStep gameStep) {
-        this.gameSteps.add(gameStep);
     }
 
     public void setBiggestReward(int biggestReward) {

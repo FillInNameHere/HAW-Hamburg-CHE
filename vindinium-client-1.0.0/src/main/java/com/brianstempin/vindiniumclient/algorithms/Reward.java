@@ -29,8 +29,10 @@ public class Reward {
         Integer ownIngameRanking = Integer.parseInt(String.valueOf(stateStr.charAt(0)));
 
         //Character ownLifeChar = stateStr.charAt(1);
-        //Integer ownLife = (int) ownLifeChar;
+        //Integer ownLifetest = (int) ownLifeChar;
         Integer ownLife = Integer.parseInt(String.valueOf(stateStr.charAt(1)));
+
+
 
         //Character ownMineCountChar = stateStr.charAt(2);
         //Integer ownMineCount = (int) ownMineCountChar;
@@ -175,7 +177,6 @@ public class Reward {
         // timeRangeFaktor
         reward = (int) (reward * (1 + (timeRange * timeRangeFaktor)));
 
-        System.out.println(reward(0,19010900));
         return reward;
     }
 
