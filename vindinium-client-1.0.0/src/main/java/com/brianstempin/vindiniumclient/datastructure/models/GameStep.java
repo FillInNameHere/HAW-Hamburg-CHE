@@ -12,17 +12,15 @@ import javax.persistence.*;
 public class GameStep {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name = "gameLogId")
     private long gameStepId;
     @OneToOne
     private State state;
-    @OneToOne(cascade = CascadeType.ALL)
-    private GameLog gameLog;
     private BotAction chosenAction;
     private BotAction bestActionThen;
     private double oldQval;
     private double newQval;
     private int reward;
-
 
 
     public GameStep() {
@@ -74,13 +72,5 @@ public class GameStep {
 
     public void setReward(int reward) {
         this.reward = reward;
-    }
-
-    public GameLog getGameLog() {
-        return gameLog;
-    }
-
-    public void setGameLog(GameLog gameLog) {
-        this.gameLog = gameLog;
     }
 }
