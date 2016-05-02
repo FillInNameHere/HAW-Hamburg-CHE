@@ -21,33 +21,40 @@ public class Reward {
         int rewardKat6 = 50;
         int rewardKat7 = 75;
 
-
         // Rückwandlung long -> int
         String stateStr = Long.toString(state);
 
-        Character ownInGameRankingChar = stateStr.charAt(0);
-        Integer ownIngameRanking = (int) ownInGameRankingChar;
+        //Character ownInGameRankingChar = stateStr.charAt(0);
+        //Integer ownIngameRanking = (int) ownInGameRankingChar;
+        Integer ownIngameRanking = Integer.parseInt(String.valueOf(stateStr.charAt(0)));
 
-        Character ownLifeChar = stateStr.charAt(1);
-        Integer ownLife = (int) ownLifeChar;
+        //Character ownLifeChar = stateStr.charAt(1);
+        //Integer ownLife = (int) ownLifeChar;
+        Integer ownLife = Integer.parseInt(String.valueOf(stateStr.charAt(1)));
 
-        Character ownMineCountChar = stateStr.charAt(2);
-        Integer ownMineCount = (int) ownMineCountChar;
+        //Character ownMineCountChar = stateStr.charAt(2);
+        //Integer ownMineCount = (int) ownMineCountChar;
+        Integer ownMineCount = Integer.parseInt(String.valueOf(stateStr.charAt(2)));
 
-        Character closestPlayerDistanceBiggerFourChar = stateStr.charAt(3);
-        Integer closestPlayerDistanceBiggerFour = (int) closestPlayerDistanceBiggerFourChar;
+        //Character closestPlayerDistanceBiggerFourChar = stateStr.charAt(3);
+        //Integer closestPlayerDistanceBiggerFour = (int) closestPlayerDistanceBiggerFourChar;
+        Integer closestPlayerDistanceBiggerFour = Integer.parseInt(String.valueOf(stateStr.charAt(3)));
 
-        Character closestPlayerMineCountChar = stateStr.charAt(4);
-        Integer closestPlayerMineCount = (int) closestPlayerMineCountChar;
+        //Character closestPlayerMineCountChar = stateStr.charAt(4);
+        //Integer closestPlayerMineCount = (int) closestPlayerMineCountChar;
+        Integer closestPlayerMineCount = Integer.parseInt(String.valueOf(stateStr.charAt(4)));
 
-        Character closestPlayerLifeChar = stateStr.charAt(5);
-        Integer closestPlayerLife = (int) closestPlayerLifeChar;
+        //Character closestPlayerLifeChar = stateStr.charAt(5);
+        //Integer closestPlayerLife = (int) closestPlayerLifeChar;
+        Integer closestPlayerLife = Integer.parseInt(String.valueOf(stateStr.charAt(5)));
 
-        Character timeRangeChar = stateStr.charAt(6);
-        Integer timeRange = (int) timeRangeChar;
+        //Character timeRangeChar = stateStr.charAt(6);
+        //Integer timeRange = (int) timeRangeChar;
+        Integer timeRange = Integer.parseInt(String.valueOf(stateStr.charAt(6)));
 
-        Character ownGoldBiggerTwoChar = stateStr.charAt(7);
-        Integer ownGoldBiggerTwo = (int) ownGoldBiggerTwoChar;
+        //Character ownGoldBiggerTwoChar = stateStr.charAt(7);
+        //Integer ownGoldBiggerTwo = (int) ownGoldBiggerTwoChar;
+        Integer ownGoldBiggerTwo = Integer.parseInt(String.valueOf(stateStr.charAt(7)));
 
 
         //Modus 0 => Schenke, Modus 1 => Mine, Modus 2 => Kampf
@@ -168,6 +175,7 @@ public class Reward {
         // timeRangeFaktor
         reward = (int) (reward * (1 + (timeRange * timeRangeFaktor)));
 
+        System.out.println(reward(0,19010900));
         return reward;
     }
 
