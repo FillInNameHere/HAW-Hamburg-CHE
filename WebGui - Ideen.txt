@@ -16,3 +16,5 @@ vllt. Livestream von dem aktuell laufenden Spiel einbinden.
 
 Verlinkung auf Githubaccount und wiki
 
+Bei get Lost games und get winning games -> die Gesamtanzahl anzeigen
+
