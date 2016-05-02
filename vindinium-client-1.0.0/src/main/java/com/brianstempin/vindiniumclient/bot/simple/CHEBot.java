@@ -373,6 +373,7 @@ public class CHEBot implements SimpleBot {
             if(ownInGameRanking == 1){
                 System.out.println("Me win!");
                 gameLog.setWin(true);
+                gameLog.setCrashed(false);
             } else {
                 System.out.println("Me no win!");
             }
