@@ -42,7 +42,7 @@ public class GameLog {
     public GameLog() {
         this.gameURL = "";
         this.win = false;
-        this.crashed = false;
+        this.crashed = true;
         this.whoAmI = 5;
         this.rounds = 0;
         this.tavern = 0;
