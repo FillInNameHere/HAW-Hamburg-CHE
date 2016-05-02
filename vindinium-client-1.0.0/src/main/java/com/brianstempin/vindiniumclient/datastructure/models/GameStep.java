@@ -23,6 +23,7 @@ public class GameStep {
     private double oldQval;
     private double newQval;
     private int reward;
+    private int turn;
 
 
     public GameStep() {
@@ -82,5 +83,13 @@ public class GameStep {
 
     public void setGameLog(GameLog gameLog) {
         this.gameLog = gameLog;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 }

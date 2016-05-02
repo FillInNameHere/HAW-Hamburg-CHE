@@ -24,7 +24,7 @@ public class CHEBot implements SimpleBot {
     private ILearningAlgorithm learningAlgorithm;
     private GameLogRepo gameLogRepo;
     private GameStepRepo gameStepRepo;
-
+    private GameStep gameStep;
 
     public CHEBot() {
         logger = Logger.getLogger("CHEBot");
@@ -84,7 +84,7 @@ public class CHEBot implements SimpleBot {
     private void doLearningAlgorithm() {
         State currentState = new State();
         currentState.setStateId(state);
-        GameStep gameStep = learningAlgorithm.step(currentState);
+        gameStep = learningAlgorithm.step(currentState);
         BotUtils.BotAction action = gameStep.getChosenAction();
         if (action.ordinal() < 3) {
             modus = action.ordinal();
@@ -99,7 +99,6 @@ public class CHEBot implements SimpleBot {
         }
 
         gameStep.setGameLog(this.gameLog);
-        gameStepRepo.saveGameStep(gameStep);
     }
 
     private List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
@@ -187,9 +186,10 @@ public class CHEBot implements SimpleBot {
     public BotMove move(GameState gameState) {
         //Führe Lern-Algorithmus aus
         doLearningAlgorithm();
+        this.gameStep.setTurn(gameState.getGame().getTurn());
         gameLog.setGameURL(gameState.getViewUrl());
         gameLog.setWhoAmI(gameState.getHero().getId());
-                
+
         if ((gameState.getGame().getTurn() >= 4) && (gameState.getGame().getTurn() <= 7)) {
             if (gameState.getGame().getHeroes().get(0).getName().equals("HAW-Hamburg CHE")) {
                 hero1IsTeamplayBot = true;
@@ -370,16 +370,17 @@ public class CHEBot implements SimpleBot {
         logger.info("" + gameState.getGame().getTurn());
         if (gameState.getGame().getTurn() >= 1196) {
             System.out.println("Game has ended!");
+            gameLog.setCrashed(0);
             if(ownInGameRanking == 1){
                 System.out.println("Me win!");
-                gameLog.setWin(true);
-                gameLog.setCrashed(false);
+                gameLog.setWin(1);
             } else {
                 System.out.println("Me no win!");
             }
         }
         gameLog.setRounds(gameState.getGame().getTurn());
         gameLog = gameLogRepo.saveGameLog(gameLog);
+        gameStepRepo.saveGameStep(gameStep);
         return botMove;
     }
 

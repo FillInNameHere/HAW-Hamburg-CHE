@@ -16,7 +16,7 @@ public class GameLog {
     private long gameLogId;
     private String gameURL;
     private int whoAmI;
-    private boolean win;
+    private int win;
     private int rounds;
     private int tavern;
     private int totalMineCount;
@@ -24,7 +24,7 @@ public class GameLog {
     private int deathByMine;
     private int kills;
     private Date startingTime;
-    private boolean crashed;
+    private int crashed;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Hero hero1;
@@ -41,8 +41,8 @@ public class GameLog {
 
     public GameLog() {
         this.gameURL = "";
-        this.win = false;
-        this.crashed = true;
+        this.win = 0;
+        this.crashed = 1;
         this.whoAmI = 5;
         this.rounds = 0;
         this.tavern = 0;
@@ -69,11 +69,11 @@ public class GameLog {
         this.whoAmI = whoAmI;
     }
 
-    public boolean isWin() {
+    public int isWin() {
         return win;
     }
 
-    public void setWin(boolean win) {
+    public void setWin(int win) {
         this.win = win;
     }
 
@@ -133,11 +133,11 @@ public class GameLog {
         this.startingTime = startingTime;
     }
 
-    public boolean isCrashed() {
+    public int isCrashed() {
         return crashed;
     }
 
-    public void setCrashed(boolean crashed) {
+    public void setCrashed(int crashed) {
         this.crashed = crashed;
     }
 
