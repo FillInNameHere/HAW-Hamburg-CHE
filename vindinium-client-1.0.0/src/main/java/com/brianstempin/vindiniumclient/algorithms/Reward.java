@@ -39,7 +39,7 @@ public class Reward {
         Integer timeRange = Integer.parseInt(String.valueOf(stateStr.charAt(6)));
 
         Integer ownGoldBiggerTwo = Integer.parseInt(String.valueOf(stateStr.charAt(7)));
-        
+
         //Modus 0 => Schenke, Modus 1 => Mine, Modus 2 => Kampf
 
         // Kategorie 1 (-200)
@@ -160,5 +160,4 @@ public class Reward {
 
         return reward;
     }
-
 }
