@@ -2,13 +2,13 @@ Das Datum zum jeweiligen Spiel mit angeben. (Database DATE() )
 
 Statistik (win/loose)
 
-Droptable
+Droptable-Button (mit Passwortabfrage)
 
-NextGame Ranked (ggf. in andere Liste eintragen)
+PlayRanked-Button (ggf. in andere Liste eintragen)
 
-Get... nach 25Einträgen neue Seite wie z.b. bei google Suchergebnissen => Get last 100 verschwindet.
+Get... nach 25Einträgen neue Seite wie z.b. bei google Suchergebnissen => Get last 100 verschwindet. (Bootstrap)
 
-Bei Get all je nach dem ob gewonnen, verloren oder draw die Zeilen Färben (grün,gelb,rot)
+Bei Get all je nach dem ob gewonnen(grün), verloren(rot) oder unfinished(yellow) die Zeilen Färben.
 
 Webgui aufhübschen (Design)
 
