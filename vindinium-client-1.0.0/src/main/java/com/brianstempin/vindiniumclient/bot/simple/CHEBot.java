@@ -9,6 +9,7 @@ import com.brianstempin.vindiniumclient.datastructure.models.GameStep;
 import com.brianstempin.vindiniumclient.datastructure.models.Hero;
 import com.brianstempin.vindiniumclient.datastructure.models.State;
 import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
+import com.brianstempin.vindiniumclient.datastructure.repos.GameStepRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateActionRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateRepo;
 import com.brianstempin.vindiniumclient.dto.GameState;
@@ -22,6 +23,7 @@ public class CHEBot implements SimpleBot {
     private GameLog gameLog;
     private ILearningAlgorithm learningAlgorithm;
     private GameLogRepo gameLogRepo;
+    private GameStepRepo gameStepRepo;
 
 
     public CHEBot() {
@@ -29,6 +31,7 @@ public class CHEBot implements SimpleBot {
         gameLog = new GameLog();
         gameLogRepo = new GameLogRepo();
         learningAlgorithm = new QLearning(new StateRepo());
+        gameStepRepo = new GameStepRepo();
     }
 
     // Zustand
@@ -94,7 +97,8 @@ public class CHEBot implements SimpleBot {
             gameLog.setSmallestReward(gameStep.getReward());
         }
 
-        gameLog.addGameStep(gameStep);
+        gameStep.setGameLog(this.gameLog);
+        gameStepRepo.saveGameStep(gameStep);
     }
 
     private List<Vertex> doDijkstra(GameState.Board board, GameState.Hero hero) {
