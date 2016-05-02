@@ -55,7 +55,7 @@ public class CHEBot implements SimpleBot {
     // Nähester Gegner Entfernung (abstrahiert)
     public int closestPlayerDistanceBiggerFour = 0;
 
-    // Eigene Minenanzahl (abstrahiert) (0: 0, 0: 1-3, 0: 4-7, 0: 8-inf)
+    // Eigene Minenanzahl (abstrahiert) (0: 0, 1: 1-3, 2: 4-7, 3: 8-inf)
     public int closestPlayerMineCount = 0;
 
     // Nähester Gegner Leben (abstrahiert) (0: 0-10, 1: 11-20, 2: 21-30, 3: 31-40, 4: 41-50, 5: 51-60, 6: 61-70, 7: 71-80, 8: 81-90, 9: 91-100)
