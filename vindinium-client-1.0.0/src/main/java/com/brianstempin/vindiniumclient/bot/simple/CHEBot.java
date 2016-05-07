@@ -381,8 +381,8 @@ public class CHEBot implements SimpleBot {
         gameLog.setRounds(gameState.getGame().getTurn());
         gameLog.setEndMessage(reason);
 
-        if(gameState.getHero().isCrashed()){
-            gameLog.setCrashed(1);
+        if(!gameState.getHero().isCrashed()){
+            gameLog.setCrashed(0);
         }
 
         if (gameState.getGame().isFinished()) {
