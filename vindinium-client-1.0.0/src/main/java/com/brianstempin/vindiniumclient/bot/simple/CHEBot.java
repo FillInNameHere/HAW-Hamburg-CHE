@@ -26,8 +26,8 @@ public class CHEBot implements SimpleBot {
 
     public CHEBot() {
         logger = Logger.getLogger("CHEBot");
-        learningAlgorithm = new QLearning(new StateRepo());
         gameStepRepo = new GameStepRepo();
+        learningAlgorithm = new QLearning(new StateRepo(), gameStepRepo);
     }
 
     // Zustand
