@@ -1,6 +1,8 @@
 package com.brianstempin.vindiniumclient.bot.simple;
 
 import com.brianstempin.vindiniumclient.bot.BotMove;
+import com.brianstempin.vindiniumclient.datastructure.models.GameLog;
+import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.dto.ApiKey;
 import com.brianstempin.vindiniumclient.dto.GameState;
 import com.brianstempin.vindiniumclient.dto.Move;
@@ -25,6 +27,8 @@ public class SimpleBotRunner implements Callable<GameState> {
                 }
             });
     private static final Logger logger = LogManager.getLogger(SimpleBotRunner.class);
+    private final GameLogRepo gameLogRepo;
+    private GameLog gameLog;
 
     private final ApiKey apiKey;
     private final GenericUrl gameUrl;
@@ -34,6 +38,9 @@ public class SimpleBotRunner implements Callable<GameState> {
         this.apiKey = apiKey;
         this.gameUrl = gameUrl;
         this.bot = bot;
+        this.gameLogRepo = new GameLogRepo();
+        this.gameLog = gameLogRepo.saveGameLog(new GameLog());
+        this.bot.setup(gameLogRepo, gameLog);
     }
 
     @Override
@@ -70,9 +77,11 @@ public class SimpleBotRunner implements Callable<GameState> {
 
         } catch (Exception e) {
             logger.error("Error during game play", e);
-            System.out.println("Error during game play: " + e);
+            this.bot.shutdown("Error during game play: "+ e, gameState);
             System.exit(0);
         }
+
+        this.bot.shutdown("Game ended normally", gameState);
 
         logger.info("Game over");
         System.out.println("Game over");

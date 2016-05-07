@@ -1,6 +1,8 @@
 package com.brianstempin.vindiniumclient.bot.simple;
 
 import com.brianstempin.vindiniumclient.bot.BotMove;
+import com.brianstempin.vindiniumclient.datastructure.models.GameLog;
+import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.dto.GameState;
 
 /**
@@ -28,12 +30,13 @@ public class RandomBot implements SimpleBot {
     }
 
     @Override
-    public void setup() {
+    public void setup(GameLogRepo gameLogRepo, GameLog gameLog) {
         // No-op
     }
 
     @Override
-    public void shutdown() {
-        // No-op
+    public void shutdown(String reason, GameState gameState) {
+
     }
+
 }

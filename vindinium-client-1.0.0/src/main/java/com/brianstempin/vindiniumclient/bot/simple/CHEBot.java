@@ -6,11 +6,9 @@ import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
 import com.brianstempin.vindiniumclient.datastructure.models.GameLog;
 import com.brianstempin.vindiniumclient.datastructure.models.GameStep;
-import com.brianstempin.vindiniumclient.datastructure.models.Hero;
 import com.brianstempin.vindiniumclient.datastructure.models.State;
 import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.GameStepRepo;
-import com.brianstempin.vindiniumclient.datastructure.repos.StateActionRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateRepo;
 import com.brianstempin.vindiniumclient.dto.GameState;
 
@@ -28,11 +26,8 @@ public class CHEBot implements SimpleBot {
 
     public CHEBot() {
         logger = Logger.getLogger("CHEBot");
-        gameLog = new GameLog();
-        gameLogRepo = new GameLogRepo();
         learningAlgorithm = new QLearning(new StateRepo());
         gameStepRepo = new GameStepRepo();
-        gameLog = gameLogRepo.saveGameLog(gameLog);
     }
 
     // Zustand
@@ -368,9 +363,29 @@ public class CHEBot implements SimpleBot {
 
         //logger.info("State: " + state + " (ownInGameRanking,ownLife,ownMineCount,closestPlayerDistanceBiggerFour,closestPlayerMineCount,closestPlayerLife,timeRange,ownGoldBiggerTwo)");
         logger.info("" + gameState.getGame().getTurn());
-        if (gameState.getGame().getTurn() >= 1196) {
-            System.out.println("Game has ended!");
-            gameLog.setCrashed(0);
+
+        gameLog = gameLogRepo.saveGameLog(gameLog);
+        gameStepRepo.saveGameStep(gameStep);
+        return botMove;
+    }
+
+    @Override
+    public void setup(GameLogRepo gameLogRepo, GameLog gameLog) {
+        logger.info("setting up bot...");
+        this.gameLogRepo = gameLogRepo;
+        this.gameLog = gameLog;
+    }
+
+    public void shutdown(String reason, GameState gameState) {
+        logger.info("shutting down bot, reason: "+reason);
+        gameLog.setRounds(gameState.getGame().getTurn());
+        gameLog.setEndMessage(reason);
+
+        if(gameState.getHero().isCrashed()){
+            gameLog.setCrashed(1);
+        }
+
+        if (gameState.getGame().isFinished()) {
             if(ownInGameRanking == 1){
                 System.out.println("Me win!");
                 gameLog.setWin(1);
@@ -378,20 +393,7 @@ public class CHEBot implements SimpleBot {
                 System.out.println("Me no win!");
             }
         }
-        gameLog.setRounds(gameState.getGame().getTurn());
-        gameLog = gameLogRepo.saveGameLog(gameLog);
-        gameStepRepo.saveGameStep(gameStep);
-        return botMove;
-    }
-
-    @Override
-    public void setup() {
-        // No-op
-    }
-
-    @Override
-    public void shutdown() {
-        // No-op
+        gameLogRepo.saveGameLog(gameLog);
     }
 
     private static class Vertex implements Comparable<Vertex> {

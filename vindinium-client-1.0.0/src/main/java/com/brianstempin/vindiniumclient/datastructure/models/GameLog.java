@@ -1,9 +1,7 @@
 package com.brianstempin.vindiniumclient.datastructure.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Christian on 08.04.2016.
@@ -25,6 +23,7 @@ public class GameLog {
     private int kills;
     private Date startingTime;
     private int crashed;
+    private String endMessage;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Hero hero1;
@@ -51,6 +50,7 @@ public class GameLog {
         this.kills = 0;
         this.startingTime = new Date();
         this.reward = 0;
+        this.endMessage = "none";
     }
 
     public String getGameURL() {
@@ -195,5 +195,13 @@ public class GameLog {
 
     public void setSmallestReward(int smallestReward) {
         this.smallestReward = smallestReward;
+    }
+
+    public String getEndMessage() {
+        return endMessage;
+    }
+
+    public void setEndMessage(String endMessage) {
+        this.endMessage = endMessage;
     }
 }
