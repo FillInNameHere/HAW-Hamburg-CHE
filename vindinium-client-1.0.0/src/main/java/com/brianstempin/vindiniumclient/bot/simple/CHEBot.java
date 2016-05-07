@@ -392,6 +392,8 @@ public class CHEBot implements SimpleBot {
             } else {
                 System.out.println("Me no win!");
             }
+        } else {
+            gameLog.setCrashed(1);
         }
         gameLogRepo.saveGameLog(gameLog);
     }
