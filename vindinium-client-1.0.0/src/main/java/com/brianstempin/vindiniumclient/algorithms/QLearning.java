@@ -7,6 +7,7 @@ import com.brianstempin.vindiniumclient.datastructure.models.StateAction;
 import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.GameStepRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateRepo;
+import com.brianstempin.vindiniumclient.util.vars.model.Vars;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +34,11 @@ public class QLearning implements ILearningAlgorithm {
     private QLearning() {
     }
 
-    public QLearning(StateRepo stateRepo, GameStepRepo gameStepRepo) {
+    public QLearning(StateRepo stateRepo, GameStepRepo gameStepRepo, Vars v) {
         this.stateRepo = stateRepo;
         this.gameStepRepo = gameStepRepo;
+        this.learningRate = v.getLearningRate();
+        this.explorationFactor = v.getExplorationFactor();
     }
 
     @Override

@@ -8,6 +8,8 @@ import com.brianstempin.vindiniumclient.bot.simple.SimpleBotRunner;
 import com.brianstempin.vindiniumclient.dto.ApiKey;
 import com.brianstempin.vindiniumclient.dto.GameState;
 import com.brianstempin.vindiniumclient.dto.Move;
+import com.brianstempin.vindiniumclient.util.vars.VarServices;
+import com.brianstempin.vindiniumclient.util.vars.model.Vars;
 import com.google.api.client.http.*;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -29,7 +31,7 @@ public class Main {
     private static final Logger gameStateLogger = LogManager.getLogger("gameStateLogger");
 
     public static void main(String args[]) throws Exception {
-        
+
         final String key = args[0];
         final String arena = args[1];
         final String botType = args[2];

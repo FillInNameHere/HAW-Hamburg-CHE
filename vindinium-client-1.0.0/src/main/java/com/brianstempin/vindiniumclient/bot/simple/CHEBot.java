@@ -11,6 +11,8 @@ import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.GameStepRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateRepo;
 import com.brianstempin.vindiniumclient.dto.GameState;
+import com.brianstempin.vindiniumclient.util.vars.VarServices;
+import com.brianstempin.vindiniumclient.util.vars.model.Vars;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -27,7 +29,9 @@ public class CHEBot implements SimpleBot {
     public CHEBot() {
         logger = Logger.getLogger("CHEBot");
         gameStepRepo = new GameStepRepo();
-        learningAlgorithm = new QLearning(new StateRepo(), gameStepRepo);
+        VarServices vs = new VarServices();
+        Vars v = vs.getVars();
+        learningAlgorithm = new QLearning(new StateRepo(), gameStepRepo, v);
     }
 
     // Zustand
