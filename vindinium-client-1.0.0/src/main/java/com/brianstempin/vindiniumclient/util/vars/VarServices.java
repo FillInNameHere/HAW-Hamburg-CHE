@@ -12,15 +12,12 @@ import java.io.File;
  */
 public class VarServices {
     String path = "file/vars.vfv";
-    String absolutePath;
     IFileServices fs;
     Gson gson;
 
     public VarServices() {
         this.fs = new FileServices();
         this.gson = new Gson();
-        /*File f = new File(this.path);
-        this.absolutePath = f.getAbsolutePath();*/
     }
 
     public Vars getVars() {
