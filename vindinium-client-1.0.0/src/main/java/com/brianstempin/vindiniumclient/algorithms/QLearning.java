@@ -80,6 +80,7 @@ public class QLearning implements ILearningAlgorithm {
             currentGameStep.setChosenAction(BotAction.FORTFAHREN);
             currentGameStep.setState(this.lastState);
             currentGameStep.setBestActionThen(BotAction.FORTFAHREN);
+            this.lastGameStep = this.currentGameStep;
             return currentGameStep;
         }
     }
