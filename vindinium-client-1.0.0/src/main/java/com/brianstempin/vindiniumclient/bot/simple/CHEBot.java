@@ -172,7 +172,7 @@ public class CHEBot implements SimpleBot {
 
         path.add(target);
         Vertex next = target;
-        while (next.getPrevious().getMinDistance() != 0) {
+        while (next.getPrevious() != null && next.getPrevious().getMinDistance() != 0 ) {
             path.add(next.getPrevious());
             next = next.getPrevious();
         }
@@ -332,7 +332,7 @@ public class CHEBot implements SimpleBot {
 
         // Notfallmodus
         Vertex move;
-        BotMove botMove = null;
+        BotMove botMove = BotMove.STAY;
 
         // Schenke
         if (modus == 0) {
@@ -343,7 +343,7 @@ public class CHEBot implements SimpleBot {
         // Kampf
         if (modus == 2) {
             // Sonderfall alle vier Spieler sind TeamPlayBots
-            if (getPath(closestPlayer).get(0) == null) {
+            if (getPath(closestPlayer).get(0) == null || getPath(closestPlayer).get(0).getPosition() == null) {
                 modus = 1;
             } else {
                 move = getPath(closestPlayer).get(0);
@@ -354,7 +354,7 @@ public class CHEBot implements SimpleBot {
         // Mine
         if (modus == 1) {
             // Sonderfall Hero besitzt ale Minen
-            if (getPath(closestMine).get(0) == null){
+            if (getPath(closestMine).get(0) == null || getPath(closestMine).get(0).getPosition() == null){
                 botMove = BotMove.STAY;
             } else {
                 move = getPath(closestMine).get(0);
