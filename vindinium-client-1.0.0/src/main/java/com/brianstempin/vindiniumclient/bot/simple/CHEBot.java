@@ -89,11 +89,11 @@ public class CHEBot implements SimpleBot {
             modus = action.ordinal();
         }
 
-        gameLog.setReward(gameLog.getReward()+gameStep.getReward());
+        gameLog.setReward(gameLog.getReward() + gameStep.getReward());
 
-        if(gameStep.getReward() > gameLog.getBiggestReward()){
+        if (gameStep.getReward() > gameLog.getBiggestReward()) {
             gameLog.setBiggestReward(gameStep.getReward());
-        } else if(gameStep.getReward() < gameLog.getSmallestReward()){
+        } else if (gameStep.getReward() < gameLog.getSmallestReward()) {
             gameLog.setSmallestReward(gameStep.getReward());
         }
 
@@ -172,7 +172,7 @@ public class CHEBot implements SimpleBot {
 
         path.add(target);
         Vertex next = target;
-        while (next.getPrevious() != null && next.getPrevious().getMinDistance() != 0 ) {
+        while (next.getPrevious() != null && next.getPrevious().getMinDistance() != 0) {
             path.add(next.getPrevious());
             next = next.getPrevious();
         }
@@ -354,7 +354,7 @@ public class CHEBot implements SimpleBot {
         // Mine
         if (modus == 1) {
             // Sonderfall Hero besitzt ale Minen
-            if (getPath(closestMine).get(0) == null || getPath(closestMine).get(0).getPosition() == null){
+            if (getPath(closestMine).get(0) == null || getPath(closestMine).get(0).getPosition() == null) {
                 botMove = BotMove.STAY;
             } else {
                 move = getPath(closestMine).get(0);
@@ -381,20 +381,18 @@ public class CHEBot implements SimpleBot {
     }
 
     public void shutdown(String reason, GameState gameState) {
-        logger.info("shutting down bot, reason: "+reason);
+        logger.info("shutting down bot, reason: " + reason);
         gameLog.setRounds(gameState.getGame().getTurn());
         gameLog.setEndMessage(reason);
 
-        if(!gameState.getHero().isCrashed()){
-            gameLog.setCrashed(0);
+        if (!gameState.getHero().isCrashed()) {
+            gameLog.setCrashed(1);
         }
 
         if (gameState.getGame().isFinished()) {
-            if(ownInGameRanking == 1){
-                System.out.println("Me win!");
+            if (ownInGameRanking == 1) {
                 gameLog.setWin(1);
             } else {
-                System.out.println("Me no win!");
             }
         } else {
             gameLog.setCrashed(1);
