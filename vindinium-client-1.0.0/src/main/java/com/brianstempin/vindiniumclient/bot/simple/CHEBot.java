@@ -172,7 +172,7 @@ public class CHEBot implements SimpleBot {
 
         path.add(target);
         Vertex next = target;
-        while (next.getPrevious() != null && next.getPrevious().getMinDistance() != 0) {
+        while (next.getPrevious().getMinDistance() != 0) {
             path.add(next.getPrevious());
             next = next.getPrevious();
         }
@@ -352,9 +352,9 @@ public class CHEBot implements SimpleBot {
         }
 
         // Mine
-        if (modus == 1) {
+        if (modus == 1 || modus == 2) {
             // Sonderfall Hero besitzt ale Minen
-            if (getPath(closestMine).get(0) == null || getPath(closestMine).get(0).getPosition() == null) {
+            if (closestMine == null) {
                 botMove = BotMove.STAY;
             } else {
                 move = getPath(closestMine).get(0);
