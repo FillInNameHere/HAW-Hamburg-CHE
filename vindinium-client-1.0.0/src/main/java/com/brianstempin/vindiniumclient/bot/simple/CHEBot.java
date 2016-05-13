@@ -352,7 +352,7 @@ public class CHEBot implements SimpleBot {
         }
 
         // Mine
-        if (modus == 1 || modus == 2) {
+        if (modus == 1) {
             // Sonderfall Hero besitzt ale Minen
             if (closestMine == null) {
                 botMove = BotMove.STAY;
