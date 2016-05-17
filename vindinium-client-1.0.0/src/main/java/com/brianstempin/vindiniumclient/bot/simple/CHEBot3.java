@@ -27,7 +27,7 @@ public class CHEBot3 implements SimpleBot {
     private GameStep gameStep;
 
     public CHEBot3() {
-        logger = Logger.getLogger("CHEBot");
+        logger = Logger.getLogger("CHEBot 3");
         gameStepRepo = new GameStepRepo();
         VarServices vs = new VarServices();
         Vars v = vs.getVars();
