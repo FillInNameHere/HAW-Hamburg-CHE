@@ -92,4 +92,8 @@ public class GameStep {
     public void setTurn(int turn) {
         this.turn = turn;
     }
+
+    public long getGameStepId() {
+        return gameStepId;
+    }
 }
