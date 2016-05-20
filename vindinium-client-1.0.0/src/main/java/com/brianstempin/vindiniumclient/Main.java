@@ -81,8 +81,8 @@ public class Main {
      * Represents the endpoint URL
      */
     public static class VindiniumUrl extends GenericUrl {
-        private final static String TRAINING_URL = "http://vindinium.org/api/training";
-        private final static String COMPETITION_URL = "http://vindinium.org/api/arena";
+        private final static String TRAINING_URL = "http://127.0.0.1:9000/api/training";
+        private final static String COMPETITION_URL = "http://127.0.0.1:9000/api/arena";
 
         public VindiniumUrl(String encodedUrl) {
             super(encodedUrl);
