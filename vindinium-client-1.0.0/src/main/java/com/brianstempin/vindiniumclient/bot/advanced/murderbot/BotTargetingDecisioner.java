@@ -2,6 +2,7 @@ package com.brianstempin.vindiniumclient.bot.advanced.murderbot;
 
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
+import com.brianstempin.vindiniumclient.bot.advanced.DijkstraResult;
 import com.brianstempin.vindiniumclient.bot.advanced.Mine;
 import com.brianstempin.vindiniumclient.bot.advanced.Vertex;
 import com.brianstempin.vindiniumclient.dto.GameState;
@@ -39,7 +40,7 @@ public class BotTargetingDecisioner implements Decision<AdvancedMurderBot.GameCo
             if(currentMine.getOwner() != null && currentMine.getOwner().isCrashed()) {
 
                 GameState.Hero target = currentMine.getOwner();
-                AdvancedMurderBot.DijkstraResult currentDijkstraResult =
+                DijkstraResult currentDijkstraResult =
                         context.getDijkstraResultMap().get(target.getPos());
                 GameState.Position nextPosition = target.getPos();
 
@@ -63,9 +64,9 @@ public class BotTargetingDecisioner implements Decision<AdvancedMurderBot.GameCo
 
         // Ok, crashed bots.  How about bots that aren't squatting?
         GameState.Hero closestTarget = null;
-        AdvancedMurderBot.DijkstraResult closestTargetDijkstraResult = null;
+        DijkstraResult closestTargetDijkstraResult = null;
         for(GameState.Hero currentHero : heroesWithMines) {
-            AdvancedMurderBot.DijkstraResult currentDijkstraResult = context
+            DijkstraResult currentDijkstraResult = context
                     .getDijkstraResultMap()
                     .get(currentHero.getPos());
 

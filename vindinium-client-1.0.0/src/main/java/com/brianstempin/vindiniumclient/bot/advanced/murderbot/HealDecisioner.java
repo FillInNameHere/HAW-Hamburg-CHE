@@ -2,6 +2,7 @@ package com.brianstempin.vindiniumclient.bot.advanced.murderbot;
 
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
+import com.brianstempin.vindiniumclient.bot.advanced.DijkstraResult;
 import com.brianstempin.vindiniumclient.bot.advanced.Pub;
 import com.brianstempin.vindiniumclient.dto.GameState;
 import org.apache.logging.log4j.LogManager;
@@ -24,13 +25,13 @@ public class HealDecisioner implements Decision<AdvancedMurderBot.GameContext, B
     public BotMove makeDecision(AdvancedMurderBot.GameContext context) {
         logger.info("Need to heal; running to nearest pub.");
 
-        Map<GameState.Position, AdvancedMurderBot.DijkstraResult> dijkstraResultMap = context.getDijkstraResultMap();
+        Map<GameState.Position, DijkstraResult> dijkstraResultMap = context.getDijkstraResultMap();
 
         // Run to the nearest pub
         Pub nearestPub = null;
-        AdvancedMurderBot.DijkstraResult nearestPubDijkstraResult = null;
+        DijkstraResult nearestPubDijkstraResult = null;
         for(Pub pub : context.getGameState().getPubs().values()) {
-            AdvancedMurderBot.DijkstraResult dijkstraToPub = dijkstraResultMap.get(pub.getPosition());
+            DijkstraResult dijkstraToPub = dijkstraResultMap.get(pub.getPosition());
             if(dijkstraToPub != null) {
                 if(nearestPub == null || nearestPubDijkstraResult.getDistance() >
                     dijkstraToPub.getDistance()) {

@@ -28,6 +28,6 @@ public class BotUtils {
     }
 
     public enum BotAction {
-        SCHENKE, MINE, KAMPF, FORTFAHREN
+        FORTFAHREN, SCHENKE, NAECHSTEMINE, NAECHSTERGEGNER, GEGNERISCHMINE, TOPGEGNER
     }
 }

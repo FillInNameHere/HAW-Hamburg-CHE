@@ -1,19 +1,14 @@
 package com.brianstempin.vindiniumclient.bot.advanced;
 
-import com.brianstempin.vindiniumclient.Main;
 import com.brianstempin.vindiniumclient.bot.BotMove;
-import com.brianstempin.vindiniumclient.bot.advanced.murderbot.AdvancedMurderBot;
 import com.brianstempin.vindiniumclient.dto.ApiKey;
 import com.brianstempin.vindiniumclient.dto.GameState;
 import com.brianstempin.vindiniumclient.dto.Move;
 import com.google.api.client.http.*;
 import com.google.api.client.http.apache.ApacheHttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.gson.GsonFactory;
-import com.google.gson.Gson;
-import org.apache.http.conn.ConnectionKeepAliveStrategy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -58,7 +53,8 @@ public class AdvancedBotRunner implements Callable<GameState> {
             response = request.execute();
             gameState = response.parseAs(GameState.class);
             logger.info("Game URL: {}", gameState.getViewUrl());
-
+            System.out.println(gameState.getViewUrl());
+            bot.setup();
             advancedGameState = new AdvancedGameState(gameState);
 
             // Game loop
@@ -78,8 +74,9 @@ public class AdvancedBotRunner implements Callable<GameState> {
 
         } catch (Exception e) {
             logger.error("Error during game play", e);
+            e.printStackTrace();
         }
-
+        bot.shutdown();
         logger.info("Game over");
         return gameState;
     }

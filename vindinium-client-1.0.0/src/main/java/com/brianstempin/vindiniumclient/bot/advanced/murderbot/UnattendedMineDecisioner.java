@@ -2,6 +2,7 @@ package com.brianstempin.vindiniumclient.bot.advanced.murderbot;
 
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
+import com.brianstempin.vindiniumclient.bot.advanced.DijkstraResult;
 import com.brianstempin.vindiniumclient.bot.advanced.Mine;
 import com.brianstempin.vindiniumclient.dto.GameState;
 import org.apache.logging.log4j.LogManager;
@@ -9,13 +10,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
-import static com.brianstempin.vindiniumclient.bot.advanced.murderbot.AdvancedMurderBot.DijkstraResult;
 
 /**
  * Decides to go after an unclaimed mine far, far away.
- *
+ * <p>
  * This decisioner decides if any mines are "easy," despite being out of the way.
- *
+ * <p>
  * According to Maslov's Hierarchy, this is boredom.
  */
 public class UnattendedMineDecisioner implements Decision<AdvancedMurderBot.GameContext, BotMove> {
@@ -37,14 +37,13 @@ public class UnattendedMineDecisioner implements Decision<AdvancedMurderBot.Game
         // A good target is the closest unattended mine
         Mine targetMine = null;
 
-        for(Mine mine : context.getGameState().getMines().values()) {
+        for (Mine mine : context.getGameState().getMines().values()) {
             DijkstraResult mineDijkstraResult = dijkstraResultMap.get(mine.getPosition());
-            if(targetMine == null && mineDijkstraResult != null) {
-                if(mine.getOwner() == null
+            if (targetMine == null && mineDijkstraResult != null) {
+                if (mine.getOwner() == null
                         || mine.getOwner().getId() != me.getId())
-                targetMine = mine;
-            }
-            else if(mineDijkstraResult != null && dijkstraResultMap.get(targetMine.getPosition()).getDistance()
+                    targetMine = mine;
+            } else if (mineDijkstraResult != null && dijkstraResultMap.get(targetMine.getPosition()).getDistance()
                     > dijkstraResultMap.get(mine.getPosition()).getDistance()
                     && (mine.getOwner() == null
                     || mine.getOwner().getId() != me.getId())) {
@@ -52,10 +51,10 @@ public class UnattendedMineDecisioner implements Decision<AdvancedMurderBot.Game
             }
         }
 
-        if(targetMine != null) {
+        if (targetMine != null) {
             GameState.Position currentPosition = targetMine.getPosition();
             DijkstraResult currentResult = dijkstraResultMap.get(currentPosition);
-            while(currentResult.getDistance() > 1) {
+            while (currentResult.getDistance() > 1) {
                 currentPosition = currentResult.getPrevious();
                 currentResult = dijkstraResultMap.get(currentPosition);
             }

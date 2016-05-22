@@ -3,9 +3,9 @@ package com.brianstempin.vindiniumclient.algorithms;
 /**
  * Created by Henning Kahl on 15.04.2016.
  */
-public class Reward3 {
+public class Reward3 implements IReward{
 
-    public static int reward(int modus, long state){
+    public int reward(int modus, long state){
         // return reward
         int reward = 0;
 

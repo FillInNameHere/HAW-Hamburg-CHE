@@ -2,6 +2,7 @@ package com.brianstempin.vindiniumclient.bot.advanced.advancedmurderbot;
 
 import com.brianstempin.vindiniumclient.bot.BotTestingUtils;
 import com.brianstempin.vindiniumclient.bot.advanced.AdvancedGameState;
+import com.brianstempin.vindiniumclient.bot.advanced.DijkstraResult;
 import com.brianstempin.vindiniumclient.bot.advanced.murderbot.AdvancedMurderBot;
 import com.brianstempin.vindiniumclient.dto.GameState;
 import com.google.gson.Gson;
@@ -11,6 +12,8 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.util.Map;
+
+import static com.brianstempin.vindiniumclient.bot.advanced.DijkstraResult.dijkstraSearch;
 
 public class AdvancedMurderBotTest {
 
@@ -28,8 +31,8 @@ public class AdvancedMurderBotTest {
 
     @Test
     public void dijkstraTest() {
-        Map<GameState.Position, AdvancedMurderBot.DijkstraResult> dijkstraResultMap =
-                AdvancedMurderBot.dijkstraSearch(gameState);
+        Map<GameState.Position, DijkstraResult> dijkstraResultMap =
+                dijkstraSearch(gameState);
 
         Assert.assertEquals(88, dijkstraResultMap.size());
     }

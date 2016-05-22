@@ -1,6 +1,5 @@
 package com.brianstempin.vindiniumclient.datastructure.models;
 
-import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
 
 import javax.persistence.*;

@@ -4,7 +4,6 @@ import com.brianstempin.vindiniumclient.bot.BotUtils.BotAction;
 import com.brianstempin.vindiniumclient.datastructure.models.GameStep;
 import com.brianstempin.vindiniumclient.datastructure.models.State;
 import com.brianstempin.vindiniumclient.datastructure.models.StateAction;
-import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.GameStepRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateRepo;
 import com.brianstempin.vindiniumclient.util.vars.model.Vars;
@@ -28,17 +27,31 @@ public class QLearning implements ILearningAlgorithm {
     private GameStep lastGameStep;
     private GameStep currentGameStep;
     private GameStepRepo gameStepRepo;
-
+    private boolean advancedActions = false;
     private double discount = 1;
+    private IReward rewarder;
+    private int actionRange;
 
     private QLearning() {
     }
 
     public QLearning(StateRepo stateRepo, GameStepRepo gameStepRepo, Vars v) {
+        this.rewarder = new Reward();
         this.stateRepo = stateRepo;
         this.gameStepRepo = gameStepRepo;
         this.learningRate = v.getLearningRate();
         this.explorationFactor = v.getExplorationFactor();
+        this.actionRange = 3;
+    }
+
+    public QLearning(StateRepo stateRepo, GameStepRepo gameStepRepo, Vars v, boolean advancedActions, IReward rewarder) {
+        this.stateRepo = stateRepo;
+        this.gameStepRepo = gameStepRepo;
+        this.learningRate = v.getLearningRate();
+        this.explorationFactor = v.getExplorationFactor();
+        this.advancedActions = advancedActions;
+        this.rewarder = rewarder;
+        this.actionRange = 5;
     }
 
     @Override
@@ -57,14 +70,18 @@ public class QLearning implements ILearningAlgorithm {
                 this.currentState = state;
                 stateAction = this.currentState.getActions().get(this.currentState.getBestAction());
             } else {
-                this.currentState = initState(currentState);
+                if(advancedActions){
+                    this.currentState = initState(currentState, BotAction.values().length);
+                } else {
+                    this.currentState = initState(currentState, 4);
+                }
                 stateAction = this.currentState.getActions().get(this.currentState.getBestAction());
             }
 
             currentGameStep.setBestActionThen(stateAction.getAction());
 
             if (Math.random() < explorationFactor) {
-                stateAction = this.currentState.getActions().get((int) (Math.random() * 3));
+                stateAction = this.currentState.getActions().get((int) (Math.random() * actionRange));
             }
 
             currentGameStep.setChosenAction(stateAction.getAction());
@@ -85,11 +102,13 @@ public class QLearning implements ILearningAlgorithm {
         }
     }
 
-    private State initState(State state) {
+
+
+    private State initState(State state, int amount) {
         stateRepo.saveState(state);
         List<StateAction> actions = new ArrayList<>();
         BotAction[] values = BotAction.values();
-        for (int i = 0, valuesLength = values.length - 1; i < valuesLength; i++) {
+            for (int i = 1, valuesLength = amount; i < valuesLength; i++) {
             BotAction b = values[i];
             StateAction sa = new StateAction();
             sa.setqValue(0.0);
@@ -98,12 +117,12 @@ public class QLearning implements ILearningAlgorithm {
             actions.add(sa);
         }
         state.setActions(actions);
-        state.setBestAction((int) (Math.random() * 3));
+        state.setBestAction((int) (Math.random() * actionRange));
         return stateRepo.saveState(state);
     }
 
     private void evaluateLastStep() {
-        int reward = Reward.reward(lastAction.getAction().ordinal(), lastState.getStateId());
+        int reward = rewarder.reward(lastAction.getAction().ordinal(), lastState.getStateId());
         double oldQVal = lastAction.getqValue();
         double bestQValNow = currentState.getActions().get(currentState.getBestAction()).getqValue();
         double newQVal = oldQVal + learningRate * (reward + discount * bestQValNow - oldQVal);
