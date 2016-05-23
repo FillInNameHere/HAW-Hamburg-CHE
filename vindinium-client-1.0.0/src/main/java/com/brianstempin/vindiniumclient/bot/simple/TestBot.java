@@ -61,7 +61,6 @@ public class TestBot implements SimpleBot {
 
             // Überprüfe: Felder worauf etwas steht werden nicht einbezogen.
             if (v.getTileType().equals("##") || v.getTileType().equals("[]") || v.getTileType().startsWith("$")) {
-
                 continue;
             }
 
