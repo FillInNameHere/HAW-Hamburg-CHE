@@ -58,6 +58,9 @@ public class GameLog {
     }
 
     public void setGameURL(String gameURL) {
+        if (gameURL.contains("127.0.0.1:9000")) {
+            gameURL = gameURL.replace("127.0.0.1:9000", "che-server.ful.informatik.haw-hamburg.de");
+        }
         this.gameURL = gameURL;
     }
 
