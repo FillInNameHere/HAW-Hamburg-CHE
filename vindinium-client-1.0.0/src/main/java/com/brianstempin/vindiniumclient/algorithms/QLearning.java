@@ -122,7 +122,7 @@ public class QLearning implements ILearningAlgorithm {
     }
 
     private void evaluateLastStep() {
-        int reward = rewarder.reward(lastAction.getAction().ordinal(), lastState.getStateId());
+        int reward = rewarder.reward(lastAction.getAction().ordinal()-1, lastState.getStateId());
         double oldQVal = lastAction.getqValue();
         double bestQValNow = currentState.getActions().get(currentState.getBestAction()-1).getqValue();
         double newQVal = oldQVal + learningRate * (reward + discount * bestQValNow - oldQVal);
