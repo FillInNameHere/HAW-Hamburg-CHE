@@ -2,7 +2,7 @@ package com.brianstempin.vindiniumclient.bot.advanced.CHE2;
 
 import com.brianstempin.vindiniumclient.algorithms.ILearningAlgorithm;
 import com.brianstempin.vindiniumclient.algorithms.QLearning;
-import com.brianstempin.vindiniumclient.algorithms.Reward3;
+import com.brianstempin.vindiniumclient.algorithms.Reward2;
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
 import com.brianstempin.vindiniumclient.bot.advanced.*;
@@ -14,8 +14,9 @@ import com.brianstempin.vindiniumclient.datastructure.repos.StateRepo;
 import com.brianstempin.vindiniumclient.dto.GameState;
 import com.brianstempin.vindiniumclient.util.vars.VarServices;
 import com.brianstempin.vindiniumclient.util.vars.model.Vars;
-import java.util.logging.Logger;
+
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Created by Eric on 17.05.2016.
@@ -54,11 +55,12 @@ public class CHEBot2 implements AdvancedBot {
         state.setStateId(stateId);
 
         long test = System.currentTimeMillis();
-        stateRepo.saveState(state);
+        //stateRepo.saveState(state);
         logger.info(""+(System.currentTimeMillis()-test));
         //doLearningAlgorithm();
         logger.info("t5: " + (System.currentTimeMillis() - t0));
 
+        modus = (int) Math.random()*50;
 
         switch (modus){
             case 1: target = getClosestPub();
@@ -76,7 +78,7 @@ public class CHEBot2 implements AdvancedBot {
 
         move = BotUtils.directionTowards(gameState.getMe().getPos() ,getPath(target).get(0));
         long t10 = System.currentTimeMillis() - t0;
-        logger.info("t10 = " + t10);
+        logger.info("tfinal = " + t10);
 
         /*logger.info("targetX = " + target.getX() + " \t\ttargetY = " + target.getY());
         logger.info("meX = " + gameState.getMe().getPos().getX() + " \t\t meY = " + gameState.getMe().getPos().getY());
@@ -95,7 +97,7 @@ public class CHEBot2 implements AdvancedBot {
         VarServices vs = new VarServices();
         this.vars = vs.getVars();
         this.logger = Logger.getLogger("CHEBot2");
-        this.learningAlgorithm = new QLearning(stateRepo, gameStepRepo, vars, true, new Reward3());
+        this.learningAlgorithm = new QLearning(stateRepo, gameStepRepo, vars, true, new Reward2());
         this.gameLog = new GameLog();
     }
 
@@ -146,7 +148,7 @@ public class CHEBot2 implements AdvancedBot {
                     closestDistance = distance;
                 }
             } catch (NullPointerException e) {
-                logger.info("nullpointer!");
+                logger.info("nullpointer!" + e);
             }
         }
         closestEnemyDistance = closestDistance;

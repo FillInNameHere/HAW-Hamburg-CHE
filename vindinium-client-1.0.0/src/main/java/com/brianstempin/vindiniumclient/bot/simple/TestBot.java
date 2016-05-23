@@ -2,8 +2,6 @@ package com.brianstempin.vindiniumclient.bot.simple;
 
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
-import com.brianstempin.vindiniumclient.datastructure.models.GameLog;
-import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.dto.GameState;
 
 import java.util.*;
@@ -235,7 +233,7 @@ public class TestBot implements SimpleBot {
     }
 
     @Override
-    public void setup(GameLogRepo gameLogRepo, GameLog gameLog) {
+    public void setup() {
         // No-op
     }
 

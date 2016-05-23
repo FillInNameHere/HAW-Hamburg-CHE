@@ -1,8 +1,6 @@
 package com.brianstempin.vindiniumclient.bot.simple;
 
 import com.brianstempin.vindiniumclient.bot.BotMove;
-import com.brianstempin.vindiniumclient.datastructure.models.GameLog;
-import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.dto.GameState;
 
 /**
@@ -26,10 +24,8 @@ public interface SimpleBot {
 
     /**
      * Called before the game is started
-     * @param gameLogRepo
-     * @param gameLog
      */
-    public void setup(GameLogRepo gameLogRepo, GameLog gameLog);
+    public void setup();
 
     /**
      * Called after the game

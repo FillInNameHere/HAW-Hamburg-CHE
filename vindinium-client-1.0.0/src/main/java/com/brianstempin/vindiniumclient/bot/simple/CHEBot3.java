@@ -375,7 +375,7 @@ public class CHEBot3 implements SimpleBot {
     }
 
     @Override
-    public void setup(GameLogRepo gameLogRepo, GameLog gameLog) {
+    public void setup() {
         logger.info("setting up bot...");
         this.gameLogRepo = gameLogRepo;
         this.gameLog = gameLog;
