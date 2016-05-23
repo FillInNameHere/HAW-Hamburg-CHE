@@ -2,6 +2,7 @@ package com.brianstempin.vindiniumclient.bot.simple;
 
 import com.brianstempin.vindiniumclient.algorithms.ILearningAlgorithm;
 import com.brianstempin.vindiniumclient.algorithms.QLearning;
+import com.brianstempin.vindiniumclient.algorithms.Reward3;
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
 import com.brianstempin.vindiniumclient.datastructure.models.GameLog;
@@ -31,7 +32,7 @@ public class CHEBot3 implements SimpleBot {
         gameStepRepo = new GameStepRepo();
         VarServices vs = new VarServices();
         Vars v = vs.getVars();
-        learningAlgorithm = new QLearning(new StateRepo(), gameStepRepo, v);
+        this.learningAlgorithm = new QLearning(new StateRepo(), gameStepRepo, v, true, new Reward3());
     }
 
     // Zustand
