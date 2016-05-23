@@ -377,7 +377,8 @@ public class CHEBot implements SimpleBot {
     public void setup() {
         logger.info("setting up bot...");
         this.gameLogRepo = new GameLogRepo();
-        this.gameLog = gameLogRepo.saveGameLog(new GameLog());
+        this.gameLog = new GameLog();
+        this.gameLog = gameLogRepo.saveGameLog(gameLog);
     }
 
     public void shutdown(String reason, GameState gameState) {
