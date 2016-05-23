@@ -67,16 +67,6 @@ public class TestBot implements SimpleBot {
             // Überprüfe: Felder worauf etwas steht werden nicht einbezogen.
             if (v.getTileType().equals("##") || v.getTileType().equals("[]") || v.getTileType().startsWith("$")) {
 
-                //Mapscan: TavernenAnzahl
-                if (v.getTileType().equals("[]")){
-                    tavernCountHelper++;
-                }
-
-                //Mapscan: MinenAnzahl
-                if (v.getTileType().startsWith("$")){
-                    globalMineCountHelper++;
-                }
-
                 continue;
             }
 
