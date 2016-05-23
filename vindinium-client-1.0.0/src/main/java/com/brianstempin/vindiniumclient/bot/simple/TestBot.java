@@ -21,8 +21,6 @@ public class TestBot implements SimpleBot {
     public boolean fightMode = false;
 
     // Map-Informationen
-    public int tavernCountHelper = 0;
-    public int globalMineCountHelper = 0;
     public int closestPlayerId = 0;
 
     // TeamPlay
@@ -30,9 +28,6 @@ public class TestBot implements SimpleBot {
     public boolean hero2IsTeamplayBot = false;
     public boolean hero3IsTeamplayBot = false;
     public boolean hero4IsTeamplayBot = false;
-
-    // Ranking
-    public int ownInGameRanking = 0;
 
     public int lastElement = 0;
 
