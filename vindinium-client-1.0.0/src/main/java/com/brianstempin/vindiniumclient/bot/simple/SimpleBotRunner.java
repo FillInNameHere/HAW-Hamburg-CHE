@@ -78,7 +78,7 @@ public class SimpleBotRunner implements Callable<GameState> {
         } catch (Exception e) {
             logger.error("Error during game play", e);
             this.bot.shutdown("Error during game play: "+ e.getMessage(), gameState);
-            e.getStackTrace();
+            e.printStackTrace();
             System.exit(0);
         }
 

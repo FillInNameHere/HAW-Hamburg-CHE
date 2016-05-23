@@ -43,6 +43,7 @@ public class AdvancedBotRunner implements Callable<GameState> {
         HttpResponse response;
         GameState gameState = null;
         AdvancedGameState advancedGameState;
+        long call;
 
         try {
             // Initial request
@@ -59,6 +60,7 @@ public class AdvancedBotRunner implements Callable<GameState> {
 
             // Game loop
             while (!gameState.getGame().isFinished() && !gameState.getHero().isCrashed()) {
+                call = System.currentTimeMillis();
                 logger.info("Taking turn " + gameState.getGame().getTurn());
                 BotMove direction = bot.move(advancedGameState);
                 Move move = new Move(apiKey.getKey(), direction.toString());
@@ -67,6 +69,7 @@ public class AdvancedBotRunner implements Callable<GameState> {
                 HttpContent turn = new UrlEncodedContent(move);
                 HttpRequest turnRequest = REQUEST_FACTORY.buildPostRequest(new GenericUrl(gameState.getPlayUrl()), turn);
                 HttpResponse turnResponse = turnRequest.execute();
+                System.out.println("zeit = " + (System.currentTimeMillis() - call));
 
                 gameState = turnResponse.parseAs(GameState.class);
                 advancedGameState = new AdvancedGameState(advancedGameState, gameState);

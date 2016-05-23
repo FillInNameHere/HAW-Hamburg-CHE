@@ -50,9 +50,14 @@ public class CHEBot2 implements AdvancedBot {
 
         stateId = generateState();
         logger.info("t3: " + (System.currentTimeMillis() - t0));
+        State state = new State();
+        state.setStateId(stateId);
 
-        doLearningAlgorithm();
-        logger.info("t4: " + (System.currentTimeMillis() - t0));
+        long test = System.currentTimeMillis();
+        stateRepo.saveState(state);
+        logger.info(""+(System.currentTimeMillis()-test));
+        //doLearningAlgorithm();
+        logger.info("t5: " + (System.currentTimeMillis() - t0));
 
 
         switch (modus){
@@ -103,6 +108,7 @@ public class CHEBot2 implements AdvancedBot {
         State currentState = new State();
         currentState.setStateId(stateId);
         gameStep = learningAlgorithm.step(currentState);
+        logger.info("t4.1: "+ (System.currentTimeMillis() - t0));
         BotUtils.BotAction action = gameStep.getChosenAction();
         if (action != BotUtils.BotAction.FORTFAHREN) {
             modus = action.ordinal();

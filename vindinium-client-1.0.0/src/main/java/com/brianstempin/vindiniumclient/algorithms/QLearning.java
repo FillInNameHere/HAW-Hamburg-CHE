@@ -68,14 +68,14 @@ public class QLearning implements ILearningAlgorithm {
 
             if (!(state == null)) {
                 this.currentState = state;
-                stateAction = this.currentState.getActions().get(this.currentState.getBestAction());
+                stateAction = this.currentState.getActions().get(this.currentState.getBestAction()-1);
             } else {
                 if(advancedActions){
                     this.currentState = initState(currentState, BotAction.values().length);
                 } else {
                     this.currentState = initState(currentState, 4);
                 }
-                stateAction = this.currentState.getActions().get(this.currentState.getBestAction());
+                stateAction = this.currentState.getActions().get(this.currentState.getBestAction()-1);
             }
 
             currentGameStep.setBestActionThen(stateAction.getAction());
@@ -117,22 +117,22 @@ public class QLearning implements ILearningAlgorithm {
             actions.add(sa);
         }
         state.setActions(actions);
-        state.setBestAction((int) (Math.random() * actionRange));
+        state.setBestAction((int) (Math.random() * actionRange)+1);
         return stateRepo.saveState(state);
     }
 
     private void evaluateLastStep() {
         int reward = rewarder.reward(lastAction.getAction().ordinal(), lastState.getStateId());
         double oldQVal = lastAction.getqValue();
-        double bestQValNow = currentState.getActions().get(currentState.getBestAction()).getqValue();
+        double bestQValNow = currentState.getActions().get(currentState.getBestAction()-1).getqValue();
         double newQVal = oldQVal + learningRate * (reward + discount * bestQValNow - oldQVal);
         lastAction.setqValue(newQVal);
         lastGameStep.setOldQval(oldQVal);
         lastGameStep.setNewQval(newQVal);
         lastGameStep.setReward(reward);
 
-        StateAction bestAction = lastStateActions.get(lastState.getBestAction());
-        for (int i = 0, actionsSize = lastStateActions.size(); i < actionsSize; i++) {
+        StateAction bestAction = lastStateActions.get(lastState.getBestAction()-1);
+        for (int i = 1, actionsSize = lastStateActions.size(); i < actionsSize; i++) {
             StateAction sa = lastStateActions.get(i);
             if (sa.getqValue() > bestAction.getqValue()) {
                 lastState.setBestAction(i);
