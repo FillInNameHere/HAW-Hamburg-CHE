@@ -86,9 +86,9 @@ public class CHEBot implements SimpleBot {
         gameStep = learningAlgorithm.step(currentState);
         BotUtils.BotAction action = gameStep.getChosenAction();
         if (action.ordinal() != 0 ) {
-            modus = action.ordinal();
+            modus = action.ordinal()-1;
         }
-
+        System.out.println("modus = " + modus);
         gameLog.setReward(gameLog.getReward() + gameStep.getReward());
 
         if (gameStep.getReward() > gameLog.getBiggestReward()) {
