@@ -1,6 +1,7 @@
 package com.brianstempin.vindiniumclient.algorithms;
 
 import com.brianstempin.vindiniumclient.bot.BotUtils.BotAction;
+import com.brianstempin.vindiniumclient.bot.advanced.AdvancedGameState;
 import com.brianstempin.vindiniumclient.datastructure.models.GameStep;
 import com.brianstempin.vindiniumclient.datastructure.models.State;
 import com.brianstempin.vindiniumclient.datastructure.models.StateAction;
@@ -71,7 +72,7 @@ public class QLearning implements ILearningAlgorithm {
                 stateAction = this.currentState.getActions().get(this.currentState.getBestAction()-1);
             } else {
                 if(advancedActions){
-                    this.currentState = initState(currentState, BotAction.values().length);
+                    this.currentState = initState(currentState, 6);
                 } else {
                     this.currentState = initState(currentState, 4);
                 }
@@ -140,5 +141,11 @@ public class QLearning implements ILearningAlgorithm {
         }
         gameStepRepo.saveGameStep(lastGameStep);
         stateRepo.saveState(lastState);
+    }
+
+    @Override
+    public GameStep advancedStep(State state, AdvancedGameState gameState){
+        ((Reward2) rewarder).setCurrentState(gameState);
+        return this.step(state);
     }
 }

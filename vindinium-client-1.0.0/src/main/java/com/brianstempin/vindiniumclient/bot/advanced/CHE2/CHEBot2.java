@@ -41,44 +41,47 @@ public class CHEBot2 implements AdvancedBot {
 
     @Override
     public BotMove move(AdvancedGameState gameState) {
-        t0 = System.currentTimeMillis();
+        //t0 = System.currentTimeMillis();
         this.gameState = gameState;
         this.dijkstraResult = DijkstraResult.dijkstraSearch(gameState);
         GameState.Position target;
         BotMove move;
         observeEnemies();
-        logger.info("t1: " + (System.currentTimeMillis()- t0));
+        //logger.info("t1: " + (System.currentTimeMillis()- t0));
 
         stateId = generateState();
-        logger.info("t3: " + (System.currentTimeMillis() - t0));
+        //logger.info("t3: " + (System.currentTimeMillis() - t0));
         State state = new State();
         state.setStateId(stateId);
 
-        long test = System.currentTimeMillis();
-        //stateRepo.saveState(state);
-        logger.info(""+(System.currentTimeMillis()-test));
-        //doLearningAlgorithm();
-        logger.info("t5: " + (System.currentTimeMillis() - t0));
+        doLearningAlgorithm();
+        //logger.info("t5: " + (System.currentTimeMillis() - t0));
 
-        modus = (int) Math.random()*50;
+        modus = (int) Math.random() * 50;
 
-        switch (modus){
-            case 1: target = getClosestPub();
+        switch (modus) {
+            case 1:
+                target = getClosestPub();
                 break;
-            case 2: target = getClosestMine();
+            case 2:
+                target = getClosestMine();
                 break;
-            case 3: target = getClosestEnemy();
+            case 3:
+                target = getClosestEnemy();
                 break;
-            case 4: target = getClosestEnemyMine();
+            case 4:
+                target = getClosestEnemyMine();
                 break;
-            case 5: target = getTopEnemy();
+            case 5:
+                target = getTopEnemy();
                 break;
-            default : target = gameState.getMe().getPos();
+            default:
+                target = gameState.getMe().getPos();
         }
 
-        move = BotUtils.directionTowards(gameState.getMe().getPos() ,getPath(target).get(0));
-        long t10 = System.currentTimeMillis() - t0;
-        logger.info("tfinal = " + t10);
+        move = BotUtils.directionTowards(gameState.getMe().getPos(), getPath(target).get(0));
+        //long t10 = System.currentTimeMillis() - t0;
+        //logger.info("tfinal = " + t10);
 
         /*logger.info("targetX = " + target.getX() + " \t\ttargetY = " + target.getY());
         logger.info("meX = " + gameState.getMe().getPos().getX() + " \t\t meY = " + gameState.getMe().getPos().getY());
@@ -109,8 +112,8 @@ public class CHEBot2 implements AdvancedBot {
     private void doLearningAlgorithm() {
         State currentState = new State();
         currentState.setStateId(stateId);
-        gameStep = learningAlgorithm.step(currentState);
-        logger.info("t4.1: "+ (System.currentTimeMillis() - t0));
+        gameStep = learningAlgorithm.advancedStep(currentState, this.gameState);
+        //logger.info("t4.1: "+ (System.currentTimeMillis() - t0));
         BotUtils.BotAction action = gameStep.getChosenAction();
         if (action != BotUtils.BotAction.FORTFAHREN) {
             modus = action.ordinal();
@@ -176,7 +179,7 @@ public class CHEBot2 implements AdvancedBot {
         if (topEnemyDistance > 9) {
             topEnemyDistanceAbstract = 0;
         }
-        logger.info("t2.1: " + (System.currentTimeMillis() - t0));
+        //logger.info("t2.1: " + (System.currentTimeMillis() - t0));
 
         sortGoldArray.clear();
         distinctSortGoldArray.clear();
@@ -193,10 +196,10 @@ public class CHEBot2 implements AdvancedBot {
                 ownInGameRanking = i + 1;
             }
         }
-        logger.info("t2.2: " + (System.currentTimeMillis() - t0));
+        //logger.info("t2.2: " + (System.currentTimeMillis() - t0));
 
         return Long.parseLong(
-                        ""   + ownInGameRanking
+                "" + ownInGameRanking
                         + "" + ownHealth
                         + "" + ownMinesPercent
                         + "" + topEnemy.getId()
