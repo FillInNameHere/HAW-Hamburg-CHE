@@ -1,8 +1,12 @@
-package com.brianstempin.vindiniumclient.bot.advanced.CHE2;
+package com.brianstempin.vindiniumclient.bot.advanced.CHE3;
+
+/**
+ * Created by Henning Kahl on 30.05.2016.
+ */
 
 import com.brianstempin.vindiniumclient.algorithms.ILearningAlgorithm;
 import com.brianstempin.vindiniumclient.algorithms.QLearning;
-import com.brianstempin.vindiniumclient.algorithms.Reward2;
+import com.brianstempin.vindiniumclient.algorithms.Reward3;
 import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.BotUtils;
 import com.brianstempin.vindiniumclient.bot.advanced.*;
@@ -18,10 +22,7 @@ import com.brianstempin.vindiniumclient.util.vars.model.Vars;
 import java.util.*;
 import java.util.logging.Logger;
 
-/**
- * Created by Eric on 17.05.2016.
- */
-public class CHEBot2 implements AdvancedBot {
+public class CHEBot3 implements AdvancedBot {
     ILearningAlgorithm learningAlgorithm;
     private Vars vars;
     private GameStepRepo gameStepRepo;
@@ -51,7 +52,7 @@ public class CHEBot2 implements AdvancedBot {
         state.setStateId(stateId);
 
         doLearningAlgorithm();
-
+        
         switch (modus) {
             case 1:
                 target = getClosestPub();
@@ -82,8 +83,8 @@ public class CHEBot2 implements AdvancedBot {
         this.stateRepo = new StateRepo();
         VarServices vs = new VarServices();
         this.vars = vs.getVars();
-        this.logger = Logger.getLogger("CHEBot2");
-        this.learningAlgorithm = new QLearning(stateRepo, gameStepRepo, vars, true, new Reward2());
+        this.logger = Logger.getLogger("CHEBot3");
+        this.learningAlgorithm = new QLearning(stateRepo, gameStepRepo, vars, true, new Reward3());
         this.gameLog = new GameLog();
     }
 
