@@ -9,9 +9,6 @@ public class Reward3 implements IReward{
         // return reward
         int reward = 0;
 
-        // timeRangeFaktor
-        double timeRangeFaktor = 0.125;
-
         // Reward Kategorien (Single Point Of Control)
         int rewardKat1 = 100;
         int rewardKat2 = 0;
@@ -24,30 +21,25 @@ public class Reward3 implements IReward{
 
         Integer ownIngameRanking = Integer.parseInt(String.valueOf(stateStr.charAt(0)));
 
-        Integer timeRange = Integer.parseInt(String.valueOf(stateStr.charAt(6)));
-
         // Kategorie 1 (100)
         if (ownIngameRanking == 1) {
-            reward += rewardKat1;
+            reward = rewardKat1;
         }
 
         // Kategorie 2 (0)
         if (ownIngameRanking == 2) {
-            reward += rewardKat2;
+            reward = rewardKat2;
         }
 
         // Kategorie 3 (-100)
         if (ownIngameRanking == 3) {
-            reward += rewardKat3;
+            reward = rewardKat3;
         }
 
         // Kategorie 4 (-200)
         if (ownIngameRanking == 4) {
-            reward += rewardKat4;
+            reward = rewardKat4;
         }
-
-        // timeRangeFaktor
-        reward = (int) (reward * (1 + (timeRange * timeRangeFaktor)));
 
         return reward;
     }
