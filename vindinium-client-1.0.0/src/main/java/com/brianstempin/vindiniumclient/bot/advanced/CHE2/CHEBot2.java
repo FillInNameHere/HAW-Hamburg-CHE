@@ -41,24 +41,18 @@ public class CHEBot2 implements AdvancedBot {
 
     @Override
     public BotMove move(AdvancedGameState gameState) {
-        //t0 = System.currentTimeMillis();
         this.gameState = gameState;
         this.dijkstraResult = DijkstraResult.dijkstraSearch(gameState);
         GameState.Position target;
         BotMove move;
         observeEnemies();
-        //logger.info("t1: " + (System.currentTimeMillis()- t0));
 
         stateId = generateState();
-        //logger.info("t3: " + (System.currentTimeMillis() - t0));
         State state = new State();
         state.setStateId(stateId);
 
         doLearningAlgorithm();
-        //logger.info("t5: " + (System.currentTimeMillis() - t0));
-
-        modus = (int) Math.random() * 50;
-
+        
         switch (modus) {
             case 1:
                 target = getClosestPub();
@@ -80,16 +74,6 @@ public class CHEBot2 implements AdvancedBot {
         }
 
         move = BotUtils.directionTowards(gameState.getMe().getPos(), getPath(target).get(0));
-        //long t10 = System.currentTimeMillis() - t0;
-        //logger.info("tfinal = " + t10);
-
-        /*logger.info("targetX = " + target.getX() + " \t\ttargetY = " + target.getY());
-        logger.info("meX = " + gameState.getMe().getPos().getX() + " \t\t meY = " + gameState.getMe().getPos().getY());
-        logger.info("target = " + target);
-        logger.info("path(1) = " + path.get(1));
-        logger.info("path(1)X = " + path.get(1).getX() + " \t\t path(1)Y = " + path.get(1).getY());
-        logger.info("path = " + path);
-        logger.info("move = " + move);*/
         return move;
     }
 
