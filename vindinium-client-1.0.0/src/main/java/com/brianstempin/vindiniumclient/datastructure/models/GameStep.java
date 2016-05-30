@@ -24,7 +24,8 @@ public class GameStep {
     private double newQval;
     private int reward;
     private int turn;
-
+    private int mineDiff = 0;
+    private int lifeDiff = 0;
 
     public GameStep() {
     }
@@ -95,5 +96,21 @@ public class GameStep {
 
     public long getGameStepId() {
         return gameStepId;
+    }
+
+    public int getMineDiff() {
+        return mineDiff;
+    }
+
+    public void setMineDiff(int mineDiff) {
+        this.mineDiff = mineDiff;
+    }
+
+    public int getLifeDiff() {
+        return lifeDiff;
+    }
+
+    public void setLifeDiff(int lifeDiff) {
+        this.lifeDiff = lifeDiff;
     }
 }

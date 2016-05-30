@@ -27,6 +27,7 @@ public class CHEBot2 implements AdvancedBot {
     private GameStepRepo gameStepRepo;
     private StateRepo stateRepo;
     private AdvancedGameState gameState;
+    private AdvancedGameState lastGameState;
     private Map<GameState.Position, DijkstraResult> dijkstraResult;
     private GameState.Hero topEnemy;
     private GameState.Hero closestEnemy;
@@ -73,6 +74,11 @@ public class CHEBot2 implements AdvancedBot {
         }
 
         move = BotUtils.directionTowards(gameState.getMe().getPos(), getPath(target).get(0));
+        if(lastGameState != null) {
+            this.lastGameState = gameState;
+            this.gameStep.setLifeDiff(gameState.getMe().getLife() - lastGameState.getMe().getLife());
+            this.gameStep.setMineDiff(gameState.getMe().getMineCount() - lastGameState.getMe().getMineCount());
+        }
         return move;
     }
 
