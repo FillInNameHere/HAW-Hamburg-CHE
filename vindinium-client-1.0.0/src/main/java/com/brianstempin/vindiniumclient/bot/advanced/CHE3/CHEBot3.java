@@ -59,12 +59,14 @@ public class CHEBot3 implements AdvancedBot {
                 break;
             case 2:
                 target = getClosestMine();
+                if(target == null) target = gameState.getMe().getPos();
                 break;
             case 3:
                 target = getClosestEnemy();
                 break;
             case 4:
                 target = getClosestEnemyMine();
+                if(target == null) target = gameState.getMe().getPos();
                 break;
             case 5:
                 target = getTopEnemy();
