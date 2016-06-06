@@ -52,21 +52,19 @@ public class CHEBot3 implements AdvancedBot {
         state.setStateId(stateId);
 
         doLearningAlgorithm();
-        
+
         switch (modus) {
             case 1:
                 target = getClosestPub();
                 break;
             case 2:
                 target = getClosestMine();
-                if(target == null) target = gameState.getMe().getPos();
                 break;
             case 3:
                 target = getClosestEnemy();
                 break;
             case 4:
                 target = getClosestEnemyMine();
-                if(target == null) target = gameState.getMe().getPos();
                 break;
             case 5:
                 target = getTopEnemy();
@@ -75,7 +73,14 @@ public class CHEBot3 implements AdvancedBot {
                 target = gameState.getMe().getPos();
         }
 
-        move = BotUtils.directionTowards(gameState.getMe().getPos(), getPath(target).get(0));
+        if(target == null) target = gameState.getMe().getPos();
+        List<GameState.Position> path = getPath(target);
+
+        if(path.size() <= 1){
+            move = BotUtils.directionTowards(gameState.getMe().getPos(), path.get(0));
+        } else {
+            move = BotUtils.directionTowards(gameState.getMe().getPos(), path.get(1));
+        }
         return move;
     }
 
