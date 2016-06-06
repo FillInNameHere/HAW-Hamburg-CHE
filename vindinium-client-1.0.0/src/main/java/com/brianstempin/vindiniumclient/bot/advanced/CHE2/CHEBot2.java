@@ -78,10 +78,13 @@ public class CHEBot2 implements AdvancedBot {
                 target = gameState.getMe().getPos();
         }
 
-        if(target == null || target == gameState.getMe().getPos()){
-            move = BotUtils.directionTowards(gameState.getMe().getPos(), getPath(gameState.getMe().getPos()).get(0));
+        if(target == null) target = gameState.getMe().getPos();
+        List<GameState.Position> path = getPath(target);
+
+        if(path.size() <= 1){
+            move = BotUtils.directionTowards(gameState.getMe().getPos(), path.get(0));
         } else {
-            move = BotUtils.directionTowards(gameState.getMe().getPos(), getPath(target).get(1));
+            move = BotUtils.directionTowards(gameState.getMe().getPos(), path.get(1));
         }
         System.out.println(target);
         System.out.println("modus = " + modus);
