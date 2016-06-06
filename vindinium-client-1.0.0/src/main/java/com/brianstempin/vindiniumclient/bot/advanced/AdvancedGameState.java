@@ -151,6 +151,9 @@ public class AdvancedGameState {
 
             this.mines.put(mine.getPosition(), mine);
         }
+
+        this.finished = updatedState.getGame().isFinished();
+        this.turn = updatedState.getGame().getTurn();
     }
 
     public AdvancedGameState(Map<GameState.Position, Mine> mines, Map<GameState.Position, Pub> pubs,
