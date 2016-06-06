@@ -139,8 +139,8 @@ public class QLearning implements ILearningAlgorithm {
                 lastState.setBestAction(i);
             }
         }
-        gameStepRepo.saveGameStep(lastGameStep);
-        stateRepo.saveState(lastState);
+        lastGameStep = gameStepRepo.saveGameStep(lastGameStep);
+        lastState = stateRepo.saveState(lastState);
     }
 
     @Override

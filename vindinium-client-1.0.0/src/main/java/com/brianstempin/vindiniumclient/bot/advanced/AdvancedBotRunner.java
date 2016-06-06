@@ -60,19 +60,14 @@ public class AdvancedBotRunner implements Callable<GameState> {
 
             // Game loop
             while (!gameState.getGame().isFinished() && !gameState.getHero().isCrashed()) {
-                call = System.currentTimeMillis();
                 System.out.println("Taking turn " + gameState.getGame().getTurn());
-                System.out.println("before bot.move: " + (System.currentTimeMillis() - call));
                 BotMove direction = bot.move(advancedGameState);
-                System.out.println("after bot.move: " + (System.currentTimeMillis() - call));
                 Move move = new Move(apiKey.getKey(), direction.toString());
 
 
                 HttpContent turn = new UrlEncodedContent(move);
                 HttpRequest turnRequest = REQUEST_FACTORY.buildPostRequest(new GenericUrl(gameState.getPlayUrl()), turn);
-                System.out.println("before request.execute: " + (System.currentTimeMillis() - call));
                 HttpResponse turnResponse = turnRequest.execute();
-                System.out.println("zeit = " + (System.currentTimeMillis() - call));
 
                 gameState = turnResponse.parseAs(GameState.class);
                 advancedGameState = new AdvancedGameState(advancedGameState, gameState);

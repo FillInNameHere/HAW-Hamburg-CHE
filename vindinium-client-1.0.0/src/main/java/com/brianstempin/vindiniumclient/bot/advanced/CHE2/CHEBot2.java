@@ -53,10 +53,10 @@ public class CHEBot2 implements AdvancedBot {
         stateId = generateState();
         State state = new State();
         state.setStateId(stateId);
+        if(gameLog.getGameURL() == null) gameLog.setGameURL(gameState.getGameViewURL());
         doLearningAlgorithm();
 
         this.gameStep.setTurn(gameState.getTurn());
-        //gameLog.setGameURL(gameState.getGameViewURL());
 
         switch (modus) {
             case 1:
@@ -89,11 +89,12 @@ public class CHEBot2 implements AdvancedBot {
         System.out.println(target);
         System.out.println("modus = " + modus);
         if(lastGameState != null) {
-            this.lastGameState = gameState;
             this.gameStep.setLifeDiff(gameState.getMe().getLife() - lastGameState.getMe().getLife());
             this.gameStep.setMineDiff(gameState.getMe().getMineCount() - lastGameState.getMe().getMineCount());
         }
-        gameStepRepo.saveGameStep(gameStep);
+        this.lastGameState = gameState;
+        gameLog = gameLogRepo.saveGameLog(gameLog);
+        gameStep = gameStepRepo.saveGameStep(gameStep);
         return move;
     }
 
@@ -106,7 +107,7 @@ public class CHEBot2 implements AdvancedBot {
         this.logger = Logger.getLogger("CHEBot2");
         this.learningAlgorithm = new QLearning(stateRepo, gameStepRepo, vars, true, new Reward2());
         this.gameLogRepo = new GameLogRepo();
-        this.gameLog = new GameLog();
+        this.gameLog = gameLogRepo.saveGameLog(new GameLog());
     }
 
     @Override
