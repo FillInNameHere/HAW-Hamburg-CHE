@@ -56,7 +56,7 @@ public class CHEBot2 implements AdvancedBot {
         doLearningAlgorithm();
 
         this.gameStep.setTurn(gameState.getTurn());
-        gameLog.setGameURL(gameState.getGameViewURL());
+        //gameLog.setGameURL(gameState.getGameViewURL());
 
         switch (modus) {
             case 1:
