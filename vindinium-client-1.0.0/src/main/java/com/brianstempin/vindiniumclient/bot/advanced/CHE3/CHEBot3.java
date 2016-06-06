@@ -91,14 +91,14 @@ public class CHEBot3 implements AdvancedBot {
     }
 
     @Override
-    public void shutdown() {
+    public void shutdown(String s) {
 
     }
 
     private void doLearningAlgorithm() {
         State currentState = new State();
         currentState.setStateId(stateId);
-        gameStep = learningAlgorithm.advancedStep(currentState, this.gameState);
+        gameStep = learningAlgorithm.step(currentState);
         BotUtils.BotAction action = gameStep.getChosenAction();
         if (action != BotUtils.BotAction.FORTFAHREN) {
             modus = action.ordinal();

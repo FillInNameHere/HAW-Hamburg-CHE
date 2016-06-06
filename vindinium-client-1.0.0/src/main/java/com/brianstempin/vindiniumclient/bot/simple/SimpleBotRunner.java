@@ -57,6 +57,7 @@ public class SimpleBotRunner implements Callable<GameState> {
 
             // Game loop
             while (!gameState.getGame().isFinished() && !gameState.getHero().isCrashed()) {
+                long call = System.currentTimeMillis();
                 logger.info("Taking turn " + gameState.getGame().getTurn());
                 BotMove direction = bot.move(gameState);
                 Move move = new Move(apiKey.getKey(), direction.toString());
@@ -64,7 +65,9 @@ public class SimpleBotRunner implements Callable<GameState> {
 
                 HttpContent turn = new UrlEncodedContent(move);
                 HttpRequest turnRequest = REQUEST_FACTORY.buildPostRequest(new GenericUrl(gameState.getPlayUrl()), turn);
+                System.out.println("before request.execute: " + (System.currentTimeMillis() - call));
                 HttpResponse turnResponse = turnRequest.execute();
+                System.out.println("after request.execute: " + (System.currentTimeMillis() - call));
 
                 gameState = turnResponse.parseAs(GameState.class);
             }

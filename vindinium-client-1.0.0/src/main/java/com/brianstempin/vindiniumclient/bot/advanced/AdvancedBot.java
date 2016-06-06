@@ -1,10 +1,6 @@
 package com.brianstempin.vindiniumclient.bot.advanced;
 
 import com.brianstempin.vindiniumclient.bot.BotMove;
-import com.brianstempin.vindiniumclient.dto.GameState;
-
-import java.util.List;
-import java.util.Map;
 
 public interface AdvancedBot {
 
@@ -17,7 +13,8 @@ public interface AdvancedBot {
 
     /**
      * Called after the game
+     * @param s
      */
-    public void shutdown();
+    public void shutdown(String s);
 
 }

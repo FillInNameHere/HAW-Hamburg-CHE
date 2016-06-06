@@ -4,13 +4,9 @@ import com.brianstempin.vindiniumclient.bot.BotMove;
 import com.brianstempin.vindiniumclient.bot.advanced.AdvancedBot;
 import com.brianstempin.vindiniumclient.bot.advanced.AdvancedGameState;
 import com.brianstempin.vindiniumclient.bot.advanced.DijkstraResult;
-import com.brianstempin.vindiniumclient.bot.advanced.Vertex;
 import com.brianstempin.vindiniumclient.dto.GameState;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
 
 import static com.brianstempin.vindiniumclient.bot.advanced.DijkstraResult.dijkstraSearch;
 
@@ -79,7 +75,7 @@ public class AdvancedMurderBot implements AdvancedBot {
     }
 
     @Override
-    public void shutdown() {
+    public void shutdown(String s) {
         // No-op
     }
 }

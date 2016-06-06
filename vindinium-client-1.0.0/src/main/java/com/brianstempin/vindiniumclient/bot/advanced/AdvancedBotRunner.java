@@ -81,9 +81,12 @@ public class AdvancedBotRunner implements Callable<GameState> {
         } catch (Exception e) {
             logger.error("Error during game play", e);
             e.printStackTrace();
+            bot.shutdown(e.getMessage());
+            System.exit(1);
         }
-        bot.shutdown();
+        bot.shutdown("Game ended normally");
         logger.info("Game over");
+        System.exit(0);
         return gameState;
     }
 }
