@@ -64,14 +64,12 @@ public class CHEBot2 implements AdvancedBot {
                 break;
             case 2:
                 target = getClosestMine();
-                if(target == null) target = gameState.getMe().getPos();
                 break;
             case 3:
                 target = getClosestEnemy();
                 break;
             case 4:
                 target = getClosestEnemyMine();
-                if(target == null) target = gameState.getMe().getPos();
                 break;
             case 5:
                 target = getTopEnemy();
@@ -79,9 +77,14 @@ public class CHEBot2 implements AdvancedBot {
             default:
                 target = gameState.getMe().getPos();
         }
+
+        if(target == null || target == gameState.getMe().getPos()){
+            move = BotUtils.directionTowards(gameState.getMe().getPos(), getPath(gameState.getMe().getPos()).get(0));
+        } else {
+            move = BotUtils.directionTowards(gameState.getMe().getPos(), getPath(target).get(1));
+        }
         System.out.println(target);
         System.out.println("modus = " + modus);
-        move = BotUtils.directionTowards(gameState.getMe().getPos(), getPath(target).get(0));
         if(lastGameState != null) {
             this.lastGameState = gameState;
             this.gameStep.setLifeDiff(gameState.getMe().getLife() - lastGameState.getMe().getLife());
@@ -122,7 +125,8 @@ public class CHEBot2 implements AdvancedBot {
         } else {
             gameLog.setCrashed(1);
         }
-        gameLogRepo.saveGameLog(gameLog);
+        gameStep.setGameLog(gameLog);
+        gameStepRepo.saveGameStep(gameStep);
     }
 
     private void doLearningAlgorithm() {
@@ -322,7 +326,6 @@ public class CHEBot2 implements AdvancedBot {
 
     private List<GameState.Position> getPath(GameState.Position target) {
         List<GameState.Position> path = new LinkedList<>();
-
         path.add(target);
         DijkstraResult next = this.dijkstraResult.get(target);
         while (next.getDistance() != 0) {
