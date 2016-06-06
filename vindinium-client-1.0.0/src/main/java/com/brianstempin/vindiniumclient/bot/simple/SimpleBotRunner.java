@@ -65,9 +65,7 @@ public class SimpleBotRunner implements Callable<GameState> {
 
                 HttpContent turn = new UrlEncodedContent(move);
                 HttpRequest turnRequest = REQUEST_FACTORY.buildPostRequest(new GenericUrl(gameState.getPlayUrl()), turn);
-                System.out.println("before request.execute: " + (System.currentTimeMillis() - call));
                 HttpResponse turnResponse = turnRequest.execute();
-                System.out.println("after request.execute: " + (System.currentTimeMillis() - call));
 
                 gameState = turnResponse.parseAs(GameState.class);
             }
@@ -76,7 +74,7 @@ public class SimpleBotRunner implements Callable<GameState> {
             logger.error("Error during game play", e);
             this.bot.shutdown("Error during game play: "+ e.getMessage(), gameState);
             e.printStackTrace();
-            System.exit(0);
+            System.exit(1);
         }
 
         this.bot.shutdown("Game ended normally", gameState);

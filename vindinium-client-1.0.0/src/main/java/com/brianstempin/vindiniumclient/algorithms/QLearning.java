@@ -133,10 +133,10 @@ public class QLearning implements ILearningAlgorithm {
         lastGameStep.setReward(reward);
 
         StateAction bestAction = lastStateActions.get(lastState.getBestAction()-1);
-        for (int i = 1, actionsSize = lastStateActions.size(); i < actionsSize; i++) {
+        for (int i = 0; i < lastStateActions.size(); i++) {
             StateAction sa = lastStateActions.get(i);
             if (sa.getqValue() > bestAction.getqValue()) {
-                lastState.setBestAction(i);
+                lastState.setBestAction(i+1);
             }
         }
         lastGameStep = gameStepRepo.saveGameStep(lastGameStep);

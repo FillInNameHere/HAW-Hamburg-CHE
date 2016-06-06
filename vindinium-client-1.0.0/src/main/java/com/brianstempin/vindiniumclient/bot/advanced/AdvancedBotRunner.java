@@ -79,7 +79,7 @@ public class AdvancedBotRunner implements Callable<GameState> {
             bot.shutdown(e.getMessage());
             System.exit(1);
         }
-        bot.shutdown("Game ended normally");
+        bot.shutdown("");
         logger.info("Game over");
         System.exit(0);
         return gameState;
