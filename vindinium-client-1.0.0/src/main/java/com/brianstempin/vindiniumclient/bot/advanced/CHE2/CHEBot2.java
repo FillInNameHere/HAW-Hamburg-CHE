@@ -53,10 +53,10 @@ public class CHEBot2 implements AdvancedBot {
         stateId = generateState();
         State state = new State();
         state.setStateId(stateId);
+        doLearningAlgorithm();
+
         this.gameStep.setTurn(gameState.getTurn());
         gameLog.setGameURL(gameState.getGameViewURL());
-
-        doLearningAlgorithm();
 
         switch (modus) {
             case 1:
