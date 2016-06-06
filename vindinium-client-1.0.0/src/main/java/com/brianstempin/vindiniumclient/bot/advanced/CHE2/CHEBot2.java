@@ -87,7 +87,6 @@ public class CHEBot2 implements AdvancedBot {
             this.gameStep.setLifeDiff(gameState.getMe().getLife() - lastGameState.getMe().getLife());
             this.gameStep.setMineDiff(gameState.getMe().getMineCount() - lastGameState.getMe().getMineCount());
         }
-        gameLogRepo.saveGameLog(gameLog);
         return move;
     }
 
@@ -100,7 +99,7 @@ public class CHEBot2 implements AdvancedBot {
         this.logger = Logger.getLogger("CHEBot2");
         this.learningAlgorithm = new QLearning(stateRepo, gameStepRepo, vars, true, new Reward2());
         this.gameLogRepo = new GameLogRepo();
-        this.gameLog = gameLogRepo.saveGameLog(new GameLog());
+        this.gameLog = new GameLog();
     }
 
     @Override
