@@ -87,6 +87,7 @@ public class CHEBot2 implements AdvancedBot {
             this.gameStep.setLifeDiff(gameState.getMe().getLife() - lastGameState.getMe().getLife());
             this.gameStep.setMineDiff(gameState.getMe().getMineCount() - lastGameState.getMe().getMineCount());
         }
+        gameStepRepo.saveGameStep(gameStep);
         return move;
     }
 
