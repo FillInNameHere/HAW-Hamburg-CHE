@@ -119,7 +119,7 @@ public class CHEBot2 implements AdvancedBot {
             gameLog.setCrashed(0);
         }
 
-        if (reason == "") {
+        if (reason.equals("")) {
             gameLog.setCrashed(0);
             if (ownInGameRanking == 1) {
                 gameLog.setWin(1);
