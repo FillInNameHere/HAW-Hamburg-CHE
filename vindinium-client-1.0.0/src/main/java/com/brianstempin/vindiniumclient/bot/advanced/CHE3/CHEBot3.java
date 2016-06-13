@@ -13,6 +13,7 @@ import com.brianstempin.vindiniumclient.bot.advanced.*;
 import com.brianstempin.vindiniumclient.datastructure.models.GameLog;
 import com.brianstempin.vindiniumclient.datastructure.models.GameStep;
 import com.brianstempin.vindiniumclient.datastructure.models.State;
+import com.brianstempin.vindiniumclient.datastructure.repos.GameLogRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.GameStepRepo;
 import com.brianstempin.vindiniumclient.datastructure.repos.StateRepo;
 import com.brianstempin.vindiniumclient.dto.GameState;
@@ -38,6 +39,8 @@ public class CHEBot3 implements AdvancedBot {
     private GameLog gameLog;
     private long stateId;
     private Logger logger;
+    private GameLogRepo gameLogRepo;
+    private int ownInGameRanking;
 
     @Override
     public BotMove move(AdvancedGameState gameState) {
@@ -50,7 +53,7 @@ public class CHEBot3 implements AdvancedBot {
         stateId = generateState();
         State state = new State();
         state.setStateId(stateId);
-
+        if(gameLog.getGameURL() == "") gameLog.setGameURL(gameState.getGameViewURL());
         doLearningAlgorithm();
 
         switch (modus) {
@@ -81,6 +84,8 @@ public class CHEBot3 implements AdvancedBot {
         } else {
             move = BotUtils.directionTowards(gameState.getMe().getPos(), path.get(1));
         }
+        gameLog = gameLogRepo.saveGameLog(gameLog);
+        gameStep = gameStepRepo.saveGameStep(gameStep);
         return move;
     }
 
@@ -92,11 +97,32 @@ public class CHEBot3 implements AdvancedBot {
         this.vars = vs.getVars();
         this.logger = Logger.getLogger("CHEBot3");
         this.learningAlgorithm = new QLearning(stateRepo, gameStepRepo, vars, true, new Reward3());
-        this.gameLog = new GameLog();
+        this.gameLogRepo = new GameLogRepo();
+
     }
 
     @Override
-    public void shutdown(String s) {
+    public void shutdown(String reason) {
+        gameLog.setEndMessage(reason);
+        logger.info("shutting down bot, reason: " + reason);
+        gameLog.setRounds(gameState.getTurn());
+        gameLog.setEndMessage(reason);
+
+        if (!gameState.getMe().isCrashed()) {
+            gameLog.setCrashed(0);
+        }
+
+        if (reason == "") {
+            gameLog.setCrashed(0);
+            if (ownInGameRanking == 1) {
+                gameLog.setWin(1);
+            } else {
+                gameLog.setWin(0);
+            }
+        }
+
+        gameStep.setGameLog(gameLog);
+        gameStepRepo.saveGameStep(gameStep);
 
     }
 
@@ -151,7 +177,7 @@ public class CHEBot3 implements AdvancedBot {
         Map<Integer, GameState.Hero> heroMap = gameState.getHeroesById();
         List<Integer> sortGoldArray = new ArrayList<>();
         List<Integer> distinctSortGoldArray = new ArrayList<>();
-        int ownInGameRanking = 4;
+        ownInGameRanking = 4;
         int ownMinesPercent = getAbstractMinecount(gameState.getMe().getMineCount());
         int ownHealth = (gameState.getMe().getLife() - 1) / 10;
         int topEnemyMinesPercent = getAbstractMinecount(topEnemy.getMineCount());
