@@ -53,8 +53,10 @@ public class CHEBot3 implements AdvancedBot {
         stateId = generateState();
         State state = new State();
         state.setStateId(stateId);
-        if(gameLog.getGameURL() == "") gameLog.setGameURL(gameState.getGameViewURL());
+        if(gameLog.getGameURL().equals("")) gameLog.setGameURL(gameState.getGameViewURL());
         doLearningAlgorithm();
+
+        this.gameStep.setTurn(gameState.getTurn());
 
         switch (modus) {
             case 1:
@@ -98,7 +100,7 @@ public class CHEBot3 implements AdvancedBot {
         this.logger = Logger.getLogger("CHEBot3");
         this.learningAlgorithm = new QLearning(stateRepo, gameStepRepo, vars, true, new Reward3());
         this.gameLogRepo = new GameLogRepo();
-
+        this.gameLog = gameLogRepo.saveGameLog(new GameLog());
     }
 
     @Override

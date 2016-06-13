@@ -53,7 +53,7 @@ public class CHEBot2 implements AdvancedBot {
         stateId = generateState();
         State state = new State();
         state.setStateId(stateId);
-        if(gameLog.getGameURL() == "") gameLog.setGameURL(gameState.getGameViewURL());
+        if(gameLog.getGameURL().equals("")) gameLog.setGameURL(gameState.getGameViewURL());
         doLearningAlgorithm();
 
         this.gameStep.setTurn(gameState.getTurn());
@@ -86,8 +86,6 @@ public class CHEBot2 implements AdvancedBot {
         } else {
             move = BotUtils.directionTowards(gameState.getMe().getPos(), path.get(1));
         }
-        System.out.println(target);
-        System.out.println("modus = " + modus);
         if(lastGameState != null) {
             this.gameStep.setLifeDiff(gameState.getMe().getLife() - lastGameState.getMe().getLife());
             this.gameStep.setMineDiff(gameState.getMe().getMineCount() - lastGameState.getMe().getMineCount());
