@@ -209,7 +209,7 @@ public class CHEBot3 implements AdvancedBot {
         Collections.sort(sortGoldArray);
         Collections.reverse(sortGoldArray);
         for (int i = 0; i < sortGoldArray.size(); i++) {
-            if (sortGoldArray.get(i).equals(gameState.getHeroesById().get(i + 1).getGold())) {
+            if (sortGoldArray.get(i).equals(gameState.getHero().getGold())) {
                 ownInGameRanking = i + 1;
             }
         }
